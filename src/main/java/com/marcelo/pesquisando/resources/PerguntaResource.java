@@ -1,0 +1,38 @@
+	package com.marcelo.pesquisando.resources;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.marcelo.pesquisando.entities.Pergunta;
+import com.marcelo.pesquisando.services.PerguntaService;
+
+@RestController
+@RequestMapping(value = "/perguntas")
+public class PerguntaResource {
+	
+	
+	@Autowired
+	private PerguntaService service;
+	
+
+	@GetMapping
+	public ResponseEntity<List<Pergunta>> findAll(){
+		
+		List<Pergunta> list = service.findAll();
+		
+		 return ResponseEntity.ok().body(list);
+	}
+	
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<Pergunta> findById(@PathVariable Long id){
+		Pergunta obj = service.findById(id);
+		
+		return ResponseEntity.ok().body(obj);
+	}
+}
