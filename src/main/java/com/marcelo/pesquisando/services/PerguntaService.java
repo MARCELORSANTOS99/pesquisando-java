@@ -24,6 +24,28 @@ public class PerguntaService {
 		return obj.get();
 	}
 	
+	public Pergunta insert(Pergunta obj) {
+		return repository.save(obj);
+	}
+	
+	public void delete(Long obj) {
+		
+		repository.deleteById(obj);
+	}
+	
+	public Pergunta upDate(Long id, Pergunta obj) {
+		
+		Pergunta entity = repository.getOne(id);
+		updateData(entity,obj);
+		
+		return repository.save(entity);
+	}
+
+	private void updateData(Pergunta entity, Pergunta obj) {
+		entity.setQuestion(obj.getQuestion());
+		
+	}
+	
 	
 	
 
