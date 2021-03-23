@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.marcelo.pesquisando.entities.Pergunta;
+import com.marcelo.pesquisando.entities.Resposta;
 import com.marcelo.pesquisando.services.PerguntaService;
+import com.marcelo.pesquisando.services.RespostaService;
 
 @RestController
 @RequestMapping(value = "/perguntas")
@@ -25,6 +27,9 @@ public class PerguntaResource {
 	
 	@Autowired
 	private PerguntaService service;
+	
+	@Autowired
+	private RespostaService RespService;
 	
 
 	@GetMapping
@@ -44,7 +49,6 @@ public class PerguntaResource {
 	
 	@PostMapping
 	public ResponseEntity<Pergunta> insert(@RequestBody Pergunta obj){
-		
 		obj = service.insert(obj);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();

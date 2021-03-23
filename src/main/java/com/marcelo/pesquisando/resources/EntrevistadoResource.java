@@ -16,33 +16,33 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.marcelo.pesquisando.entities.Pergunta;
-import com.marcelo.pesquisando.entities.Resposta;
-import com.marcelo.pesquisando.services.RespostaService;
+import com.marcelo.pesquisando.entities.Entrevistado;
+import com.marcelo.pesquisando.services.EntrevistadoService;
 
 @RestController
-@RequestMapping(value = "/respostas")
-public class RespostaResource {
+@RequestMapping(value = "/entrevistados")
+public class EntrevistadoResource {
 	
 	@Autowired
-	private RespostaService service;
+	private EntrevistadoService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Resposta>> findAll(){
+	public ResponseEntity<List<Entrevistado>> findAll(){
 		
-		List<Resposta> list = service.findAll();
+		List<Entrevistado> list = service.findAll();
 		
 		 return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Resposta> findById(@PathVariable Long id){
-		Resposta obj = service.findById(id);
+	public ResponseEntity<Entrevistado> findById(@PathVariable Long id){
+		Entrevistado obj = service.findById(id);
 		
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Resposta> insert(@RequestBody Resposta obj){
+	public ResponseEntity<Entrevistado> insert(@RequestBody Entrevistado obj){
 		
 		obj = service.insert(obj);
 		
@@ -58,7 +58,7 @@ public class RespostaResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Resposta> update(@PathVariable Long id, @RequestBody Resposta obj){
+	public ResponseEntity<Entrevistado> update(@PathVariable Long id, @RequestBody Entrevistado obj){
 		obj = service.upDate(id, obj);
 		return ResponseEntity.ok().body(obj);
 	}
