@@ -5,10 +5,12 @@ import java.net.URI;
 import java.util.List;
 
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +27,7 @@ import org.supercsv.prefs.CsvPreference;
 import com.marcelo.pesquisando.entities.Pesquisa;
 import com.marcelo.pesquisando.services.PesquisaService;
 
+@Controller
 @RestController
 @RequestMapping(value = "/pesquisas")
 public class PesquisaResource {
@@ -82,10 +85,9 @@ public class PesquisaResource {
 	public void exportToCsv(HttpServletResponse response) throws IOException {
 		
 		response.setContentType("text/csv");
-		String fileName = "pesquisas.csv";
 		
 		String headerKey = "Content-Disposition";
-		String headervalue = "attachement; filename" + fileName;
+		String headervalue = "attachement; filename=pesquisas.csv";
 		
 		response.setHeader(headerKey, headervalue);
 		
@@ -93,12 +95,8 @@ public class PesquisaResource {
 		
 		ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
 		
-		//String[] csvHeader = {"id","Cidade"};
-		//String[] csvHeader = {"id","Cidade","Escolaridade"};
 		String[] csvHeader = {"id","Cidade","Escolaridade","FaixaIdade", "Genero","Nome","Religiao","Pergunta","Resposta"};
 		
-		//String[] nameMapping = {"id","cidade"};
-		//String[] nameMapping = {"id","cidade","entrevistadoEscolaridade"};
 		String[] nameMapping = {"id","cidade","entrevistadoEscolaridade","entrevistadoFaixaIdade","entrevistadoGenero","entrevistadoNome","entrevistadoReligiao","Pergunta","Resposta"};
 		
 		csvWriter.writeHeader(csvHeader);
@@ -111,5 +109,4 @@ public class PesquisaResource {
 		
 	}
 	
-
 }
