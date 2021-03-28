@@ -27,13 +27,45 @@ public class RespostaService {
 	
 	
 	public Resposta insert(Resposta obj) {
-		System.out.println(obj);
 		return repository.save(obj);
 	}
 	
 	public void delete(Long obj) {
 		
-		repository.deleteById(obj);
+		List<Resposta> respostas = findAll();
+
+		long toConvertObj = obj;//3
+		int id = (int)toConvertObj;
+		int ii = 2;
+		
+		/*
+		 System.out.println("respostas=>"+respostas);
+		System.out.println("respostas=>"+respostas.size());
+		System.out.println("idPergunta==>"+ obj);
+		System.out.println("idRespostaPraDeletar=>>"+respostas.get(ii).getId());
+		System.out.println("idRespostaPraDeletarReposta=>>"+respostas.get(ii).getResp());
+		System.out.println("idPerguntaNaResposta=>>"+respostas.get(ii).getPergunt().getId());
+		System.out.println("idPerguntaNaResposta == obj =>");
+		System.out.println(respostas.get(ii).getPergunt().getId() == toConvertObj);
+		*/
+		int idPergunta = (int) toConvertObj;
+		
+		
+		for (int i = 0; i < respostas.size(); i++) {
+			
+			long idRespostaPraDeletar = respostas.get(i).getId();//2
+			long idPerguntaNaResposta = respostas.get(i).getPergunt().getId();//2
+			
+			System.out.println("idRespostaPraDeletar "+ idRespostaPraDeletar);
+			System.out.println("idPerguntaNaResposta "+ idPerguntaNaResposta);
+			System.out.println("idPergunta "+ idPergunta);
+			
+			if (idPerguntaNaResposta == toConvertObj) {//2=2
+				repository.deleteById(idRespostaPraDeletar);	
+			}
+		}
+		
+		
 	}
 	
 	public Resposta upDate(Long id, Resposta obj) {

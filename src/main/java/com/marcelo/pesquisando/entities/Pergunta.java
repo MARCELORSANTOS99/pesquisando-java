@@ -2,6 +2,7 @@ package com.marcelo.pesquisando.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -30,24 +31,16 @@ public class Pergunta implements Serializable {
 	@OneToMany(mappedBy="pergunt")
 	private List<Resposta> respostas = new ArrayList<>();
 	
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name="pesqui_id")
-	private Pesquisa pesqui;
-	
-	public Pergunta() {
+		
+	public Pergunta() {}
 
-	}
 
-	public Pergunta(Long id, String question) {
+	public Pergunta(Long id, String question, String dissertativa) {
 		super();
 		this.id = id;
 		this.question = question;
 	}
 
-	
-	
-	
 	public Long getId() {
 		return id;
 	}
@@ -70,6 +63,28 @@ public class Pergunta implements Serializable {
 
 	public void setRespostas(List<Resposta> respostas) {
 		this.respostas = respostas;
+	}
+
+
+	public List<String> getRespostasWeb() {
+		
+		List<String> respostasWeb = new ArrayList<>();
+		
+		for (int i = 0; i < getRespostas().size(); i++) {
+			long idPerg = getId();
+			long idResp = getRespostas().get(i).getPergunt().getId();
+			System.out.println("getQuestion = "+ getQuestion());
+			System.out.println("idPerg = "+ idPerg);
+			System.out.println("idResp = "+ idResp);
+			
+			if (idPerg == idResp) {
+				respostasWeb.add(getRespostas().get(i).getResp());
+				System.out.println("getRespostas = "+ getRespostas().get(i).getResp());
+			}
+		}
+		
+				
+		return respostasWeb;
 	}
 
 	@Override

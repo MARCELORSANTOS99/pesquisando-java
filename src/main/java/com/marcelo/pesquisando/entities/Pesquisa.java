@@ -29,6 +29,8 @@ public class Pesquisa implements Serializable{
 	
 	private String resposta;
 	
+	private String respostaDissertiva;
+	
 	
 	public Pesquisa() {}
 	
@@ -36,7 +38,7 @@ public class Pesquisa implements Serializable{
 
 	public Pesquisa(Long id, String cidade, String entrevistadoNome, String entrevistadoReligiao,
 			String entrevistadoFaixaIdade, String entrevistadoGenero, String entrevistadoEscolaridade, String pergunta,
-			String resposta) {
+			String resposta, String respostaDissertiva) {
 		super();
 		this.id = id;
 		this.cidade = cidade;
@@ -47,6 +49,7 @@ public class Pesquisa implements Serializable{
 		this.entrevistadoEscolaridade = entrevistadoEscolaridade;
 		this.pergunta = pergunta;
 		this.resposta = resposta;
+		this.resposta = respostaDissertiva;
 	}
 
 
@@ -147,6 +150,17 @@ public class Pesquisa implements Serializable{
 
 	public void setEntrevistadoEscolaridade(String entrevistadoEscolaridade) {
 		this.entrevistadoEscolaridade = entrevistadoEscolaridade;
+	}
+	
+
+	public String getRespostaDissertiva() {
+		return respostaDissertiva;
+	}
+
+
+
+	public void setRespostaDissertiva(String respostaDissertiva) {
+		this.respostaDissertiva = respostaDissertiva;
 	}
 
 

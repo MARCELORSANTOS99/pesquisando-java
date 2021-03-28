@@ -1,5 +1,7 @@
 package com.marcelo.pesquisando.services;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,7 +49,7 @@ public class PerguntaService {
 	}
 	
 	public void delete(Long obj) {
-		
+								
 		repository.deleteById(obj);
 	}
 	

@@ -46,8 +46,8 @@ public class TestConfig implements CommandLineRunner {
 		Entrevistado p2 = new Entrevistado(null,"Debora Santos",EntrevistadoReligiao.ESPIRITA,EntrevistadoFaixaIdade.DE_26_A_40_ANOS,EntrevistadoGenero.MULHER,EntrevistadoEscolaridade.SUPERIOR_COMPLETO);
 		Entrevistado p3 = new Entrevistado(null,"Alice",EntrevistadoReligiao.ESPIRITA,EntrevistadoFaixaIdade.ATE_18_ANOS,EntrevistadoGenero.MULHER,EntrevistadoEscolaridade.PRIMEIRO_GRAU_COMPLETO);
 
-		Pergunta perg1 = new Pergunta(null, "Em que vc vai votar?");
-		Pergunta perg2 = new Pergunta(null, "Você é a favor do porte de arma?");
+		Pergunta perg1 = new Pergunta(null, "Em que vc vai votar?",null);
+		Pergunta perg2 = new Pergunta(null, "Você é a favor do porte de arma?","Não gosto de arma");
 
 		Resposta r1 = new Resposta(null, "Cajuru", perg1);
 		Resposta r2 = new Resposta(null, "Bolsonaro", perg1);
@@ -59,14 +59,18 @@ public class TestConfig implements CommandLineRunner {
 		perguntas.add(perg1);
 		perguntas.add(perg2);
 		
+		
+		//Montar pesquisa
 		Pesquisa pesquisa = new Pesquisa();
 		Pesquisa pesquisa2 = new Pesquisa();
 		Pesquisa pesquisa3 = new Pesquisa();
+		Pesquisa pesquisa4 = new Pesquisa();
 		
 		//cidade
 		pesquisa.setCidade("Três Pontas");
 		pesquisa2.setCidade("Três Pontas");
 		pesquisa3.setCidade("Três Pontas");
+		pesquisa4.setCidade("Três Pontas");
 		
 		//Entrevistado
 		pesquisa.setEntrevistadoNome(p1.getNome());
@@ -87,22 +91,34 @@ public class TestConfig implements CommandLineRunner {
 		pesquisa3.setEntrevistadoGenero(p3.getGenero().toString());
 		pesquisa3.setEntrevistadoReligiao(p3.getEntrevistadoReligiao().toString());
 		
+		pesquisa4.setEntrevistadoNome(p3.getNome());
+		pesquisa4.setEntrevistadoEscolaridade(p3.getEscolaridade().toString());
+		pesquisa4.setEntrevistadoFaixaIdade(p3.getFaixaIdade().toString());
+		pesquisa4.setEntrevistadoGenero(p3.getGenero().toString());
+		pesquisa4.setEntrevistadoReligiao(p3.getEntrevistadoReligiao().toString());
+		
 		//Pergunta
 		pesquisa.setPergunta(perg1.getQuestion());
 		pesquisa2.setPergunta(perg1.getQuestion());
 		pesquisa3.setPergunta(perg1.getQuestion());
+		pesquisa4.setPergunta(perg2.getQuestion());
+		
 			
 		
 		//Resposta escolhida
 		pesquisa.setResposta("Bolsonaro");
 		pesquisa2.setResposta("Bolsonaro");
 		pesquisa3.setResposta("LULA");
+		pesquisa4.setResposta("Não");
+		
+		//Observação
+		pesquisa4.setRespostaDissertiva("Não gosto de armas");
 		
 		
 		entrevistadoRepository.saveAll(Arrays.asList(p1,p2));
 		perguntaRepository.saveAll(Arrays.asList(perg2, perg1));
 		respostaRepository.saveAll(Arrays.asList(r1, r2, r3, r4,r5));
-		pesquisaRepository.saveAll(Arrays.asList(pesquisa,pesquisa2,pesquisa3));
+		pesquisaRepository.saveAll(Arrays.asList(pesquisa,pesquisa2,pesquisa3,pesquisa4));
 
 	}
 

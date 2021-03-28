@@ -1,17 +1,29 @@
 package com.marcelo.pesquisando.dto;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
+import javax.validation.constraints.NotBlank;
 
 import com.marcelo.pesquisando.entities.Pergunta;
 import com.marcelo.pesquisando.entities.Resposta;
 
+
+
 public class RequisicaoNovaPesquisa {
 	
+	
+	@NotBlank
 	private String nomeCidade;
+	
+	@NotBlank
 	private String nomePergunta;
+	
+	@NotBlank
 	private String nomeResposta;
+	
+	@NotBlank
+	private String dissertativa;
 	
 	
 	public String getNomeCidade() {
@@ -32,11 +44,20 @@ public class RequisicaoNovaPesquisa {
 	public void setNomeResposta(String nomeResposta) {
 		this.nomeResposta = nomeResposta;
 	}
+	
+	public String getDissertativa() {
+		return dissertativa;
+	}
+	public void setDissertativa(String dissertativa) {
+		this.dissertativa = dissertativa;
+	}
 	public Pergunta toPesquisa() {
 		Pergunta pergunta = new Pergunta();
 				
 		pergunta.setQuestion(nomePergunta);
 		pergunta.setRespostas(respostas());
+		
+		
 		
 		return pergunta;
 	}
@@ -47,14 +68,7 @@ public class RequisicaoNovaPesquisa {
 		
 		String textoRespostas = nomeResposta;
 		String[] arrayRespostas = textoRespostas.split(";");
-		System.out.println("textoRespostas: "+ textoRespostas);
-        System.out.println(arrayRespostas[0]);
-        System.out.println(arrayRespostas[1]);
-        System.out.println("tamanho: " + arrayRespostas.length);
 		
-
-        
-        
 		for (int i = 0; i < arrayRespostas.length; i++) {
 			
 			Resposta resposta = new Resposta();

@@ -23,31 +23,46 @@
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
 
-						<li
-						 class="nav-item"><a class="nav-link" href="/pesquisa/resumo/">Resumo</a>
-						</li>
-						
+						<li class="nav-item"><a class="nav-link"
+							href="/pesquisa/resumo/">Resumo</a></li>
+
 					</ul>
 					<a href="/pesquisa/formulario">
-						<button class="btn btn-outline-success" type="submit">Nova Pesquisa</button>
+						<button class="btn btn-outline-success" type="submit">Nova
+							Pesquisa</button>
 					</a>
 
 				</div>
 			</div>
 		</nav>
 
-		<div class="card" th:each="pergunta : ${perguntas}">
+		<div class="card" th:each="pergunta, r : ${perguntas} ">
 			<div>
-				<span th:text=${pergunta.question}>Pergunta </span>
+				<span th:text=${pergunta.question}>Pergunta </span> <i
+					class="bi bi-archive-fill" ></i>
+				<td><a th:href="@{/pesquisa/delete/{id}(id=${pergunta.id})}">Delete</a></td>
+				
 			</div>
-
 			<div>Respostas:</div>
 
 			<th:block>
 				<div>
-					<div class="panel-body" th:text="${pergunta.respostas}"></div>
+					<td th:text=" ${pergunta.getRespostasWeb()}">
 				</div>
 			</th:block>
+
+			<div>
+				<a href="/pesquisa/formulario">
+					<button class="btn btn-warning" type="submit">Editar</button>
+				</a>
+			</div>
+
+			<div>
+				
+				
+				
+			</div>
+
 
 
 			<div>

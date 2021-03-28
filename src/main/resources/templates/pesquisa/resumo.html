@@ -13,11 +13,16 @@
 	<div class="container">
 
 		<div class="jumbotron mb-0">
-			<h1 class="display-4">Lista das pesquisas</h1>
+			<h1 class="display-4">Lista das Pesquisas</h1>
 		</div>
 
 		<div class="col-12">
-			<button type="submit" class="btn btn-success">Exportar</button>
+			<a href="/pesquisas/export">
+				<button type="submit" class="btn btn-outline-primary" >Exportar</button>
+			</a>
+			<a href="/home">
+				<button type="submit" class="btn btn-outline-secondary" >Voltar</button>
+			</a>
 		</div>
 
 		<table class="table">
@@ -32,19 +37,22 @@
 					<th scope="col">Religião</th>
 					<th scope="col">Pergunta</th>
 					<th scope="col">Resposta</th>
+					<th scope="col">OBS:</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<th scope="row">1</th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-					<td>Mark</td>
-					<td>Otto</td>
+				<tr th:each="pesquisa : ${pesquisas}">
+					
+					<td th:text=${pesquisa.id}></td>
+					<td th:text=${pesquisa.cidade}></td>
+					<td th:text=${pesquisa.entrevistadoEscolaridade}></td>
+					<td th:text=${pesquisa.entrevistadoFaixaIdade}></td>
+					<td th:text=${pesquisa.entrevistadoGenero}></td>
+					<td th:text=${pesquisa.entrevistadoNome}></td>
+					<td th:text=${pesquisa.entrevistadoReligiao}></td>
+					<td th:text=${pesquisa.pergunta}></td>
+					<td th:text=${pesquisa.resposta}></td>
+					<td th:text=${pesquisa.getRespostaDissertiva()}></td>
 				</tr>
 			</tbody>
 		</table>
