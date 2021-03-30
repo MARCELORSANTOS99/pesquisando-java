@@ -20,10 +20,14 @@ public class HomeController {
 	public String home(Model model) {
 
 		List<Pergunta> perguntas = service.findAll();
-		boolean isDissertativa = true;
 		
-	    model.addAttribute("isDissertativa", isDissertativa);	
+		int tamanho = perguntas.size();
+		
+		for (int i = 0; i < tamanho; i++) {
 			
+		}
+		
+	    			
 		model.addAttribute("perguntas", perguntas);
 		
 		

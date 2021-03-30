@@ -71,10 +71,10 @@ public class PesquisaWebController {
 	@PostMapping("novo")
 	public String novo(RequisicaoNovaPesquisa requisicao) {
 
-		
+		System.out.println("MÉTODO INSERT");
 		Pergunta pergunta = requisicao.toPesquisa();
 
-		
+			
 			perguntaService.insert(pergunta);
 		
 				
