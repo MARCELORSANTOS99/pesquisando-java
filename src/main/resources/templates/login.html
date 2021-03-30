@@ -33,26 +33,21 @@
 					</a>
 
 				</div>
-			
-					
 			</div>
 		</nav>
 
-		<div class="card" th:each="pergunta, r : ${perguntas} ">
-			<div>
-				<span th:text=${pergunta.question}>Pergunta </span> <i
-					class="bi bi-archive-fill" ></i>
-				<td><a th:href="@{/pesquisa/delete/{id}(id=${pergunta.id})}">Delete</a></td>
-				
-			</div>
-			<div>Respostas:</div>
-
-			<th:block>
-				<div>
-					<td th:text=" ${pergunta.getRespostasWeb()}">
+		<div class="card mb-3">
+			<form th:action="@{/login}" class="card-body" method="post">
+				<div class="card-body" >
+					<input type="text" name="username" placeholder="Usuário" />
 				</div>
-			</th:block>
-
+				<div>
+				</div>
+				<div class="card-body">
+					<input type="password" name="password" placeholder="Senha" />
+				</div>
+				<input type="submit" value="Log in" />
+			</form>
 		</div>
 	</div>
 </body>

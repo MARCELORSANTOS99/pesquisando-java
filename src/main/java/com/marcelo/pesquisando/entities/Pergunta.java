@@ -68,18 +68,21 @@ public class Pergunta implements Serializable {
 
 	public List<String> getRespostasWeb() {
 		
+		System.out.println("***ENTROU PARA RECUPERAR RESPOSTAS***");
+		
 		List<String> respostasWeb = new ArrayList<>();
 		
 		for (int i = 0; i < getRespostas().size(); i++) {
 			long idPerg = getId();
 			long idResp = getRespostas().get(i).getPergunt().getId();
+			/*
 			System.out.println("getQuestion = "+ getQuestion());
 			System.out.println("idPerg = "+ idPerg);
 			System.out.println("idResp = "+ idResp);
-			
+			*/
 			if (idPerg == idResp) {
 				respostasWeb.add(getRespostas().get(i).getResp());
-				System.out.println("getRespostas = "+ getRespostas().get(i).getResp());
+				//System.out.println("getRespostas = "+ getRespostas().get(i).getResp());
 			}
 		}
 		

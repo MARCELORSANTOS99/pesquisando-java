@@ -1,7 +1,5 @@
 package com.marcelo.pesquisando.services;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,13 +9,17 @@ import org.springframework.stereotype.Service;
 import com.marcelo.pesquisando.entities.Pergunta;
 import com.marcelo.pesquisando.entities.Resposta;
 import com.marcelo.pesquisando.repositories.PerguntaRepository;
+import com.marcelo.pesquisando.repositories.RespostaRepository;
 
 @Service
 public class PerguntaService {
 	
 	@Autowired
 	private PerguntaRepository repository;
-
+	
+	@Autowired
+	private RespostaRepository respRepository;
+	
 	@Autowired
 	private RespostaService respService;
 	
@@ -57,14 +59,18 @@ public class PerguntaService {
 		
 		Pergunta entity = repository.getOne(id);
 		updateData(entity,obj);
+					
 		
 		return repository.save(entity);
+		
 	}
 
 	private void updateData(Pergunta entity, Pergunta obj) {
 		entity.setQuestion(obj.getQuestion());
 		
 	}
+	
+
 	
 	
 	

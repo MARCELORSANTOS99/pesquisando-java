@@ -20,11 +20,7 @@
 
 
 		<div class="card mt-3">
-			<form class="row g-3" action="/pesquisa/novo" method="POST">
-				<div class="form-group">
-					<label for="nomeCidade" class="form-label">Cidade</label> <input
-						name="nomeCidade" placeholder="São Paulo" class="form-control">
-				</div>
+			<form class="row g-3" action="/pesquisa/novo" method="POST" th:object = "${pergunta}">
 				<div class="form-group">
 					<label for="nomePergunta" class="form-label">Pergunta</label> <input
 						name="nomePergunta" placeholder="Em que você vai votar para 2022?"
@@ -41,9 +37,7 @@
 				<div class="col-12">
 					<button type="submit" class="btn btn-success">Enviar</button>
 				</div>
-				<div class="col-12">
-					<button type="submit" class="btn btn-primary">Add Reposta</button>
-				</div>
+
 			</form>
 		</div>
 

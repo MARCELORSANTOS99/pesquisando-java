@@ -17,7 +17,6 @@ public class HomeController {
 	private PerguntaService service;
 	
 	@GetMapping("home")
-
 	public String home(Model model) {
 
 		List<Pergunta> perguntas = service.findAll();

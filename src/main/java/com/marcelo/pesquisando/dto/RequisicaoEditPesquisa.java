@@ -10,51 +10,41 @@ import com.marcelo.pesquisando.entities.Resposta;
 
 
 
-public class RequisicaoNovaPesquisa {
+public class RequisicaoEditPesquisa {
 	
-	
-	private String nomeId;
+	private long nomeId;
 		
-	public String getNomeId() {
+	private String nomePerguntaEdit;
+	
+			
+	private String nomeResposta;
+		
+						
+	public long getNomeId() {
 		return nomeId;
 	}
-	public void setNomeId(String nomeId) {
+	public void setNomeId(long nomeId) {
 		this.nomeId = nomeId;
 	}
-
-	private String nomeCidade;
-	
-	
-	private String nomePergunta;
-	
-	
-	private String nomeResposta;
-	
-	
-	public String getNomeCidade() {
-		return nomeCidade;
-	}
-	public void setNomeCidade(String nomeCidade) {
-		this.nomeCidade = nomeCidade;
-	}
 	public String getNomePergunta() {
-		return nomePergunta;
+		return nomePerguntaEdit;
 	}
 	public void setNomePergunta(String nomePergunta) {
-		this.nomePergunta = nomePergunta;
+		this.nomePerguntaEdit = nomePergunta;
 	}
 	public String getNomeResposta() {
 		return nomeResposta;
 	}
 	public void setNomeResposta(String nomeResposta) {
 		this.nomeResposta = nomeResposta;
-	}	
-
+	}
+	
+	
 	public Pergunta toPesquisa() {
 		Pergunta pergunta = new Pergunta();
-						
-		pergunta.setQuestion(nomePergunta);
-		pergunta.setRespostas(respostas());
+				
+		pergunta.setQuestion("Teste nova Pergunta");
+		//pergunta.setRespostas(respostas());
 			
 		return pergunta;
 	}

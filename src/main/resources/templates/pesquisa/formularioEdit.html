@@ -11,7 +11,7 @@
 <body>
 	<div class="container">
 		<div class="jumbotron mb-0">
-			<h1 class="display-4">Nova Pesquisa</h1>
+			<h1 class="display-4">Editar Pesquisa</h1>
 			<a href="/home">
 				<button type="submit" class="btn btn-outline-secondary">Voltar</button>
 			</a>
@@ -20,21 +20,21 @@
 
 
 		<div class="card mt-3">
-			<form class="row g-3" action="/pesquisa/novo" method="POST">
+			<form class="row g-3" action="/pesquisa/novo" method="POST" th:object = "${pergunta}">
 				<div class="form-group">
-					<label for="nomeCidade" class="form-label">Cidade</label> <input
-						name="nomeCidade" placeholder="São Paulo" class="form-control">
+					<label for="nomeId" class="form-label">ID</label> <input th:field = "*{id}"
+						name="nomeId" placeholder="São Paulo" class="form-control" id="id">
 				</div>
 				<div class="form-group">
-					<label for="nomePergunta" class="form-label">Pergunta</label> <input
-						name="nomePergunta" placeholder="Em que você vai votar para 2022?"
+					<label for="nomePergunta" class="form-label">Pergunta</label> <input th:field = "*{question}"
+						name="nomePergunta" id="nomePergunta"
 						class="form-control">
 				</div>
 
 				<div class="form-group">
 					<label for="nomeResposta" class="form-label">Resposta
-						separado por (;)</label> <input name="nomeResposta"
-						placeholder="Ex: Ótimo;Bom;Ruim" class="form-control">
+						separado por (;)</label> <input name="nomeResposta" th:text = "${pergunta.getRespostasWeb()}"
+						class="form-control">
 
 				</div>
 

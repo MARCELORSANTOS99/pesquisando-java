@@ -36,21 +36,9 @@ public class RespostaService {
 
 		long toConvertObj = obj;//3
 		int id = (int)toConvertObj;
-		int ii = 2;
-		
-		/*
-		 System.out.println("respostas=>"+respostas);
-		System.out.println("respostas=>"+respostas.size());
-		System.out.println("idPergunta==>"+ obj);
-		System.out.println("idRespostaPraDeletar=>>"+respostas.get(ii).getId());
-		System.out.println("idRespostaPraDeletarReposta=>>"+respostas.get(ii).getResp());
-		System.out.println("idPerguntaNaResposta=>>"+respostas.get(ii).getPergunt().getId());
-		System.out.println("idPerguntaNaResposta == obj =>");
-		System.out.println(respostas.get(ii).getPergunt().getId() == toConvertObj);
-		*/
+			
 		int idPergunta = (int) toConvertObj;
-		
-		
+			
 		for (int i = 0; i < respostas.size(); i++) {
 			
 			long idRespostaPraDeletar = respostas.get(i).getId();//2
@@ -73,6 +61,7 @@ public class RespostaService {
 		Resposta entity = repository.getOne(id);
 		updateData(entity,obj);
 		
+		System.out.println("Salvou novas respostas");
 		return repository.save(entity);
 	}
 
