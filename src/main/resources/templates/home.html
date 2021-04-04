@@ -30,6 +30,8 @@
 					<a href="/pesquisa/formulario">
 						<button class="btn btn-outline-success" type="submit">Nova
 							Pesquisa</button>
+					</a> <a href="/cidade/formulario">
+						<button class="btn btn-outline-success" type="submit">Campanha</button>
 					</a>
 
 				</div>
@@ -37,6 +39,16 @@
 
 			</div>
 		</nav>
+
+		<div></div>
+
+		<div class="card" th:each="cidade : ${cidades} ">
+			<div>
+			<h5>Campanha:</h5>
+			<h6><span th:text=${cidade.nome}>Campanha </span> <i
+					class="bi bi-archive-fill"></i></h6>
+			
+		</div>
 
 		<div class="card" th:each="pergunta, r : ${perguntas} ">
 			<div>

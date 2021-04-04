@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.marcelo.pesquisando.entities.Cidade;
 import com.marcelo.pesquisando.entities.Entrevistado;
 import com.marcelo.pesquisando.entities.Pergunta;
 import com.marcelo.pesquisando.entities.Pesquisa;
@@ -17,13 +18,14 @@ import com.marcelo.pesquisando.entities.enums.EntrevistadoEscolaridade;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoFaixaIdade;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoGenero;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoReligiao;
+import com.marcelo.pesquisando.repositories.CidadeRepository;
 import com.marcelo.pesquisando.repositories.EntrevistadoRepository;
 import com.marcelo.pesquisando.repositories.PerguntaRepository;
 import com.marcelo.pesquisando.repositories.PesquisaRepository;
 import com.marcelo.pesquisando.repositories.RespostaRepository;
 
 @Configuration
-@Profile("test")
+@Profile("dev")
 public class TestConfig implements CommandLineRunner {
 
 	@Autowired
@@ -37,9 +39,13 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private PesquisaRepository pesquisaRepository;
+	
+	@Autowired
+	private CidadeRepository cidadeRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
+
 		
 		
 		Entrevistado p1 = new Entrevistado(null,"Marcelo Santos",EntrevistadoReligiao.OUTRA,EntrevistadoFaixaIdade.DE_26_A_40_ANOS,EntrevistadoGenero.HOMEM,EntrevistadoEscolaridade.SUPERIOR_COMPLETO);
@@ -54,6 +60,9 @@ public class TestConfig implements CommandLineRunner {
 		Resposta r3 = new Resposta(null, "LULA", perg1);
 		Resposta r4 = new Resposta(null, "Sim", perg2);
 		Resposta r5 = new Resposta(null, "Não", perg2);
+		
+		Cidade city = new Cidade();
+		city.setNome("Salvador");
 		
 		ArrayList<Pergunta> perguntas = new ArrayList<>();
 		perguntas.add(perg1);
@@ -115,10 +124,13 @@ public class TestConfig implements CommandLineRunner {
 		pesquisa4.setRespostaDissertiva("Não gosto de armas");
 		
 		
+		
 		entrevistadoRepository.saveAll(Arrays.asList(p1,p2));
 		perguntaRepository.saveAll(Arrays.asList(perg2, perg1));
 		respostaRepository.saveAll(Arrays.asList(r1, r2, r3, r4,r5));
 		pesquisaRepository.saveAll(Arrays.asList(pesquisa,pesquisa2,pesquisa3,pesquisa4));
+		cidadeRepository.saveAll(Arrays.asList(city));
+
 
 	}
 

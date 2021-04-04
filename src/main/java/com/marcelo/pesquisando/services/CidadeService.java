@@ -26,7 +26,7 @@ public class CidadeService {
 	
 	
 	public Cidade insert(Cidade obj) {
-		System.out.println(obj);
+		System.out.println(obj.getNome());
 		return repository.save(obj);
 	}
 	

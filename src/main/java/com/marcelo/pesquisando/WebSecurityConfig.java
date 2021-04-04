@@ -2,6 +2,7 @@ package com.marcelo.pesquisando;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -17,9 +18,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		http
+		http.csrf().disable()
 		.authorizeRequests()
-			.anyRequest().authenticated()
+        	.antMatchers(HttpMethod.GET, "/perguntas/")
+        	.permitAll()
+        	.antMatchers(HttpMethod.GET, "/cidades/")
+        	.permitAll()
+        	.antMatchers(HttpMethod.POST, "/pesquisas/")
+        	.permitAll()
+		.anyRequest().authenticated()
 		.and()
 		.formLogin(form -> form
 	            .loginPage("/login")

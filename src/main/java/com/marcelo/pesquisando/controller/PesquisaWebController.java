@@ -77,8 +77,6 @@ public class PesquisaWebController {
 			
 			perguntaService.insert(pergunta);
 		
-				
-
 		return "redirect:/home";
 
 	}
