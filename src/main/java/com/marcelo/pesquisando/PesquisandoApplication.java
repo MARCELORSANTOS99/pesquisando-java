@@ -14,6 +14,7 @@ public class PesquisandoApplication {
 		SpringApplication.run(PesquisandoApplication.class, args);
 	}
 	
+	
 	@Bean
 	public Filter getCharacterEncodingFilter() {
 

@@ -25,7 +25,7 @@ import com.marcelo.pesquisando.repositories.PesquisaRepository;
 import com.marcelo.pesquisando.repositories.RespostaRepository;
 
 @Configuration
-@Profile("dev")
+@Profile("test")
 public class TestConfig implements CommandLineRunner {
 
 	@Autowired
