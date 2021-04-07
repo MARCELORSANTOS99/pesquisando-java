@@ -120,7 +120,7 @@ public class TestConfig implements CommandLineRunner {
 		pesquisa3.setResposta("LULA");
 		pesquisa4.setResposta("Não");
 		
-		//Observação
+		//Observaçãosss
 		pesquisa4.setRespostaDissertiva("Não gosto de armas");
 		
 		
