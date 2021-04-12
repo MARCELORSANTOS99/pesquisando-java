@@ -85,6 +85,13 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<scope>2.2.1</scope>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>

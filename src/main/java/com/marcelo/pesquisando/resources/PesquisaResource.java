@@ -1,13 +1,14 @@
 package com.marcelo.pesquisando.resources;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,7 @@ import org.supercsv.prefs.CsvPreference;
 
 import com.marcelo.pesquisando.entities.Pesquisa;
 import com.marcelo.pesquisando.services.PesquisaService;
+
 
 @Controller
 @RestController
@@ -53,6 +55,7 @@ public class PesquisaResource {
 	
 	@PostMapping
 	public ResponseEntity<Pesquisa> insert(@RequestBody Pesquisa obj){
+		
 		obj = service.insert(obj);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -75,7 +78,7 @@ public class PesquisaResource {
 	@GetMapping(value = "/resumo")
 	public ResponseEntity<Long> resumoPesquisa(){
 		
-		long qtd = service.buscaPesquisa("Bolsonaro");
+		long qtd = service.buscaPesquisa("");
 		
 		 return ResponseEntity.ok().body(qtd);
 	}
@@ -95,9 +98,9 @@ public class PesquisaResource {
 		
 		ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
 		
-		String[] csvHeader = {"id","Cidade","Escolaridade","FaixaIdade", "Genero","Nome","Religiao","Pergunta","Resposta","OBS"};
+		String[] csvHeader = {"id","Código","Cidade","Escolaridade","FaixaIdade", "Genero","Nome","Religiao","Pergunta","Resposta","OBS"};
 		
-		String[] nameMapping = {"id","cidade","entrevistadoEscolaridade","entrevistadoFaixaIdade","entrevistadoGenero","entrevistadoNome","entrevistadoReligiao","Pergunta","Resposta","respostaDissertiva"};
+		String[] nameMapping = {"id","codigo","cidade","entrevistadoEscolaridade","entrevistadoFaixaIdade","entrevistadoGenero","entrevistadoNome","entrevistadoReligiao","Pergunta","Resposta","respostaDissertiva"};
 		
 		csvWriter.writeHeader(csvHeader);
 		
@@ -108,5 +111,42 @@ public class PesquisaResource {
 		csvWriter.close();
 		
 	}
+	
+	//Exportar para EXCEL
+	@GetMapping(value = "/export/excel")
+	public void exportToExcel(HttpServletResponse response) throws IOException {
+		
+		List<Pesquisa> listPesquisa = service.findAll();
+		Workbook workbook = new XSSFWorkbook();
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+			
+		
+		
+		response.setContentType("text/csv");
+		
+		String headerKey = "Content-Disposition";
+		String headervalue = "attachement; filename=pesquisas.csv";
+		
+		response.setHeader(headerKey, headervalue);
+		
+		
+		
+		ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
+		
+		String[] csvHeader = {"id","Código","Cidade","Escolaridade","FaixaIdade", "Genero","Nome","Religiao","Pergunta","Resposta","OBS"};
+		
+		String[] nameMapping = {"id","codigo","cidade","entrevistadoEscolaridade","entrevistadoFaixaIdade","entrevistadoGenero","entrevistadoNome","entrevistadoReligiao","Pergunta","Resposta","respostaDissertiva"};
+		
+		csvWriter.writeHeader(csvHeader);
+		
+		for (Pesquisa pesquisa : listPesquisa) {
+			csvWriter.write(pesquisa, nameMapping);
+		}
+		
+		csvWriter.close();
+		
+	}
+	
+
 	
 }

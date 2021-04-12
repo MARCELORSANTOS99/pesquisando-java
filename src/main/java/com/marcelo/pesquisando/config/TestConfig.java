@@ -63,7 +63,7 @@ public class TestConfig implements CommandLineRunner {
 		
 		Cidade city = new Cidade();
 		city.setNome("Salvador");
-		
+			
 		ArrayList<Pergunta> perguntas = new ArrayList<>();
 		perguntas.add(perg1);
 		perguntas.add(perg2);

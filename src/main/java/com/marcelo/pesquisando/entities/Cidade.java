@@ -18,6 +18,7 @@ private static final long serialVersionUID = 1L;
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
+
 	
 	
 	public Long getId() {
@@ -55,7 +56,6 @@ private static final long serialVersionUID = 1L;
 			return false;
 		return true;
 	}
-	
 	
 	
 

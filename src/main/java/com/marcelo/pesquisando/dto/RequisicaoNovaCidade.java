@@ -6,6 +6,7 @@ public class RequisicaoNovaCidade {
 	
 	private long nomeId;
 	private String nomeCidade;
+	private String nomeCodigo;
 	
 	public long getNomeId() {
 		return nomeId;
@@ -23,9 +24,11 @@ public class RequisicaoNovaCidade {
 	public Cidade toCidade() {
 		Cidade cidade = new Cidade();
 		cidade.setNome(nomeCidade);
+	
 			
 		return cidade;
 	}
+	
 	
 
 }

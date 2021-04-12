@@ -1,15 +1,18 @@
 package com.marcelo.pesquisando.entities;
 
 import java.io.Serializable;
+import java.time.Instant;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
+@Table(name = "tb_pesquisa")
 public class Pesquisa implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -17,6 +20,14 @@ public class Pesquisa implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	
+	//@JsonFormat(shape= JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm", locale = "pt-BR", timezone = "Brazil/East")
+	private Instant moment = Instant.now();
+	
+	private String codigo;
+	
 	private String cidade;
 	
 	private String entrevistadoNome;
@@ -36,11 +47,12 @@ public class Pesquisa implements Serializable{
 	
 
 
-	public Pesquisa(Long id, String cidade, String entrevistadoNome, String entrevistadoReligiao,
+	public Pesquisa(Long id, String codigo, String cidade, String entrevistadoNome, String entrevistadoReligiao,
 			String entrevistadoFaixaIdade, String entrevistadoGenero, String entrevistadoEscolaridade, String pergunta,
 			String resposta, String respostaDissertiva) {
 		super();
 		this.id = id;
+		this.codigo = codigo;
 		this.cidade = cidade;
 		this.entrevistadoNome = entrevistadoNome;
 		this.entrevistadoReligiao = entrevistadoReligiao;
@@ -188,6 +200,18 @@ public class Pesquisa implements Serializable{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 	
 	

@@ -26,9 +26,12 @@ public class HomeController {
 
 		List<Pergunta> perguntas = service.findAll();
 		List<Cidade> cidades = cityService.findAll();
+		
+		String version = "1.0.1";
     			
 		model.addAttribute("perguntas", perguntas);
 		model.addAttribute("cidades", cidades);
+		model.addAttribute("version", version);
 		
 		
 		return "home";

@@ -27,7 +27,7 @@ public class PesquisaService {
 	
 	
 	public Pesquisa insert(Pesquisa obj) {
-		System.out.println(obj);
+				
 		return repository.save(obj);
 	}
 	
@@ -54,10 +54,6 @@ public class PesquisaService {
 		return repository.resumo(resposta);
 	}
 	
-	//Exporta para CSV
-	
-
-
 	
 
 }

@@ -29,6 +29,7 @@
 			<thead>
 				<tr>
 					<th scope="col">ID</th>
+					<th scope="col">Código</th>
 					<th scope="col">Cidade</th>
 					<th scope="col">Escolaridade</th>
 					<th scope="col">Faixa de idade</th>
@@ -44,6 +45,7 @@
 				<tr th:each="pesquisa : ${pesquisas}">
 					
 					<td th:text=${pesquisa.id}></td>
+					<td th:text=${pesquisa.codigo}></td>
 					<td th:text=${pesquisa.cidade}></td>
 					<td th:text=${pesquisa.entrevistadoEscolaridade}></td>
 					<td th:text=${pesquisa.entrevistadoFaixaIdade}></td>
