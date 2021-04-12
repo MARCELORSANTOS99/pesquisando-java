@@ -112,7 +112,7 @@ public class PesquisaResource {
 		
 	}
 	
-	//Exportar para EXCEL
+	//Exportar para EXCEL Desabilitado
 	@GetMapping(value = "/export/excel")
 	public void exportToExcel(HttpServletResponse response) throws IOException {
 		
