@@ -17,7 +17,7 @@ public class PesquisaService {
 	
 	public List<Pesquisa> findAll(){
 		
-		return repository.findAllByOrderByIdAsc();
+		return repository.findByOrderByIdAscCodigoAsc();
 	}
 	
 	public Pesquisa findById(Long id) {
