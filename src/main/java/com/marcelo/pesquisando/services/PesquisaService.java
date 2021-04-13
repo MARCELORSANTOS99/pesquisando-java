@@ -17,7 +17,7 @@ public class PesquisaService {
 	
 	public List<Pesquisa> findAll(){
 		
-		return repository.findAll();
+		return repository.findAllByOrderByIdAsc();
 	}
 	
 	public Pesquisa findById(Long id) {
@@ -49,10 +49,13 @@ public class PesquisaService {
 			
 	}
 	
+	//COUNT POR PESQUISA
+	
 	public long buscaPesquisa(String resposta){
 		
 		return repository.resumo(resposta);
 	}
+	
 	
 	
 
