@@ -14,6 +14,7 @@ import com.marcelo.pesquisando.services.CidadeService;
 @EnableScheduling
 public class Rotina {
 	
+	/*
 	@Autowired
 	private CidadeService service;
 	
@@ -27,4 +28,5 @@ public class Rotina {
 		System.out.println(list);
 	
     }
+    */
 }

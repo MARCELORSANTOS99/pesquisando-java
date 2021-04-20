@@ -64,6 +64,7 @@ public class Resposta implements Serializable {
 
 
 	public Pergunta getPergunt() {
+		
 		return pergunt;
 	}
 

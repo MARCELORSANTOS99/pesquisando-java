@@ -27,6 +27,9 @@ public class HomeController {
 		List<Pergunta> perguntas = service.findAll();
 		List<Cidade> cidades = cityService.findAll();
 		
+		System.out.println("<<<lista pergutas>>>>");
+		System.out.println(perguntas);
+		
 		String version = "1.0.1";
     			
 		model.addAttribute("perguntas", perguntas);

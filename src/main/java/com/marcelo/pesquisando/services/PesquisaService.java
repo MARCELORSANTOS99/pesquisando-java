@@ -1,11 +1,13 @@
 package com.marcelo.pesquisando.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.marcelo.pesquisando.entities.Apuracao;
 import com.marcelo.pesquisando.entities.Pesquisa;
 import com.marcelo.pesquisando.repositories.PesquisaRepository;
 
@@ -14,6 +16,9 @@ public class PesquisaService {
 	
 	@Autowired
 	private PesquisaRepository repository;
+	
+	@Autowired
+	private ApuracaoService apuracaoService;
 	
 	public List<Pesquisa> findAll(){
 		
@@ -29,6 +34,7 @@ public class PesquisaService {
 	public Pesquisa insert(Pesquisa obj) {
 				
 		return repository.save(obj);
+		
 	}
 	
 	public void delete(Long obj) {
@@ -51,10 +57,40 @@ public class PesquisaService {
 	
 	//COUNT POR PESQUISA
 	
-	public long buscaPesquisa(String resposta){
+	public long buscaPesquisa(String pergunta){
 		
-		return repository.resumo(resposta);
+		return repository.resumo(pergunta);
 	}
+	
+
+	public long resumoApuration(String pergunta,String genero){
+		
+		return repository.resumoApuration(pergunta,genero);
+	}
+	
+	public List<Apuracao> resumoGroupByPergunta(){
+		
+		List<Apuracao> listaApuracao = new ArrayList<>();
+		List<String> lista = repository.resumoGrouByPergunta();
+		
+		 for(String item : lista){
+	            
+			 String novaLista[] = item.split(",");
+	         			 
+			 Apuracao p = new Apuracao(novaLista[0], novaLista[1],Integer.parseInt(novaLista[2]));
+			 
+			 //apuracaoService.insert(p);
+			 
+			 listaApuracao.add(p);
+		        
+	        }
+	 
+		
+		
+		return listaApuracao;
+	}
+	
+	
 	
 	
 	

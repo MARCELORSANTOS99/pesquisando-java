@@ -2,6 +2,8 @@ package com.marcelo.pesquisando.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +25,7 @@ public class Pesquisa implements Serializable{
 	
 	
 	//@JsonFormat(shape= JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm", locale = "pt-BR", timezone = "Brazil/East")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yy HH:mm", locale = "pt-BR", timezone = "Brazil/East")
 	private Instant moment = Instant.now();
 	
 	private String codigo;
@@ -31,15 +33,15 @@ public class Pesquisa implements Serializable{
 	private String cidade;
 	
 	private String entrevistadoNome;
+	private String entrevistadoBairro;
+	private String entrevistadoRua;
+	private String entrevistadoNumero;
 	private String entrevistadoReligiao;
 	private String entrevistadoFaixaIdade;
 	private String entrevistadoGenero;
 	private String entrevistadoEscolaridade;
-	
 	private String pergunta;
-	
 	private String resposta;
-	
 	private String respostaDissertiva;
 	
 	
@@ -47,23 +49,27 @@ public class Pesquisa implements Serializable{
 	
 
 
-	public Pesquisa(Long id, String codigo, String cidade, String entrevistadoNome, String entrevistadoReligiao,
+	public Pesquisa(Long id, Instant moment, String codigo, String cidade, String entrevistadoNome,
+			String entrevistadoBairro, String entrevistadoRua, String entrevistadoNumero, String entrevistadoReligiao,
 			String entrevistadoFaixaIdade, String entrevistadoGenero, String entrevistadoEscolaridade, String pergunta,
 			String resposta, String respostaDissertiva) {
 		super();
 		this.id = id;
+		this.moment = moment;
 		this.codigo = codigo;
 		this.cidade = cidade;
 		this.entrevistadoNome = entrevistadoNome;
+		this.entrevistadoBairro = entrevistadoBairro;
+		this.entrevistadoRua = entrevistadoRua;
+		this.entrevistadoNumero = entrevistadoNumero;
 		this.entrevistadoReligiao = entrevistadoReligiao;
 		this.entrevistadoFaixaIdade = entrevistadoFaixaIdade;
 		this.entrevistadoGenero = entrevistadoGenero;
 		this.entrevistadoEscolaridade = entrevistadoEscolaridade;
 		this.pergunta = pergunta;
 		this.resposta = resposta;
-		this.resposta = respostaDissertiva;
+		this.respostaDissertiva = respostaDissertiva;
 	}
-
 
 
 	public Long getId() {
@@ -213,11 +219,58 @@ public class Pesquisa implements Serializable{
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
+
+
+
+	public Instant getMoment() {
+		
+		return moment;
+	}
+
+
+
+	public void setMoment(Instant moment) {
+		this.moment = moment;
+	}
+
+
+
+	public String getEntrevistadoBairro() {
+		return entrevistadoBairro;
+	}
+
+
+
+	public void setEntrevistadoBairro(String entrevistadoBairro) {
+		this.entrevistadoBairro = entrevistadoBairro;
+	}
+
+
+
+	public String getEntrevistadoRua() {
+		return entrevistadoRua;
+	}
+
+
+
+	public void setEntrevistadoRua(String entrevistadoRua) {
+		this.entrevistadoRua = entrevistadoRua;
+	}
+
+
+
+	public String getEntrevistadoNumero() {
+		return entrevistadoNumero;
+	}
+
+
+
+	public void setEntrevistadoNumero(String entrevistadoNumero) {
+		this.entrevistadoNumero = entrevistadoNumero;
+	}
 	
 	
-	
-	
-	
+
 	
 
 }

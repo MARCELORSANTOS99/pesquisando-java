@@ -31,21 +31,14 @@
 					<th scope="col">ID</th>
 					<th scope="col">Código</th>
 					<th scope="col">Cidade</th>
+					<th scope="col">Escolaridade</th>
+					<th scope="col">Faixa de idade</th>
+					<th scope="col">Genero</th>
+					<th scope="col">Nome</th>
+					<th scope="col">Religião</th>
 					<th scope="col">Pergunta</th>
 					<th scope="col">Resposta</th>
 					<th scope="col">OBS:</th>
-					<th scope="col">Nome</th>
-					<th scope="col">Bairro</th>
-					<th scope="col">Rua</th>
-					<th scope="col">Numero</th>					
-					<th scope="col">Genero</th>
-					<th scope="col">Faixa de idade</th>
-					<th scope="col">Religião</th>
-					<th scope="col">Escolaridade</th>
-					
-					
-				
-					
 				</tr>
 			</thead>
 			<tbody>
@@ -54,22 +47,14 @@
 					<td th:text=${pesquisa.id}></td>
 					<td th:text=${pesquisa.codigo}></td>
 					<td th:text=${pesquisa.cidade}></td>
+					<td th:text=${pesquisa.entrevistadoEscolaridade}></td>
+					<td th:text=${pesquisa.entrevistadoFaixaIdade}></td>
+					<td th:text=${pesquisa.entrevistadoGenero}></td>
+					<td th:text=${pesquisa.entrevistadoNome}></td>
+					<td th:text=${pesquisa.entrevistadoReligiao}></td>
 					<td th:text=${pesquisa.pergunta}></td>
 					<td th:text=${pesquisa.resposta}></td>
 					<td th:text=${pesquisa.getRespostaDissertiva()}></td>
-					<td th:text=${pesquisa.entrevistadoNome}></td>
-					<td th:text=${pesquisa.entrevistadoBairro}></td>
-					<td th:text=${pesquisa.entrevistadoRua}></td>
-					<td th:text=${pesquisa.entrevistadoNumero}></td>					
-					<td th:text=${pesquisa.entrevistadoGenero}></td>
-					<td th:text=${pesquisa.entrevistadoFaixaIdade}></td>
-					<td th:text=${pesquisa.entrevistadoReligiao}></td>
-					<td th:text=${pesquisa.entrevistadoEscolaridade}></td>
-				
-					
-					
-					
-
 				</tr>
 			</tbody>
 		</table>

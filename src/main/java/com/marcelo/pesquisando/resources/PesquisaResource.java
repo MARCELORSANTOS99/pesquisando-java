@@ -3,6 +3,8 @@ package com.marcelo.pesquisando.resources;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URI;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +28,7 @@ import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
 import com.marcelo.pesquisando.entities.Pesquisa;
+import com.marcelo.pesquisando.entities.Apuracao;
 import com.marcelo.pesquisando.services.PesquisaService;
 
 
@@ -83,14 +86,50 @@ public class PesquisaResource {
 		 return ResponseEntity.ok().body(qtd);
 	}
 	
+	@GetMapping(value = "/apuration")
+	public ResponseEntity<Long> resumoApuracion(){
+		
+		String pergunta = "O que você acha da limpeza as calçadas?";
+		String genero = "HOMEM";
+		
+		long qtd = service.resumoApuration(pergunta, genero);
+		
+		 return ResponseEntity.ok().body(qtd);
+	}
+	
+	@GetMapping(value = "/apuration2")
+	public ResponseEntity<String> groupByPergunta(){
+		
+		List<Apuracao> list = service.resumoGroupByPergunta(); 
+		
+		 return ResponseEntity.ok().body(list.toString());
+		
+	}
+	
+	
+	
+	
+	
 	//Exportar para CSV
 	@GetMapping(value = "/export")
 	public void exportToCsv(HttpServletResponse response) throws IOException {
 		
 		response.setContentType("text/csv");
+	
+		
+		// data/hora atual
+		LocalDateTime agora = LocalDateTime.now();
+
+		// formatar a data
+		DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("ddMMuuuuhhmm");
+		String dataFormatada = formatterData.format(agora);
+
+		System.out.println(dataFormatada);
+		
+		String nomeArquivo = "pesquisa_";
 		
 		String headerKey = "Content-Disposition";
-		String headervalue = "attachement; filename=pesquisas.csv";
+		String headervalue = "attachement; filename="+nomeArquivo+dataFormatada+".csv";
 		
 		response.setHeader(headerKey, headervalue);
 		
@@ -98,9 +137,9 @@ public class PesquisaResource {
 		
 		ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
 		
-		String[] csvHeader = {"id","Código","Cidade","Escolaridade","FaixaIdade", "Genero","Nome","Religiao","Pergunta","Resposta","OBS"};
+		String[] csvHeader = {"id","Código","Cidade","Pergunta","Resposta","OBS","Nome","Bairro","Rua","Numero","Genero","FaixaIdade","Religiao", "Escolaridade"};
 		
-		String[] nameMapping = {"id","codigo","cidade","entrevistadoEscolaridade","entrevistadoFaixaIdade","entrevistadoGenero","entrevistadoNome","entrevistadoReligiao","Pergunta","Resposta","respostaDissertiva"};
+		String[] nameMapping = {"id","codigo","cidade","Pergunta","Resposta","respostaDissertiva","entrevistadoNome","entrevistadoBairro","entrevistadoRua","entrevistadoNumero","entrevistadoGenero","entrevistadoFaixaIdade","entrevistadoReligiao","entrevistadoEscolaridade"};
 		
 		csvWriter.writeHeader(csvHeader);
 		
