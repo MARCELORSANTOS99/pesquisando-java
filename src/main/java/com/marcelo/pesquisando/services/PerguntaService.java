@@ -1,5 +1,6 @@
 package com.marcelo.pesquisando.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +28,7 @@ public class PerguntaService {
 	
 	public List<Pergunta> findAll(){
 		
-		return repository.findAll();
+		return repository.findAllByOrderByIdAsc();
 	}
 	
 	public Pergunta findById(Long id) {
@@ -51,7 +52,16 @@ public class PerguntaService {
 	}
 	
 	public void delete(Long obj) {
-								
+	
+		Pergunta p = findById(obj);
+		List<Resposta> respostas = p.getRespostas();
+		
+		for (Resposta resposta : respostas) {
+			
+			respService.deleteFromApp(resposta.getId());
+			
+		}
+		
 		repository.deleteById(obj);
 	}
 	

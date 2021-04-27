@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.marcelo.pesquisando.entities.Pergunta;
 import com.marcelo.pesquisando.entities.Resposta;
 import com.marcelo.pesquisando.repositories.RespostaRepository;
 
@@ -17,7 +18,7 @@ public class RespostaService {
 	
 	public List<Resposta> findAll(){
 		
-		return repository.findAll();
+		return repository.findAllByOrderByIdAsc();
 	}
 	
 	public Resposta findById(Long id) {
@@ -27,6 +28,11 @@ public class RespostaService {
 	
 	
 	public Resposta insert(Resposta obj) {
+		return repository.save(obj);
+	}
+	
+	public Resposta insertFromApp(Resposta obj, Pergunta pergunt ) {
+		obj.setPergunt(pergunt);
 		return repository.save(obj);
 	}
 	
@@ -53,6 +59,13 @@ public class RespostaService {
 			}
 		}
 		
+		
+	}
+	
+	public void deleteFromApp(Long id) {
+		
+		repository.deleteById(id);
+		System.out.println("Resposta deletada");
 		
 	}
 	

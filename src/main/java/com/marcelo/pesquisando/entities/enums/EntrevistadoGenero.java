@@ -4,8 +4,5 @@ public enum EntrevistadoGenero {
 	
 	HOMEM,
 	MULHER,
-	GAY,
-	TRANSEXUAL,
-	
 
 }

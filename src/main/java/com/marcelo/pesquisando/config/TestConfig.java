@@ -48,9 +48,9 @@ public class TestConfig implements CommandLineRunner {
 
 		
 		
-		Entrevistado p1 = new Entrevistado(null,"Marcelo Santos",EntrevistadoReligiao.OUTRA,EntrevistadoFaixaIdade.DE_26_A_40_ANOS,EntrevistadoGenero.HOMEM,EntrevistadoEscolaridade.SUPERIOR_COMPLETO);
-		Entrevistado p2 = new Entrevistado(null,"Debora Santos",EntrevistadoReligiao.ESPIRITA,EntrevistadoFaixaIdade.DE_26_A_40_ANOS,EntrevistadoGenero.MULHER,EntrevistadoEscolaridade.SUPERIOR_COMPLETO);
-		Entrevistado p3 = new Entrevistado(null,"Alice",EntrevistadoReligiao.ESPIRITA,EntrevistadoFaixaIdade.ATE_18_ANOS,EntrevistadoGenero.MULHER,EntrevistadoEscolaridade.PRIMEIRO_GRAU_COMPLETO);
+		Entrevistado p1 = new Entrevistado(null,"Marcelo Santos",EntrevistadoReligiao.OUTRA,EntrevistadoFaixaIdade.DE_16_A_24_ANOS,EntrevistadoGenero.HOMEM,EntrevistadoEscolaridade.ENSINO_SUPERIOR);
+		Entrevistado p2 = new Entrevistado(null,"Debora Santos",EntrevistadoReligiao.ESPIRITA,EntrevistadoFaixaIdade.DE_16_A_24_ANOS,EntrevistadoGenero.MULHER,EntrevistadoEscolaridade.ENSINO_SUPERIOR);
+		Entrevistado p3 = new Entrevistado(null,"Alice",EntrevistadoReligiao.ESPIRITA,EntrevistadoFaixaIdade.ACIMA_DE_70_ANOS,EntrevistadoGenero.MULHER,EntrevistadoEscolaridade.ENSINO_FUNDAMENTAL);
 
 		Pergunta perg1 = new Pergunta(null, "Em que vc vai votar?",null);
 		Pergunta perg2 = new Pergunta(null, "Você é a favor do porte de arma?","Não gosto de arma");

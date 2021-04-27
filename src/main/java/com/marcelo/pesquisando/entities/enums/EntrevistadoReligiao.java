@@ -6,6 +6,7 @@ public enum EntrevistadoReligiao {
 	EVANGELICO,
 	ESPIRITA,
 	BUDISMO,
-	OUTRA
+	OUTRA,
+	NAO_SABE_OU_NAO_RESPONDEU
 
 }

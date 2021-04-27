@@ -1,7 +1,10 @@
 	package com.marcelo.pesquisando.resources;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.marcelo.pesquisando.entities.Pergunta;
-import com.marcelo.pesquisando.entities.Resposta;
+import com.marcelo.pesquisando.entities.PerguntaApuracao;
+import com.marcelo.pesquisando.entities.RespostaApuracao;
+import com.marcelo.pesquisando.entities.enums.EntrevistadoGenero;
+import com.marcelo.pesquisando.entities.enums.EntrevistadoEscolaridade;
+import com.marcelo.pesquisando.entities.enums.EntrevistadoFaixaIdade;
+import com.marcelo.pesquisando.entities.enums.EntrevistadoReligiao;
 import com.marcelo.pesquisando.services.PerguntaService;
+import com.marcelo.pesquisando.services.PesquisaService;
 import com.marcelo.pesquisando.services.RespostaService;
 
 @RestController
@@ -29,7 +38,10 @@ public class PerguntaResource {
 	private PerguntaService service;
 	
 	@Autowired
-	private RespostaService RespService;
+	private PesquisaService pesquisaService;
+	
+	@Autowired
+	private RespostaService respService;
 	
 
 	@GetMapping
@@ -44,12 +56,14 @@ public class PerguntaResource {
 	public ResponseEntity<Pergunta> findById(@PathVariable Long id){
 		Pergunta obj = service.findById(id);
 		
+		
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	@PostMapping
 	public ResponseEntity<Pergunta> insert(@RequestBody Pergunta obj){
 		
+		System.out.println(obj);
 		obj = service.insert(obj);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -72,7 +86,92 @@ public class PerguntaResource {
 	}
 	
 	
+	@GetMapping(value = "/apuracao/{id}")
+	public ResponseEntity<PerguntaApuracao> findByIdApuracao(@PathVariable Long id){
+		
+		Pergunta obj = service.findById(id);
+		
+		long total = pesquisaService.resumoApurationAppPergunta(obj.getQuestion());
+		List<Integer> totalPorResposta = pesquisaService.resumoApurationAppPerguntaPorResposta(obj);
+		Integer totalPorPergunta = pesquisaService.resumoApurationAppTotalPorPergunta(obj);
+		
+		System.out.println(obj.getRespostasWeb());
+		System.out.println(totalPorResposta);
+		
+		PerguntaApuracao pergutaApurada = new PerguntaApuracao(obj.getQuestion(), obj.getRespostasWeb(), totalPorResposta, totalPorPergunta);
+				
+		return ResponseEntity.ok().body(pergutaApurada);
+	}
 	
-	
+	@GetMapping(value = "/apuracao/{id}/{tipo}/{resposta}")
+	public ResponseEntity<RespostaApuracao> findByIdApuracaoPorTipo(@PathVariable Long id, @PathVariable String tipo, @PathVariable String resposta){
+		
+		Pergunta obj = service.findById(id);
+		
+		List<String> enumsLista = new ArrayList<>();
+		
+		
+		definirTipo(tipo, enumsLista);
+		
+		//int[] a = {10,20,30,40,50};
+		//int sum = IntStream.of(a).sum();
+		
+		
+		List<Integer> totalPorRespostaTipo = pesquisaService.resumoApurationAppPerguntaPorRespostaTipo(obj, tipo, resposta);
+		Integer totalPerguntaResposta = pesquisaService.totalPorPerguntaAndResposta(obj.getQuestion(),resposta);
+		
+		System.out.println(enumsLista);
+		System.out.println(totalPorRespostaTipo);
+		
+		RespostaApuracao respostaApurada = new RespostaApuracao(obj.getQuestion(),enumsLista,obj.getRespostasWeb(),resposta,totalPorRespostaTipo,totalPerguntaResposta);
+				
+		return ResponseEntity.ok().body(respostaApurada);
+	}
+
+	public void definirTipo(String tipo, List<String> enumsLista) {
+		switch (tipo) {
+		case "genero":
+			System.out.println("EntrevistadoGenero");
+						
+			List<EntrevistadoGenero> listaGenero = Arrays.asList(EntrevistadoGenero.values());
+	        for (int i = 0; i < listaGenero.size(); i++) {
+	        	enumsLista.add(listaGenero.get(i).toString());
+	        }		
+			
+			break;
+		case "idade":
+			System.out.println("EntrevistadoFaixaIdade");
+			
+			
+			List<EntrevistadoFaixaIdade> listaIdade = Arrays.asList(EntrevistadoFaixaIdade.values());
+	        for (int i = 0; i < listaIdade.size(); i++) {
+	        	enumsLista.add(listaIdade.get(i).toString());
+	        }
+			
+			break;
+		case "religiao":
+			System.out.println("EntrevistadoReligiao");
+			
+			
+			List<EntrevistadoReligiao> listaReligiao = Arrays.asList(EntrevistadoReligiao.values());
+	        for (int i = 0; i < listaReligiao.size(); i++) {
+	        	enumsLista.add(listaReligiao.get(i).toString());
+	        }
+			break;
+		case "escolaridade":
+			System.out.println("EntrevistadoEscolaridade");
+			
+			
+			List<EntrevistadoEscolaridade> listaEscola = Arrays.asList(EntrevistadoEscolaridade.values());
+	        for (int i = 0; i < listaEscola.size(); i++) {
+	        	enumsLista.add(listaEscola.get(i).toString());
+	        }
+			
+			break;
+
+		default:
+			break;
+		}
+	}	
 	
 }

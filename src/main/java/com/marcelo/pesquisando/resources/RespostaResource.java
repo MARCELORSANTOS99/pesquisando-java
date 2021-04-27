@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.marcelo.pesquisando.entities.Pergunta;
 import com.marcelo.pesquisando.entities.Resposta;
+import com.marcelo.pesquisando.services.PerguntaService;
 import com.marcelo.pesquisando.services.RespostaService;
 
 @RestController
@@ -25,6 +26,9 @@ public class RespostaResource {
 	
 	@Autowired
 	private RespostaService service;
+	
+	@Autowired
+	private PerguntaService perguntaService;
 	
 	@GetMapping
 	public ResponseEntity<List<Resposta>> findAll(){
@@ -51,9 +55,35 @@ public class RespostaResource {
 		return ResponseEntity.created(uri).body(obj);
 	}
 	
+	@PostMapping(value = "/{id}")
+	public ResponseEntity<Resposta> insertFromApp(@RequestBody Resposta obj, @PathVariable Long id){
+		
+		System.out.println("insertFromApp");
+		Pergunta pergunta = perguntaService.findById(id);
+		System.out.println(pergunta.getId());
+		
+		obj = service.insertFromApp(obj, pergunta);
+		
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		
+		return ResponseEntity.created(uri).body(obj);
+	}
+	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id){
-		service.delete(id);
+				
+		//service.delete(id);
+		service.deleteFromApp(id);
+		return ResponseEntity.noContent().build();
+	}
+	
+	@PostMapping(value = "/from/app/{id}")
+	public ResponseEntity<Resposta> deleteFromApp(@RequestBody Resposta obj, @PathVariable Long id){
+		
+		service.deleteFromApp(id);
+				
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		
 		return ResponseEntity.noContent().build();
 	}
 	
