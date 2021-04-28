@@ -92,13 +92,15 @@ public class PerguntaResource {
 		Pergunta obj = service.findById(id);
 		
 		long total = pesquisaService.resumoApurationAppPergunta(obj.getQuestion());
+		List<String> respostasDissertativas  = pesquisaService.listaRespostasDissertativas(obj);
+		List<Integer> totalRespostasDissertativas  = pesquisaService.totalListaRespostasDissertativas(obj,respostasDissertativas);
 		List<Integer> totalPorResposta = pesquisaService.resumoApurationAppPerguntaPorResposta(obj);
 		Integer totalPorPergunta = pesquisaService.resumoApurationAppTotalPorPergunta(obj);
 		
 		System.out.println(obj.getRespostasWeb());
 		System.out.println(totalPorResposta);
 		
-		PerguntaApuracao pergutaApurada = new PerguntaApuracao(obj.getQuestion(), obj.getRespostasWeb(), totalPorResposta, totalPorPergunta);
+		PerguntaApuracao pergutaApurada = new PerguntaApuracao(obj.getQuestion(), obj.getRespostasWeb(), totalPorResposta, totalPorPergunta,respostasDissertativas,totalRespostasDissertativas);
 				
 		return ResponseEntity.ok().body(pergutaApurada);
 	}
@@ -126,7 +128,8 @@ public class PerguntaResource {
 		RespostaApuracao respostaApurada = new RespostaApuracao(obj.getQuestion(),enumsLista,obj.getRespostasWeb(),resposta,totalPorRespostaTipo,totalPerguntaResposta);
 				
 		return ResponseEntity.ok().body(respostaApurada);
-	}
+	}	
+
 
 	public void definirTipo(String tipo, List<String> enumsLista) {
 		switch (tipo) {

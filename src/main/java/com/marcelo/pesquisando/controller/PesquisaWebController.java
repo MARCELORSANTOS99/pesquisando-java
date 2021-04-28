@@ -1,13 +1,12 @@
 package com.marcelo.pesquisando.controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.math3.stat.descriptive.summary.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,12 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.marcelo.pesquisando.dto.RequisicaoEditPesquisa;
+import com.marcelo.pesquisando.dto.RequisicaoEditRespostaPesquisa;
 import com.marcelo.pesquisando.dto.RequisicaoNovaPesquisa;
+import com.marcelo.pesquisando.entities.Apuracao;
 import com.marcelo.pesquisando.entities.Pergunta;
 import com.marcelo.pesquisando.entities.Pesquisa;
-import com.marcelo.pesquisando.entities.Apuracao;
-import com.marcelo.pesquisando.entities.Resposta;
 import com.marcelo.pesquisando.repositories.PerguntaRepository;
 import com.marcelo.pesquisando.services.PerguntaService;
 import com.marcelo.pesquisando.services.PesquisaService;
@@ -79,6 +77,20 @@ public class PesquisaWebController {
 	    return "redirect:/hello";
 	}
 	
+	@GetMapping(value = {"/resumo/pesquisa/edit/{id}"})
+	public String showEditObservacao(Model model, @PathVariable long id) {
+		
+		System.out.println(">>>>");
+		Pesquisa pesquisa = pesquisaService.findById(id); 
+	   
+	   	
+	   	System.out.println(pesquisa.getRespostaDissertiva());
+	  
+	   		  
+	    model.addAttribute("pesquisa", pesquisa);
+	    return "pesquisa/edit";
+	}
+	
 
 	@GetMapping("resumo")
 	public String resumo(Model model) {
@@ -121,6 +133,26 @@ public class PesquisaWebController {
 		Pergunta pergunta = requisicao.toPesquisa();
 
 		perguntaService.insert(pergunta);
+
+		return "redirect:/home";
+
+	}
+	
+							///pesquisa/resumo/pesquisa/edit/resposta/update/
+	//@RequestMapping(value="/pesquisa/resumo/pesquisa/edit/resposta/update", method = RequestMethod.POST)
+
+//	@PostMapping("pesquisa/resumo/pesquisa/edit/resposta/update")
+//	public String updateRespostaDissertativa(@ModelAttribute("pesquisa") Pesquisa pesquisa) {
+
+	@PostMapping("/update/{id}")
+    public String updateStudent(@PathVariable("id") long id, Pesquisa pesquisa, Model model) {
+
+		System.out.println("MÉTODO UPDATE");
+		
+		System.out.println(pesquisa.getRespostaDissertiva());
+		
+		pesquisaService.upDateRespostaDissertativa(pesquisa.getRespostaDissertiva(),id);
+		
 
 		return "redirect:/home";
 

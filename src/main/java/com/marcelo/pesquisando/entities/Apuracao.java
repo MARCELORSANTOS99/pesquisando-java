@@ -21,13 +21,15 @@ public class Apuracao implements Serializable {
 	private String pergunta;
 	private String resposta;
 	private int qtd;
+	private String dissertativa;
 	
 	
 	
-	public Apuracao(String pergunta, String resposta, int qtd) {
+	public Apuracao(String pergunta, String resposta, int qtd, String dissertativa) {
 		this.pergunta = pergunta;
 		this.resposta = resposta;
 		this.qtd = qtd;
+		this.dissertativa = dissertativa;
 	}
 	
 	
@@ -58,7 +60,18 @@ public class Apuracao implements Serializable {
 	public void setQtd(int qtd) {
 		this.qtd = qtd;
 	}
-	
+			
+	public String getDissertativa() {
+		return dissertativa;
+	}
+
+
+	public void setDissertativa(String dissertativa) {
+		this.dissertativa = dissertativa;
+	}
+
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

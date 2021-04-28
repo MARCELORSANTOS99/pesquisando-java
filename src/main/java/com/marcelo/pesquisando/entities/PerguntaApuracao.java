@@ -8,18 +8,22 @@ public class PerguntaApuracao {
 	private List<String> respostas;
 	private List<Integer> totalPorResposta;
 	private Integer totalPorPergunta;
+	private List<String> respostasDissertativa;
+	private List<Integer> totalRespostasDissertativa;
 	
 	public String getPergunta() {
 		return pergunta;
 	}
 	
 		
-	public PerguntaApuracao(String pergunta, List<String> respostas, List<Integer> totalPorResposta, Integer totalPorPergunta ) {
+	public PerguntaApuracao(String pergunta, List<String> respostas, List<Integer> totalPorResposta, Integer totalPorPergunta, List<String> respostasDissertativa, List<Integer> totalRespostasDissertativa ) {
 		super();
 		this.pergunta = pergunta;
 		this.respostas = respostas;
 		this.totalPorResposta = totalPorResposta;
 		this.totalPorPergunta = totalPorPergunta;
+		this.respostasDissertativa = respostasDissertativa;
+		this.totalRespostasDissertativa = totalRespostasDissertativa;
 	}
 
 
@@ -48,6 +52,26 @@ public class PerguntaApuracao {
 	}
 	public void setTotalPorResposta(List<Integer> totalPorResposta) {
 		this.totalPorResposta = totalPorResposta;
+	}
+
+
+	public List<String> getRespostasDissertativa() {
+		return respostasDissertativa;
+	}
+
+
+	public void setRespostasDissertativa(List<String> respostasDissertativa) {
+		this.respostasDissertativa = respostasDissertativa;
+	}
+
+
+	public List<Integer> getTotalRespostasDissertativa() {
+		return totalRespostasDissertativa;
+	}
+
+
+	public void setTotalRespostasDissertativa(List<Integer> totalRespostasDissertativa) {
+		this.totalRespostasDissertativa = totalRespostasDissertativa;
 	}
 	
 	

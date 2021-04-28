@@ -82,9 +82,6 @@ public class PesquisaService {
 	}
 	
 	
-
-	
-	
 	
 	
 	public List<Apuracao> resumoGroupByPergunta(){
@@ -96,11 +93,11 @@ public class PesquisaService {
 	            
 			 String novaLista[] = item.split(",");
 	         			 
-			 Apuracao p = new Apuracao(novaLista[0], novaLista[1],Integer.parseInt(novaLista[2]));
+			 //Apuracao p = new Apuracao(novaLista[0], novaLista[1],Integer.parseInt(novaLista[2]));
 			 
 			 //apuracaoService.insert(p);
 			 
-			 listaApuracao.add(p);
+			 //listaApuracao.add(p);
 		        
 	        }
 	 
@@ -114,7 +111,6 @@ public class PesquisaService {
 		
 		List<Integer> totalPorResposta = new ArrayList<>();
 
-		
 		obj.getRespostasWeb().forEach(resp->totalPorResposta.add(repository.resumoApurationPorRespostaDaPergunta(obj.getQuestion(), resp)));
 	
 		
@@ -196,6 +192,34 @@ public class PesquisaService {
 		
 		
 		return totalPorRespostaTipo;
+	}
+
+	public void upDateRespostaDissertativa(String respostaDissertiva,long id) {
+		
+		System.out.println("<<service pesquisa>>");
+		System.out.println(id);
+		System.out.println(respostaDissertiva);
+		
+		repository.updateRespostaDissertativa(id,respostaDissertiva);
+		
+	}
+
+	public List<String> listaRespostasDissertativas(Pergunta obj) {
+		
+		List<String> respostasDissertativas = repository.agruparPorDissertativa(obj.getQuestion());
+		
+		return respostasDissertativas;
+	}
+
+	public List<Integer> totalListaRespostasDissertativas(Pergunta obj, List<String> respostasDissertativas) {
+
+		List<Integer> totalPorDissertativa = new ArrayList<>();
+
+		respostasDissertativas.forEach(resp->totalPorDissertativa.add(repository.resumoApurationPorDissertativaDaPergunta(obj.getQuestion(), resp)));
+	
+		
+		return totalPorDissertativa;
+		
 	}
 
 
