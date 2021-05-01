@@ -21,6 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.marcelo.pesquisando.entities.Pergunta;
 import com.marcelo.pesquisando.entities.PerguntaApuracao;
 import com.marcelo.pesquisando.entities.RespostaApuracao;
+import com.marcelo.pesquisando.entities.TipoApuracao;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoGenero;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoEscolaridade;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoFaixaIdade;
@@ -106,7 +107,7 @@ public class PerguntaResource {
 	}
 	
 	@GetMapping(value = "/apuracao/{id}/{tipo}/{resposta}")
-	public ResponseEntity<RespostaApuracao> findByIdApuracaoPorTipo(@PathVariable Long id, @PathVariable String tipo, @PathVariable String resposta){
+	public ResponseEntity<RespostaApuracao> findByIdApuracaoPorTipoAndResposta(@PathVariable Long id, @PathVariable String tipo, @PathVariable String resposta){
 		
 		Pergunta obj = service.findById(id);
 		
@@ -119,8 +120,10 @@ public class PerguntaResource {
 		//int sum = IntStream.of(a).sum();
 		
 		
+		
 		List<Integer> totalPorRespostaTipo = pesquisaService.resumoApurationAppPerguntaPorRespostaTipo(obj, tipo, resposta);
 		Integer totalPerguntaResposta = pesquisaService.totalPorPerguntaAndResposta(obj.getQuestion(),resposta);
+		
 		
 		System.out.println(enumsLista);
 		System.out.println(totalPorRespostaTipo);
@@ -128,7 +131,23 @@ public class PerguntaResource {
 		RespostaApuracao respostaApurada = new RespostaApuracao(obj.getQuestion(),enumsLista,obj.getRespostasWeb(),resposta,totalPorRespostaTipo,totalPerguntaResposta);
 				
 		return ResponseEntity.ok().body(respostaApurada);
-	}	
+	}
+	
+	@GetMapping(value = "/apuracao/tipo/{id}/{tipo}/{tipoResposta}")
+	public ResponseEntity<TipoApuracao> findByIdApuracaoPorTipo(@PathVariable Long id, @PathVariable String tipo, @PathVariable String tipoResposta ){
+		
+		Pergunta obj = service.findById(id);
+				
+		
+		Integer totalPorPergunta = pesquisaService.resumoApurationAppTotalPorPergunta(obj);
+
+		List<Integer> totalPerguntaTipoAndResposta = pesquisaService.totalPorPerguntaAndTipoAndResposta(obj,tipo, tipoResposta.toUpperCase());
+				
+
+		TipoApuracao tipoApuracao = new TipoApuracao(obj.getQuestion(),tipo,tipoResposta,obj.getRespostasWeb(),totalPerguntaTipoAndResposta, totalPorPergunta);
+				
+		return ResponseEntity.ok().body(tipoApuracao);
+	}
 
 
 	public void definirTipo(String tipo, List<String> enumsLista) {
@@ -144,8 +163,7 @@ public class PerguntaResource {
 			break;
 		case "idade":
 			System.out.println("EntrevistadoFaixaIdade");
-			
-			
+						
 			List<EntrevistadoFaixaIdade> listaIdade = Arrays.asList(EntrevistadoFaixaIdade.values());
 	        for (int i = 0; i < listaIdade.size(); i++) {
 	        	enumsLista.add(listaIdade.get(i).toString());

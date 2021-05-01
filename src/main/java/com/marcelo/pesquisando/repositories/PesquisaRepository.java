@@ -32,7 +32,6 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
 	
 	@Query(value = "SELECT COUNT(p) FROM Pesquisa as p where p.pergunta = ?1 AND p.entrevistadoGenero = ?2")
 	long resumoApuration(String pergunta, String genero);
-	
 
 	
 	@Query(value = "SELECT pergunta,resposta, COUNT(resposta) FROM Pesquisa GROUP BY resposta,pergunta ORDER BY pergunta ")
@@ -48,12 +47,12 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
 	public Integer resumoApurationPorRespostaDaPergunta(String pergunta, String resposta);
 
 
-
 	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.pergunta = ?1")
 	public Integer resumoApurationPorRespostaDaPergunta(String question);
 	
 	@Query(value = "SELECT COUNT (respostaDissertiva) FROM Pesquisa as p where p.pergunta = ?1 AND respostaDissertiva = ?2")
 	public Integer resumoApurationPorDissertativaDaPergunta(String question, String dissertativa);
+	
 	
 	
 	//por genero
@@ -71,6 +70,24 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
 	//por escolaridade
 	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.pergunta = ?1 AND resposta = ?2 AND entrevistadoEscolaridade = ?3")
 	public Integer resumoApurationPorRespostaDaPerguntaEscolaridade(String pergunta, String resposta, String entrevistadoEscolaridade );
+	
+
+	//TIPO - por genero
+	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.pergunta = ?1 AND p.entrevistadoGenero = ?2")
+	public Integer resumoApurationPorPerguntaAndTipoGenero(String pergunta, String entrevistadoGenero);
+	
+	//TIPO - por idade
+	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.pergunta = ?1 AND p.entrevistadoFaixaIdade = ?2")
+	public Integer resumoApurationPorPerguntaAndTipoFaixaIdade(String pergunta, String entrevistadoFaixaIdade);
+	
+	//TIPO - por religião
+	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.pergunta = ?1 AND p.entrevistadoReligiao = ?2")
+	public Integer resumoApurationPorPerguntaAndTipoReligiao(String pergunta, String entrevistadoReligiao);
+	
+	//TIPO - por escolaridade
+	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.pergunta = ?1 AND p.entrevistadoEscolaridade = ?2")
+	public Integer resumoApurationPorPerguntaAndTipoEscolaridade(String pergunta, String entrevistadoEscolaridade);
+	
 
 	
     @Transactional

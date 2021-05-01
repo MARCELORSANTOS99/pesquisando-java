@@ -222,6 +222,57 @@ public class PesquisaService {
 		
 	}
 
+	public List<Integer> totalPorPerguntaAndTipoAndResposta(Pergunta obj, String tipo, String tipoResposta) {
+		
+		List<Integer> totalRespostaTipo =  new ArrayList<>();
+				
+		switch (tipo) {
+		case "genero":
+			System.out.println("EntrevistadoGenero");
+								
+			for (String resposta : obj.getRespostasWeb()) {
+				
+				totalRespostaTipo.add(repository.resumoApurationPorRespostaDaPerguntaGenero(obj.getQuestion(), resposta, tipoResposta.toUpperCase()));
+			}	
+			break;
+			
+		case "idade":
+			System.out.println("EntrevistadoFaixaIdade");
+						
+			for (String resposta : obj.getRespostasWeb()) {
+				
+				totalRespostaTipo.add(repository.resumoApurationPorRespostaDaPerguntaIdade(obj.getQuestion(), resposta, tipoResposta.toUpperCase()));
+			}
+			
+			break;
+		case "religiao":
+			System.out.println("EntrevistadoReligiao");
+			
+			
+			for (String resposta : obj.getRespostasWeb()) {
+				
+				totalRespostaTipo.add(repository.resumoApurationPorRespostaDaPerguntaReligiao(obj.getQuestion(), resposta, tipoResposta.toUpperCase()));
+			}
+			break;
+		case "escolaridade":
+			System.out.println("EntrevistadoEscolaridade");
+			
+			
+			for (String resposta : obj.getRespostasWeb()) {
+				
+				totalRespostaTipo.add(repository.resumoApurationPorRespostaDaPerguntaEscolaridade(obj.getQuestion(), resposta, tipoResposta.toUpperCase()));
+			}
+			
+			break;
+			
+		default:
+			break;
+		}
+		
+		
+		return totalRespostaTipo;
+	}
+
 
 
 
