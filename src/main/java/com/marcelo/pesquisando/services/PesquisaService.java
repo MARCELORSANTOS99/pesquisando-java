@@ -274,6 +274,46 @@ public class PesquisaService {
 	}
 
 
+	
+	public Integer totalPorPerguntaAndTipo(Pergunta obj, String tipo, String tipoResposta) {
+		
+		Integer totalRespostaTipo = 0;
+				
+		switch (tipo) {
+		case "genero":
+			System.out.println("EntrevistadoGenero");
+											
+				totalRespostaTipo = repository.resumoApurationPorPerguntaAndTipoGenero(obj.getQuestion(), tipoResposta.toUpperCase());
+				
+			break;
+			
+		case "idade":
+			System.out.println("EntrevistadoFaixaIdade");
+						
+							
+			totalRespostaTipo = repository.resumoApurationPorPerguntaAndTipoFaixaIdade(obj.getQuestion(), tipoResposta.toUpperCase());
+			
+			
+			break;
+		case "religiao":
+			System.out.println("EntrevistadoReligiao");
+			
+			totalRespostaTipo = repository.resumoApurationPorPerguntaAndTipoReligiao(obj.getQuestion(), tipoResposta.toUpperCase());			
+			
+			break;
+		case "escolaridade":
+			System.out.println("EntrevistadoEscolaridade");
+		
+			totalRespostaTipo = repository.resumoApurationPorPerguntaAndTipoEscolaridade(obj.getQuestion(), tipoResposta.toUpperCase());
+							
+			break;
+			
+		default:
+			break;
+		}
+		return totalRespostaTipo;
+	
+	}
 
 
 	

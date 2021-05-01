@@ -139,7 +139,7 @@ public class PerguntaResource {
 		Pergunta obj = service.findById(id);
 				
 		
-		Integer totalPorPergunta = pesquisaService.resumoApurationAppTotalPorPergunta(obj);
+		Integer totalPorPergunta = pesquisaService.totalPorPerguntaAndTipo(obj,tipo, tipoResposta.toUpperCase());
 
 		List<Integer> totalPerguntaTipoAndResposta = pesquisaService.totalPorPerguntaAndTipoAndResposta(obj,tipo, tipoResposta.toUpperCase());
 				
