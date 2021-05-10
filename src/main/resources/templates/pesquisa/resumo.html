@@ -41,6 +41,7 @@
 					<th scope="col">Faixa de idade</th>
 					<th scope="col">Religião</th>
 					<th scope="col">Escolaridade</th>
+					<th scope="col">Usuario</th>
 
 
 
@@ -64,6 +65,7 @@
 					<td th:text=${pesquisa.entrevistadoFaixaIdade}></td>
 					<td th:text=${pesquisa.entrevistadoReligiao}></td>
 					<td th:text=${pesquisa.entrevistadoEscolaridade}></td>
+					<td th:text=${pesquisa.usuarioApp}></td>
 					<td><a th:href="@{pesquisa/edit/{id}(id=${pesquisa.id})}">Editar</a></td>
 					
 

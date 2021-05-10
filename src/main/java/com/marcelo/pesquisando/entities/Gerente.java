@@ -15,6 +15,7 @@ private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	private String nome;
 	private String email;
 	private String userFirebase;
 	private Boolean manager;
@@ -31,6 +32,14 @@ private static final long serialVersionUID = 1L;
 	}
 	public void setId(long id) {
 		this.id = id;
+	}
+		
+	
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	public String getEmail() {
 		return email;

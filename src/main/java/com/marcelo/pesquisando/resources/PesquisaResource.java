@@ -56,6 +56,7 @@ public class PesquisaResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	/*
 	@PostMapping
 	public ResponseEntity<Pesquisa> insert(@RequestBody Pesquisa obj){
 		
@@ -65,6 +66,25 @@ public class PesquisaResource {
 		
 		return ResponseEntity.created(uri).body(obj);
 	}
+	*/
+	
+	
+	@PostMapping
+	public ResponseEntity<List<Pesquisa>> insert(@RequestBody List<Pesquisa> obj){
+		
+		System.out.println(obj);
+		
+		List<Pesquisa> pesquisas = obj;
+		
+		for (Pesquisa pesquisa : pesquisas) {
+			service.insert(pesquisa);
+		}	
+		
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pesquisas.get(0).getCodigo()).toUri();
+		
+		return ResponseEntity.created(uri).body(pesquisas);
+	}
+	
 	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id){
@@ -137,9 +157,9 @@ public class PesquisaResource {
 		
 		ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
 		
-		String[] csvHeader = {"id","Código","Cidade","Pergunta","Resposta","OBS","Nome","Bairro","Rua","Numero","Genero","FaixaIdade","Religiao", "Escolaridade"};
+		String[] csvHeader = {"id","Código","Cidade","Pergunta","Resposta","OBS","Nome","Bairro","Rua","Numero","Genero","FaixaIdade","Religiao", "Escolaridade","usuario"};
 		
-		String[] nameMapping = {"id","codigo","cidade","Pergunta","Resposta","respostaDissertiva","entrevistadoNome","entrevistadoBairro","entrevistadoRua","entrevistadoNumero","entrevistadoGenero","entrevistadoFaixaIdade","entrevistadoReligiao","entrevistadoEscolaridade"};
+		String[] nameMapping = {"id","codigo","cidade","Pergunta","Resposta","respostaDissertiva","entrevistadoNome","entrevistadoBairro","entrevistadoRua","entrevistadoNumero","entrevistadoGenero","entrevistadoFaixaIdade","entrevistadoReligiao","entrevistadoEscolaridade","user"};
 		
 		csvWriter.writeHeader(csvHeader);
 		

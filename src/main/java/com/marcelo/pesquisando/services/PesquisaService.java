@@ -16,6 +16,7 @@ import com.marcelo.pesquisando.entities.enums.EntrevistadoEscolaridade;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoFaixaIdade;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoGenero;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoReligiao;
+import com.marcelo.pesquisando.repositories.GerenteRepository;
 import com.marcelo.pesquisando.repositories.PesquisaRepository;
 
 @Service
@@ -23,6 +24,9 @@ public class PesquisaService {
 	
 	@Autowired
 	private PesquisaRepository repository;
+	
+	@Autowired
+	private GerenteRepository repositoryGerente;
 	
 	@Autowired
 	private ApuracaoService apuracaoService;
@@ -39,9 +43,15 @@ public class PesquisaService {
 	
 	
 	public Pesquisa insert(Pesquisa obj) {
-				
-		return repository.save(obj);
 		
+		String user = obj.getUsuarioApp();
+		System.out.println(user);
+		
+		
+		obj.setUsuarioApp(repositoryGerente.pegarUser(user));
+		System.out.println(obj);
+		
+		return repository.save(obj);
 	}
 	
 	public void delete(Long obj) {

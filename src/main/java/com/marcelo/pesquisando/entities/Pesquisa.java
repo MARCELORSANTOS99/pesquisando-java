@@ -43,6 +43,7 @@ public class Pesquisa implements Serializable{
 	private String pergunta;
 	private String resposta;
 	private String respostaDissertiva;
+	private String usuarioApp;
 	
 	
 	public Pesquisa() {}
@@ -52,7 +53,7 @@ public class Pesquisa implements Serializable{
 	public Pesquisa(Long id, Instant moment, String codigo, String cidade, String entrevistadoNome,
 			String entrevistadoBairro, String entrevistadoRua, String entrevistadoNumero, String entrevistadoReligiao,
 			String entrevistadoFaixaIdade, String entrevistadoGenero, String entrevistadoEscolaridade, String pergunta,
-			String resposta, String respostaDissertiva) {
+			String resposta, String respostaDissertiva, String user) {
 		super();
 		this.id = id;
 		this.moment = moment;
@@ -69,7 +70,22 @@ public class Pesquisa implements Serializable{
 		this.pergunta = pergunta;
 		this.resposta = resposta;
 		this.respostaDissertiva = respostaDissertiva;
+		this.usuarioApp = user;
 	}
+
+	
+
+
+	public String getUsuarioApp() {
+		return usuarioApp;
+	}
+
+
+
+	public void setUsuarioApp(String usuarioApp) {
+		this.usuarioApp = usuarioApp;
+	}
+
 
 
 	public Long getId() {
