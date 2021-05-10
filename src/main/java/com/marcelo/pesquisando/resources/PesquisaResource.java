@@ -159,7 +159,7 @@ public class PesquisaResource {
 		
 		String[] csvHeader = {"id","Código","Cidade","Pergunta","Resposta","OBS","Nome","Bairro","Rua","Numero","Genero","FaixaIdade","Religiao", "Escolaridade","usuario"};
 		
-		String[] nameMapping = {"id","codigo","cidade","Pergunta","Resposta","respostaDissertiva","entrevistadoNome","entrevistadoBairro","entrevistadoRua","entrevistadoNumero","entrevistadoGenero","entrevistadoFaixaIdade","entrevistadoReligiao","entrevistadoEscolaridade","user"};
+		String[] nameMapping = {"id","codigo","cidade","Pergunta","Resposta","respostaDissertiva","entrevistadoNome","entrevistadoBairro","entrevistadoRua","entrevistadoNumero","entrevistadoGenero","entrevistadoFaixaIdade","entrevistadoReligiao","entrevistadoEscolaridade","usuarioApp"};
 		
 		csvWriter.writeHeader(csvHeader);
 		
@@ -192,9 +192,9 @@ public class PesquisaResource {
 		
 		ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
 		
-		String[] csvHeader = {"id","Código","Cidade","Escolaridade","FaixaIdade", "Genero","Nome","Religiao","Pergunta","Resposta","OBS"};
+		String[] csvHeader = {"id","Código","Cidade","Escolaridade","FaixaIdade", "Genero","Nome","Religiao","Pergunta","Resposta","OBS","Usuario"};
 		
-		String[] nameMapping = {"id","codigo","cidade","entrevistadoEscolaridade","entrevistadoFaixaIdade","entrevistadoGenero","entrevistadoNome","entrevistadoReligiao","Pergunta","Resposta","respostaDissertiva"};
+		String[] nameMapping = {"id","codigo","cidade","entrevistadoEscolaridade","entrevistadoFaixaIdade","entrevistadoGenero","entrevistadoNome","entrevistadoReligiao","Pergunta","Resposta","respostaDissertiva","usuarioApp"};
 		
 		csvWriter.writeHeader(csvHeader);
 		
