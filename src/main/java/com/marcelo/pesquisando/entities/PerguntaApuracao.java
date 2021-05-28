@@ -10,13 +10,17 @@ public class PerguntaApuracao {
 	private Integer totalPorPergunta;
 	private List<String> respostasDissertativa;
 	private List<Integer> totalRespostasDissertativa;
+	private List<String> respostasBairro;
+	private List<Integer> totalRespostasBairro;
 	
 	public String getPergunta() {
 		return pergunta;
 	}
 	
-		
-	public PerguntaApuracao(String pergunta, List<String> respostas, List<Integer> totalPorResposta, Integer totalPorPergunta, List<String> respostasDissertativa, List<Integer> totalRespostasDissertativa ) {
+
+	public PerguntaApuracao(String pergunta, List<String> respostas, List<Integer> totalPorResposta,
+			Integer totalPorPergunta, List<String> respostasDissertativa, List<Integer> totalRespostasDissertativa,
+			List<String> respostasBairro, List<Integer> totalRespostasBairro) {
 		super();
 		this.pergunta = pergunta;
 		this.respostas = respostas;
@@ -24,8 +28,9 @@ public class PerguntaApuracao {
 		this.totalPorPergunta = totalPorPergunta;
 		this.respostasDissertativa = respostasDissertativa;
 		this.totalRespostasDissertativa = totalRespostasDissertativa;
+		this.respostasBairro = respostasBairro;
+		this.totalRespostasBairro = totalRespostasBairro;
 	}
-
 
 
 	public Integer getTotalPorPergunta() {
@@ -72,6 +77,26 @@ public class PerguntaApuracao {
 
 	public void setTotalRespostasDissertativa(List<Integer> totalRespostasDissertativa) {
 		this.totalRespostasDissertativa = totalRespostasDissertativa;
+	}
+
+
+	public List<String> getRespostasBairro() {
+		return respostasBairro;
+	}
+
+
+	public void setRespostasBairro(List<String> respostasBairro) {
+		this.respostasBairro = respostasBairro;
+	}
+
+
+	public List<Integer> getTotalRespostasBairro() {
+		return totalRespostasBairro;
+	}
+
+
+	public void setTotalRespostasBairro(List<Integer> totalRespostasBairro) {
+		this.totalRespostasBairro = totalRespostasBairro;
 	}
 	
 	

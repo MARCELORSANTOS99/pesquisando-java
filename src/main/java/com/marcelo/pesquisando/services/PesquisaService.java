@@ -204,13 +204,13 @@ public class PesquisaService {
 		return totalPorRespostaTipo;
 	}
 
-	public void upDateRespostaDissertativa(String respostaDissertiva,long id) {
+	public void upDateRespostaDissertativa(String respostaDissertiva,String entrevistadoBairro,long id) {
 		
 		System.out.println("<<service pesquisa>>");
 		System.out.println(id);
 		System.out.println(respostaDissertiva);
 		
-		repository.updateRespostaDissertativa(id,respostaDissertiva);
+		repository.updateRespostaDissertativa(id,respostaDissertiva,entrevistadoBairro);
 		
 	}
 
@@ -231,6 +231,26 @@ public class PesquisaService {
 		return totalPorDissertativa;
 		
 	}
+	
+	
+	public List<String> listaRespostasPorBairro(Pergunta obj) {
+		
+		List<String> respostasBairro = repository.agruparPorBairro(obj.getQuestion());
+		
+		return respostasBairro;
+	}
+
+	public List<Integer> totalListaRespostasPorBairro(Pergunta obj, List<String> respostasBairro) {
+
+		List<Integer> totalPorBairro = new ArrayList<>();
+
+		respostasBairro.forEach(resp->totalPorBairro.add(repository.resumoApurationPorBairroDaPergunta(obj.getQuestion(), resp)));
+	
+		
+		return totalPorBairro;
+		
+	}
+	
 
 	public List<Integer> totalPorPerguntaAndTipoAndResposta(Pergunta obj, String tipo, String tipoResposta) {
 		
@@ -324,6 +344,8 @@ public class PesquisaService {
 		return totalRespostaTipo;
 	
 	}
+
+	
 
 
 	

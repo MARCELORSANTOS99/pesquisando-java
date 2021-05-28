@@ -1,11 +1,14 @@
 package com.marcelo.pesquisando.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,8 +21,9 @@ private static final long serialVersionUID = 1L;
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-
 	
+	@OneToMany(mappedBy="cidad")
+	private List<Pergunta> perguntas = new ArrayList<>();
 	
 	public Long getId() {
 		return id;
@@ -32,6 +36,16 @@ private static final long serialVersionUID = 1L;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	
+	
+	
+	public List<Pergunta> getPerguntas() {
+		return perguntas;
+	}
+	public void setPerguntas(List<Pergunta> perguntas) {
+		this.perguntas = perguntas;
 	}
 	@Override
 	public int hashCode() {

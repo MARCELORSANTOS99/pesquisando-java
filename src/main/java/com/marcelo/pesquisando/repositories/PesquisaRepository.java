@@ -26,6 +26,9 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
 	
 	long countByPergunta(String pergunta);
 	
+	@Query(value = "SELECT entrevistadoBairro FROM Pesquisa where pergunta = ?1 GROUP BY entrevistadoBairro")
+	List<String> agruparPorBairro(String pergunta);
+	
 	@Query(value = "SELECT respostaDissertiva FROM Pesquisa where pergunta = ?1 GROUP BY respostaDissertiva")
 	List<String> agruparPorDissertativa(String pergunta);
 
@@ -52,6 +55,9 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
 	
 	@Query(value = "SELECT COUNT (respostaDissertiva) FROM Pesquisa as p where p.pergunta = ?1 AND respostaDissertiva = ?2")
 	public Integer resumoApurationPorDissertativaDaPergunta(String question, String dissertativa);
+	
+	@Query(value = "SELECT COUNT (entrevistadoBairro) FROM Pesquisa as p where p.pergunta = ?1 AND entrevistadoBairro = ?2")
+	public Integer resumoApurationPorBairroDaPergunta(String question, String bairro);
 	
 	
 	
@@ -89,11 +95,10 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
 	public Integer resumoApurationPorPerguntaAndTipoEscolaridade(String pergunta, String entrevistadoEscolaridade);
 	
 
-	
     @Transactional
  	@Modifying
-    @Query("UPDATE Pesquisa c SET c.respostaDissertiva = :respostaDissertiva WHERE c.id = :id")
-    int updateRespostaDissertativa(@Param("id") long id, @Param("respostaDissertiva") String respostaDissertiva);
+    @Query("UPDATE Pesquisa c SET c.respostaDissertiva = :respostaDissertiva,c.entrevistadoBairro = :entrevistadoBairro WHERE c.id = :id")
+    int updateRespostaDissertativa(@Param("id") long id, @Param("respostaDissertiva") String respostaDissertiva, @Param("entrevistadoBairro") String entrevistadoBairro);
 
 
 	

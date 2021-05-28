@@ -27,6 +27,11 @@ public class Pergunta implements Serializable {
 	private Long id;
 	private String question;
 	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="cidad_id")
+	private Cidade cidad;
+	
 
 	@OneToMany(mappedBy="pergunt")
 	private List<Resposta> respostas = new ArrayList<>();

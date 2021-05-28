@@ -83,10 +83,8 @@ public class PesquisaWebController {
 		System.out.println(">>>>");
 		Pesquisa pesquisa = pesquisaService.findById(id); 
 	   
-	   	
 	   	System.out.println(pesquisa.getRespostaDissertiva());
-	  
-	   		  
+	  		  
 	    model.addAttribute("pesquisa", pesquisa);
 	    return "pesquisa/edit";
 	}
@@ -138,11 +136,6 @@ public class PesquisaWebController {
 
 	}
 	
-							///pesquisa/resumo/pesquisa/edit/resposta/update/
-	//@RequestMapping(value="/pesquisa/resumo/pesquisa/edit/resposta/update", method = RequestMethod.POST)
-
-//	@PostMapping("pesquisa/resumo/pesquisa/edit/resposta/update")
-//	public String updateRespostaDissertativa(@ModelAttribute("pesquisa") Pesquisa pesquisa) {
 
 	@PostMapping("/update/{id}")
     public String updateStudent(@PathVariable("id") long id, Pesquisa pesquisa, Model model) {
@@ -151,7 +144,7 @@ public class PesquisaWebController {
 		
 		System.out.println(pesquisa.getRespostaDissertiva());
 		
-		pesquisaService.upDateRespostaDissertativa(pesquisa.getRespostaDissertiva(),id);
+		pesquisaService.upDateRespostaDissertativa(pesquisa.getRespostaDissertiva(),pesquisa.getEntrevistadoBairro(),id);
 		
 
 		return "redirect:/home";

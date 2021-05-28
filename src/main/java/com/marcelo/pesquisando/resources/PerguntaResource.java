@@ -95,13 +95,18 @@ public class PerguntaResource {
 		long total = pesquisaService.resumoApurationAppPergunta(obj.getQuestion());
 		List<String> respostasDissertativas  = pesquisaService.listaRespostasDissertativas(obj);
 		List<Integer> totalRespostasDissertativas  = pesquisaService.totalListaRespostasDissertativas(obj,respostasDissertativas);
+		
+		List<String> respostasPorBairro  = pesquisaService.listaRespostasPorBairro(obj);
+		List<Integer> totalRespostasPorBairro  = pesquisaService.totalListaRespostasPorBairro(obj,respostasPorBairro);
+		
+		
 		List<Integer> totalPorResposta = pesquisaService.resumoApurationAppPerguntaPorResposta(obj);
 		Integer totalPorPergunta = pesquisaService.resumoApurationAppTotalPorPergunta(obj);
 		
 		System.out.println(obj.getRespostasWeb());
 		System.out.println(totalPorResposta);
 		
-		PerguntaApuracao pergutaApurada = new PerguntaApuracao(obj.getQuestion(), obj.getRespostasWeb(), totalPorResposta, totalPorPergunta,respostasDissertativas,totalRespostasDissertativas);
+		PerguntaApuracao pergutaApurada = new PerguntaApuracao(obj.getQuestion(), obj.getRespostasWeb(), totalPorResposta, totalPorPergunta,respostasDissertativas,totalRespostasDissertativas,respostasPorBairro,totalRespostasPorBairro);
 				
 		return ResponseEntity.ok().body(pergutaApurada);
 	}
