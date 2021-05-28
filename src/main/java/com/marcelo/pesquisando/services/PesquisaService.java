@@ -251,6 +251,19 @@ public class PesquisaService {
 		
 	}
 	
+	public List<Integer> totalPorPerguntaAndBairroAndResposta(Pergunta obj, String bairro) {
+		
+		List<Integer> totalRespostaBairro =  new ArrayList<>();
+		
+		for (String resposta : obj.getRespostasWeb()) {
+			
+			totalRespostaBairro.add(repository.resumoApurationPorRespostaDaPerguntaBairro(obj.getQuestion(), resposta, bairro));
+		}
+		
+		return totalRespostaBairro;
+		
+	}
+	
 
 	public List<Integer> totalPorPerguntaAndTipoAndResposta(Pergunta obj, String tipo, String tipoResposta) {
 		
@@ -301,6 +314,13 @@ public class PesquisaService {
 		
 		
 		return totalRespostaTipo;
+	}
+	
+	public Integer totalPorPerguntaAndBairro(Pergunta obj, String bairro) {
+		
+		Integer totalRespostaBairro = repository.resumoApurationPorPerguntaAndBairro(obj.getQuestion(), bairro);
+		
+		return totalRespostaBairro;
 	}
 
 

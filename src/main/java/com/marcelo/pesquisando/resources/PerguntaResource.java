@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.marcelo.pesquisando.entities.BairroApuracao;
 import com.marcelo.pesquisando.entities.Pergunta;
 import com.marcelo.pesquisando.entities.PerguntaApuracao;
 import com.marcelo.pesquisando.entities.RespostaApuracao;
@@ -152,6 +153,21 @@ public class PerguntaResource {
 		TipoApuracao tipoApuracao = new TipoApuracao(obj.getQuestion(),tipo,tipoResposta,obj.getRespostasWeb(),totalPerguntaTipoAndResposta, totalPorPergunta);
 				
 		return ResponseEntity.ok().body(tipoApuracao);
+	}
+	
+	@GetMapping(value = "/apuracao/bairro/{id}/{bairro}")
+	public ResponseEntity<BairroApuracao> findByIdApuracaoPorBairro(@PathVariable Long id, @PathVariable String bairro ){
+		
+		Pergunta obj = service.findById(id);
+				
+		
+		Integer totalPorPergunta = pesquisaService.totalPorPerguntaAndBairro(obj,bairro);
+
+		List<Integer> totalPerguntaBairroAndResposta = pesquisaService.totalPorPerguntaAndBairroAndResposta(obj,bairro);	
+		
+		BairroApuracao bairroApuracao = new BairroApuracao(obj.getQuestion(),bairro,obj.getRespostasWeb(),totalPerguntaBairroAndResposta, totalPorPergunta);
+				
+		return ResponseEntity.ok().body(bairroApuracao);
 	}
 
 
