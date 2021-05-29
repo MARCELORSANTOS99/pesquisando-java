@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.marcelo.pesquisando.entities.Gerente;
+import com.marcelo.pesquisando.entities.GerenteApuracao;
 import com.marcelo.pesquisando.services.GerenteService;
 
 @Controller
@@ -49,6 +50,16 @@ public class GerenteResource {
 		Gerente obj = service.findByUserFirebase(user);
 		
 		return ResponseEntity.ok().body(obj);
+	}
+	
+	@GetMapping(value = "/firebase/totalPesquisas/{user}")
+	public ResponseEntity<List<GerenteApuracao>>  qtdPesquisaFeitas(@PathVariable String user){
+		
+		System.out.println(user);
+			
+		List<GerenteApuracao> listGerenteApuracao = service.totalPesquisasFeitas();
+			
+		 return ResponseEntity.ok().body(listGerenteApuracao);
 	}
 	
 	@PostMapping

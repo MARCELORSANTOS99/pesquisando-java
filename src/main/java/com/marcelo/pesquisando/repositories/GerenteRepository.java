@@ -15,5 +15,9 @@ public interface GerenteRepository extends JpaRepository<Gerente, Long> {
 	
 	@Query(value = "SELECT nome FROM Gerente where userFirebase = ?1")
 	public String pegarUser(String uid);
+	
+	
+	@Query(value = "SELECT nome FROM Gerente where userFirebase = ?1")
+	public Integer totalPesquisaFeitas(String uid);
 
 }
