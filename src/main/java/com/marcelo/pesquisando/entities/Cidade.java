@@ -25,6 +25,7 @@ private static final long serialVersionUID = 1L;
 	@OneToMany(mappedBy="cidad")
 	private List<Pergunta> perguntas = new ArrayList<>();
 	
+	
 	public Long getId() {
 		return id;
 	}

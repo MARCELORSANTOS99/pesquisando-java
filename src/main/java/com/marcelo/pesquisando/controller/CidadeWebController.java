@@ -35,7 +35,7 @@ public class CidadeWebController {
 		List<Cidade> cidades = cidadeService.findAll();
 		model.addAttribute("cidades", cidades);
 		
-		model.addAttribute("cidade",cidades.get(0));
+		model.addAttribute("cidade",cidades);
 
 		return "cidade/formulario";
 	}
@@ -44,11 +44,13 @@ public class CidadeWebController {
 	public String novo(RequisicaoNovaCidade requisicao) {
 		
 		List<Cidade> cidades = cidadeService.findAll();
-			
+		
+		/*
 		for (int i = 0; i < cidades.size(); i++) {	
 			System.out.println("Deletando cidades antes de inserir...");
 			cidadeService.delete(cidades.get(i).getId());
 		}
+		*/
 		
 
 		System.out.println("MÉTODO INSERT");
