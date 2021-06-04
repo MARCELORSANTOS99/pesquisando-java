@@ -27,6 +27,7 @@ import com.marcelo.pesquisando.entities.enums.EntrevistadoGenero;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoEscolaridade;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoFaixaIdade;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoReligiao;
+import com.marcelo.pesquisando.services.CidadeService;
 import com.marcelo.pesquisando.services.PerguntaService;
 import com.marcelo.pesquisando.services.PesquisaService;
 import com.marcelo.pesquisando.services.RespostaService;
@@ -41,6 +42,9 @@ public class PerguntaResource {
 	
 	@Autowired
 	private PesquisaService pesquisaService;
+	
+	@Autowired
+	private CidadeService cidadeService;
 	
 	@Autowired
 	private RespostaService respService;
@@ -62,10 +66,13 @@ public class PerguntaResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@PostMapping
-	public ResponseEntity<Pergunta> insert(@RequestBody Pergunta obj){
+	@PostMapping(value = "/{id}")
+	public ResponseEntity<Pergunta> insert(@PathVariable Long id, @RequestBody Pergunta obj){
 		
 		System.out.println(obj);
+		 
+		obj.setCidad(cidadeService.findById(id));
+				
 		obj = service.insert(obj);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -83,6 +90,10 @@ public class PerguntaResource {
 	public ResponseEntity<Pergunta> update(@PathVariable Long id, @RequestBody Pergunta obj){
 		
 		System.out.println("<<<ENTROU NO MÉTOD EDIT>>>");
+			
+		//obj.getRespostas().forEach(item->respService.upDate(item.getId(),item));
+		//obj.getRespostas().forEach(item->System.out.println(item.getResp()));
+		
 		obj = service.upDate(id, obj);
 		return ResponseEntity.ok().body(obj);
 	}

@@ -19,7 +19,9 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
 	@Query(value = "SELECT COUNT(p) FROM Pesquisa as p where p.resposta = ?1")
 	long resumo(String resposta);
 	
-		
+	//@Query(value = "SELECT * FROM Pesquisa where idCidade = ?1")
+	public List<Pesquisa> findAllByIdCidade(String idCidade);
+	
 	public List<Pesquisa> findAllByOrderByIdAsc();
 	
 	List<Pesquisa> findByOrderByIdAscCodigoAsc();

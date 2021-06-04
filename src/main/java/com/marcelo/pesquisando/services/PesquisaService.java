@@ -36,6 +36,11 @@ public class PesquisaService {
 		return repository.findByOrderByIdAscCodigoAsc();
 	}
 	
+	public List<Pesquisa> findAllByCidade(String id){
+		
+		return repository.findAllByIdCidade(id);
+	}
+	
 	public Pesquisa findById(Long id) {
 		Optional<Pesquisa> obj =  repository.findById(id);
 		return obj.get();
@@ -68,7 +73,8 @@ public class PesquisaService {
 
 	private void updateData(Pesquisa entity, Pesquisa obj) {
 		
-		entity.setCidade(obj.getCidade());
+		entity.setEntrevistadoBairro(obj.getEntrevistadoBairro());
+		entity.setRespostaDissertiva(obj.getRespostaDissertiva());
 			
 	}
 	

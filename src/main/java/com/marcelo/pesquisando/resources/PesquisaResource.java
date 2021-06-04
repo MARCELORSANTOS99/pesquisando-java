@@ -49,6 +49,14 @@ public class PesquisaResource {
 		 return ResponseEntity.ok().body(list);
 	}
 	
+	@GetMapping(value = "/cidade/{id}")
+	public ResponseEntity<List<Pesquisa>> findAllByIdCidade(@PathVariable String id){
+		
+		List<Pesquisa> list = service.findAllByCidade(id);
+		
+		 return ResponseEntity.ok().body(list);
+	}
+	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Pesquisa> findById(@PathVariable Long id){
 		Pesquisa obj = service.findById(id);

@@ -18,8 +18,7 @@ public class PerguntaService {
 	@Autowired
 	private PerguntaRepository repository;
 	
-	@Autowired
-	private RespostaRepository respRepository;
+
 	
 	@Autowired
 	private RespostaService respService;
@@ -53,9 +52,11 @@ public class PerguntaService {
 	
 	public void delete(Long obj) {
 	
+		System.out.println("<<Delete Respostas>>");
 		Pergunta p = findById(obj);
 		List<Resposta> respostas = p.getRespostas();
 		
+		System.out.println("<<ENTROU Delete Respostas>>");
 		for (Resposta resposta : respostas) {
 			
 			respService.deleteFromApp(resposta.getId());
