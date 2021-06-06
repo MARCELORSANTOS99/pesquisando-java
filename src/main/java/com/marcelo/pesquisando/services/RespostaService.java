@@ -70,6 +70,11 @@ public class RespostaService {
 	}
 	
 	public Resposta upDate(Long id, Resposta obj) {
+		System.out.println("<<<EDIT RESPOSTAS>>>");
+		System.out.println(id);
+		System.out.println(obj);
+		System.out.println(obj.getId());
+		System.out.println(obj.getResp());
 		
 		Resposta entity = repository.getOne(id);
 		updateData(entity,obj);

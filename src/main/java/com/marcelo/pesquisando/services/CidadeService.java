@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.marcelo.pesquisando.entities.Cidade;
+import com.marcelo.pesquisando.entities.Pergunta;
+import com.marcelo.pesquisando.entities.Resposta;
 import com.marcelo.pesquisando.repositories.CidadeRepository;
 
 @Service
@@ -14,6 +16,9 @@ public class CidadeService {
 	
 	@Autowired
 	private CidadeRepository repository;
+	
+	@Autowired
+	private PerguntaService perguntaService;
 	
 	public List<Cidade> findAll(){
 		return repository.findAll();
@@ -31,6 +36,15 @@ public class CidadeService {
 	}
 	
 	public void delete(Long obj) {
+		
+		Cidade c = findById(obj);
+	
+		List<Pergunta> perguntas = c.getPerguntas();
+	
+		for (Pergunta pergunta : perguntas) {
+			perguntaService.delete(pergunta.getId());
+			
+		}
 		
 		repository.deleteById(obj);
 	}

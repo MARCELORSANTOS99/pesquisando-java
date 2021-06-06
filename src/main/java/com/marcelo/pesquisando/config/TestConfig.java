@@ -76,10 +76,10 @@ public class TestConfig implements CommandLineRunner {
 		Pesquisa pesquisa4 = new Pesquisa();
 		
 		//cidade
-		pesquisa.setCidade("Três Pontas");
-		pesquisa2.setCidade("Três Pontas");
-		pesquisa3.setCidade("Três Pontas");
-		pesquisa4.setCidade("Três Pontas");
+		pesquisa.setCidade(city.getNome());
+		pesquisa2.setCidade(city.getNome());
+		pesquisa3.setCidade(city.getNome());
+		pesquisa4.setCidade(city.getNome());
 		
 		//Entrevistado
 		pesquisa.setEntrevistadoNome(p1.getNome());

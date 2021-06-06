@@ -50,6 +50,16 @@ public class Pergunta implements Serializable {
 		return id;
 	}
 
+	public Cidade getCidad() {
+		return cidad;
+	}
+
+
+	public void setCidad(Cidade cidad) {
+		this.cidad = cidad;
+	}
+
+
 	public void setId(Long id) {
 		this.id = id;
 	}

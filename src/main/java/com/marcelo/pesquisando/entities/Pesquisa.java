@@ -9,9 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_pesquisa")
@@ -30,8 +33,10 @@ public class Pesquisa implements Serializable{
 	
 	private String codigo;
 	
-	private String cidade;
+	private String idCidade;
 	
+	private String cidade;
+
 	private String entrevistadoNome;
 	private String entrevistadoBairro;
 	private String entrevistadoRua;
@@ -49,15 +54,15 @@ public class Pesquisa implements Serializable{
 	public Pesquisa() {}
 	
 
-
-	public Pesquisa(Long id, Instant moment, String codigo, String cidade, String entrevistadoNome,
+	public Pesquisa(Long id, Instant moment, String codigo, String idCidade, String cidade, String entrevistadoNome,
 			String entrevistadoBairro, String entrevistadoRua, String entrevistadoNumero, String entrevistadoReligiao,
 			String entrevistadoFaixaIdade, String entrevistadoGenero, String entrevistadoEscolaridade, String pergunta,
-			String resposta, String respostaDissertiva, String user) {
+			String resposta, String respostaDissertiva, String usuarioApp) {
 		super();
 		this.id = id;
 		this.moment = moment;
 		this.codigo = codigo;
+		this.idCidade = idCidade;
 		this.cidade = cidade;
 		this.entrevistadoNome = entrevistadoNome;
 		this.entrevistadoBairro = entrevistadoBairro;
@@ -70,10 +75,11 @@ public class Pesquisa implements Serializable{
 		this.pergunta = pergunta;
 		this.resposta = resposta;
 		this.respostaDissertiva = respostaDissertiva;
-		this.usuarioApp = user;
+		this.usuarioApp = usuarioApp;
 	}
 
-	
+
+
 
 
 	public String getUsuarioApp() {
@@ -95,6 +101,16 @@ public class Pesquisa implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+
+	public String getIdCidade() {
+		return idCidade;
+	}
+
+
+	public void setIdCidade(String idCidade) {
+		this.idCidade = idCidade;
+	}
 
 	public String getCidade() {
 		return cidade;
@@ -103,8 +119,6 @@ public class Pesquisa implements Serializable{
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
-	
-	
 
 	public String getPergunta() {
 		return pergunta;
