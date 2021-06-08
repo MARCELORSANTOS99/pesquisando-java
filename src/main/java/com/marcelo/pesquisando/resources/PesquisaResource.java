@@ -64,6 +64,26 @@ public class PesquisaResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@GetMapping(value = "/{idCidade}/{idPesquisa}")
+	public ResponseEntity<Pesquisa> findByIdCidadeAndPesquisa(@PathVariable String idCidade,@PathVariable Long idPesquisa ){
+		
+		Pesquisa obj = service.findById(idPesquisa);
+		System.out.println(obj.getIdCidade());
+		System.out.println(idCidade);
+		
+		
+		if(obj.getIdCidade().equals(idCidade)) {
+			System.out.println("<<1>>");			
+			return ResponseEntity.ok().body(obj);
+			
+		}else {
+			System.out.println("<<2>>");
+			return ResponseEntity.badRequest().body(obj);
+		}
+		
+		
+	}
+	
 	/*
 	@PostMapping
 	public ResponseEntity<Pesquisa> insert(@RequestBody Pesquisa obj){
