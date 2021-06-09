@@ -120,9 +120,18 @@ public class PesquisaResource {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PutMapping(value = "/{id}")
-	public ResponseEntity<Pesquisa> update(@PathVariable Long id, @RequestBody Pesquisa obj){
-		obj = service.upDate(id, obj);
+	@PutMapping(value = "/bairro/{id}")
+	public ResponseEntity<List<Pesquisa>> updateBairro(@PathVariable Long id, @RequestBody Pesquisa obj){
+		
+		List<Pesquisa> objs = service.upDate(id, obj);
+		
+		return ResponseEntity.ok().body(objs);
+	}
+	
+	@PutMapping(value = "/dissertativa/{id}")
+	public ResponseEntity<Pesquisa> updateDissertativa(@PathVariable Long id, @RequestBody Pesquisa obj){
+		
+		obj = service.upDateDissertativa(id, obj);
 		return ResponseEntity.ok().body(obj);
 	}
 	

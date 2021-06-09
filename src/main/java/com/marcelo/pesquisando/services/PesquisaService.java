@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.marcelo.pesquisando.entities.Apuracao;
+import com.marcelo.pesquisando.entities.Cidade;
 import com.marcelo.pesquisando.entities.Pergunta;
 import com.marcelo.pesquisando.entities.Pesquisa;
 import com.marcelo.pesquisando.entities.Resposta;
@@ -63,20 +64,48 @@ public class PesquisaService {
 		repository.deleteById(obj);
 	}
 	
-	public Pesquisa upDate(Long id, Pesquisa obj) {
+	public List<Pesquisa> upDate(Long id, Pesquisa obj) {
 		
-		Pesquisa entity = repository.getOne(id);
-		updateData(entity,obj);
+		Optional<Pesquisa> cod = repository.findById(id);
 		
-		return repository.save(entity);
+		List<Pesquisa> lista = repository.findByCodigo(cod.get().getCodigo());
+		
+		
+		List<Pesquisa> entitys = new  ArrayList<>();
+		
+		 for(Pesquisa pesquisa : lista){
+			 Pesquisa entity = repository.getOne(pesquisa.getId());
+			 updateDataBairro(entity,obj);
+				repository.save(entity);
+				entitys.add(entity);
+	        }
+		 return entitys;
+		
 	}
 
-	private void updateData(Pesquisa entity, Pesquisa obj) {
+	private void updateDataBairro(Pesquisa entity, Pesquisa obj) {
 		
 		entity.setEntrevistadoBairro(obj.getEntrevistadoBairro());
+		//entity.setRespostaDissertiva(obj.getRespostaDissertiva());
+			
+	}
+	
+	
+	public Pesquisa upDateDissertativa(Long id, Pesquisa obj) {
+		
+		Pesquisa entity = repository.getOne(id);
+		updateDataDissertativa(entity,obj);
+		
+		return repository.save(entity);
+		
+	}
+
+	private void updateDataDissertativa(Pesquisa entity, Pesquisa obj) {
+		
 		entity.setRespostaDissertiva(obj.getRespostaDissertiva());
 			
 	}
+	
 	
 	//COUNT POR PESQUISA
 	

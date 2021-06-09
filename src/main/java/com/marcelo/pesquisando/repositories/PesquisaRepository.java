@@ -10,7 +10,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.marcelo.pesquisando.entities.Pesquisa;
-import com.marcelo.pesquisando.entities.Resposta;
 
 public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
 	
@@ -26,6 +25,10 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
 	
 	List<Pesquisa> findByOrderByIdAscCodigoAsc();
 	
+	@Query(value = "SELECT p FROM Pesquisa p where codigo = ?1")
+	List<Pesquisa> findByCodigo(String codigo);
+	
+		
 	long countByPergunta(String pergunta);
 	
 	@Query(value = "SELECT entrevistadoBairro FROM Pesquisa where pergunta = ?1 GROUP BY entrevistadoBairro")
@@ -117,6 +120,8 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
  	@Modifying
     @Query("UPDATE Pesquisa c SET c.respostaDissertiva = :respostaDissertiva,c.entrevistadoBairro = :entrevistadoBairro WHERE c.id = :id")
     int updateRespostaDissertativa(@Param("id") long id, @Param("respostaDissertiva") String respostaDissertiva, @Param("entrevistadoBairro") String entrevistadoBairro);
+
+	
 
 
 	
