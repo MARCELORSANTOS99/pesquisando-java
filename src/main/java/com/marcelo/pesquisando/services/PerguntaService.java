@@ -78,6 +78,7 @@ public class PerguntaService {
 
 	private void updateData(Pergunta entity, Pergunta obj) {
 		entity.setQuestion(obj.getQuestion());
+		entity.setRespostasAleatorias(obj.getRespostasAleatorias());
 		
 	}
 	

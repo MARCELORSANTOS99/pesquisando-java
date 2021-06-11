@@ -92,7 +92,6 @@ public class PerguntaResource {
 		System.out.println("<<<ENTROU NO MÉTOD EDIT>>>");
 			
 		//obj.getRespostas().forEach(item->respService.upDate(item.getId(),item));
-		//obj.getRespostas().forEach(item->System.out.println(item.getResp()));
 		
 		obj = service.upDate(id, obj);
 		return ResponseEntity.ok().body(obj);
