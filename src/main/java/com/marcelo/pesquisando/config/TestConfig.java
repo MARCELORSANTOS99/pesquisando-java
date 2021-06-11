@@ -47,13 +47,17 @@ public class TestConfig implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		
+		Cidade city = new Cidade();
+		city.setNome("Salvador");
 		
 		Entrevistado p1 = new Entrevistado(null,"Marcelo Santos",EntrevistadoReligiao.OUTRA,EntrevistadoFaixaIdade.DE_16_A_24_ANOS,EntrevistadoGenero.HOMEM,EntrevistadoEscolaridade.ENSINO_SUPERIOR);
 		Entrevistado p2 = new Entrevistado(null,"Debora Santos",EntrevistadoReligiao.ESPIRITA,EntrevistadoFaixaIdade.DE_16_A_24_ANOS,EntrevistadoGenero.MULHER,EntrevistadoEscolaridade.ENSINO_SUPERIOR);
 		Entrevistado p3 = new Entrevistado(null,"Alice",EntrevistadoReligiao.ESPIRITA,EntrevistadoFaixaIdade.ACIMA_DE_70_ANOS,EntrevistadoGenero.MULHER,EntrevistadoEscolaridade.ENSINO_FUNDAMENTAL);
 
-		Pergunta perg1 = new Pergunta(null, "Em que vc vai votar?",null);
-		Pergunta perg2 = new Pergunta(null, "Você é a favor do porte de arma?","Não gosto de arma");
+		Pergunta perg1 = new Pergunta(null, "Em que vc vai votar?","Sim",city,null);
+		Pergunta perg2 = new Pergunta(null, "Você é a favor do porte de arma?","Sim",city,null);
+		Pergunta perg3 = new Pergunta(null,"Teste","Sim",city,null);
+		
 
 		Resposta r1 = new Resposta(null, "Cajuru", perg1);
 		Resposta r2 = new Resposta(null, "Bolsonaro", perg1);
@@ -61,8 +65,7 @@ public class TestConfig implements CommandLineRunner {
 		Resposta r4 = new Resposta(null, "Sim", perg2);
 		Resposta r5 = new Resposta(null, "Não", perg2);
 		
-		Cidade city = new Cidade();
-		city.setNome("Salvador");
+	
 			
 		ArrayList<Pergunta> perguntas = new ArrayList<>();
 		perguntas.add(perg1);

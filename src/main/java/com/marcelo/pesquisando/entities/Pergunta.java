@@ -40,19 +40,14 @@ public class Pergunta implements Serializable {
 		
 	public Pergunta() {}
 
-	
-
-	public Pergunta(Long id, String question, String aleatoria, Cidade cidad, List<Resposta> respostas) {
+	public Pergunta(Long id, String question, String respostasAleatorias, Cidade cidad, List<Resposta> respostas) {
 		super();
 		this.id = id;
 		this.question = question;
-		this.respostasAleatorias = aleatoria;
+		this.respostasAleatorias = respostasAleatorias;
 		this.cidad = cidad;
 		this.respostas = respostas;
 	}
-
-
-
 
 	public Long getId() {
 		return id;
