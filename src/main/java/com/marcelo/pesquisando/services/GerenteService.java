@@ -36,14 +36,14 @@ public class GerenteService {
 	}
 	
 	
-	public List<GerenteApuracao> totalPesquisasFeitas() {
+	public List<GerenteApuracao> totalPesquisasFeitas(String idCidade) {
 				
 		List<Gerente> ListGerente = repository.findAll();
 		List<GerenteApuracao> listGerenteApuracao = new ArrayList<GerenteApuracao>();
 		
 		for (Gerente gerente : ListGerente) {
 			
-			List<Object[]> results = pesquisaRepository.totalPesquisaPorUsuario(gerente.getNome());	
+			List<Object[]> results = pesquisaRepository.totalPesquisaPorUsuario(gerente.getNome(), idCidade);	
 			//System.out.println(results.size());
 			
 				GerenteApuracao gerenteApuracao = new GerenteApuracao(
