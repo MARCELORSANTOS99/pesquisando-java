@@ -26,6 +26,7 @@ public class Pergunta implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String question;
+	private String respostasAleatorias;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -39,12 +40,19 @@ public class Pergunta implements Serializable {
 		
 	public Pergunta() {}
 
+	
 
-	public Pergunta(Long id, String question, String dissertativa) {
+	public Pergunta(Long id, String question, String aleatoria, Cidade cidad, List<Resposta> respostas) {
 		super();
 		this.id = id;
 		this.question = question;
+		this.respostasAleatorias = aleatoria;
+		this.cidad = cidad;
+		this.respostas = respostas;
 	}
+
+
+
 
 	public Long getId() {
 		return id;
@@ -71,6 +79,20 @@ public class Pergunta implements Serializable {
 	public void setQuestion(String question) {
 		this.question = question;
 	}
+		
+
+
+	public String getRespostasAleatorias() {
+		return respostasAleatorias;
+	}
+
+
+
+	public void setRespostasAleatorias(String respostasAleatorias) {
+		this.respostasAleatorias = respostasAleatorias;
+	}
+
+
 
 	public List<Resposta> getRespostas() {
 		return respostas;
