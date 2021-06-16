@@ -25,6 +25,7 @@ public class CidadeService {
 	}
 	
 	public Cidade findById(Long id) {
+		//OrderBySeatNumberAsc()
 		Optional<Cidade> obj =  repository.findById(id);
 		return obj.get();
 	}

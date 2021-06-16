@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +23,9 @@ import com.marcelo.pesquisando.entities.Pergunta;
 import com.marcelo.pesquisando.entities.PerguntaApuracao;
 import com.marcelo.pesquisando.entities.RespostaApuracao;
 import com.marcelo.pesquisando.entities.TipoApuracao;
-import com.marcelo.pesquisando.entities.enums.EntrevistadoGenero;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoEscolaridade;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoFaixaIdade;
+import com.marcelo.pesquisando.entities.enums.EntrevistadoGenero;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoReligiao;
 import com.marcelo.pesquisando.services.CidadeService;
 import com.marcelo.pesquisando.services.PerguntaService;
@@ -99,10 +98,12 @@ public class PerguntaResource {
 	}
 	
 	
+	
 	@GetMapping(value = "/apuracao/cidade/{idCidade}")
 	public ResponseEntity<List<PerguntaApuracao>> findByIdCidadeApuracao(@PathVariable Long idCidade){
 		
 		Cidade cidade = cidadeService.findById(idCidade);
+		
 		List<PerguntaApuracao> pergutaApuradaList = new ArrayList<PerguntaApuracao>();
 		
 		for(Pergunta obj : cidade.getPerguntas()){
@@ -121,7 +122,7 @@ public class PerguntaResource {
 			System.out.println(obj.getRespostasWeb());
 			System.out.println(totalPorResposta);
 			
-			PerguntaApuracao pergutaApurada = new PerguntaApuracao(obj.getQuestion(), obj.getRespostasWeb(), totalPorResposta, totalPorPergunta,respostasDissertativas,totalRespostasDissertativas,respostasPorBairro,totalRespostasPorBairro);
+			PerguntaApuracao pergutaApurada = new PerguntaApuracao(obj.getQuestion(),obj.getId(), obj.getRespostasWeb(), totalPorResposta, totalPorPergunta,respostasDissertativas,totalRespostasDissertativas,respostasPorBairro,totalRespostasPorBairro);
 			pergutaApuradaList.add(pergutaApurada);
             
         }
@@ -135,6 +136,9 @@ public class PerguntaResource {
 		Pergunta obj = service.findById(id);
 		
 		long total = pesquisaService.resumoApurationAppPergunta(obj.getQuestion());
+		
+		long idPergunta = obj.getId();
+		
 		List<String> respostasDissertativas  = pesquisaService.listaRespostasDissertativas(obj);
 		List<Integer> totalRespostasDissertativas  = pesquisaService.totalListaRespostasDissertativas(obj,respostasDissertativas);
 		
@@ -148,7 +152,7 @@ public class PerguntaResource {
 		System.out.println(obj.getRespostasWeb());
 		System.out.println(totalPorResposta);
 		
-		PerguntaApuracao pergutaApurada = new PerguntaApuracao(obj.getQuestion(), obj.getRespostasWeb(), totalPorResposta, totalPorPergunta,respostasDissertativas,totalRespostasDissertativas,respostasPorBairro,totalRespostasPorBairro);
+		PerguntaApuracao pergutaApurada = new PerguntaApuracao(obj.getQuestion(),idPergunta, obj.getRespostasWeb(), totalPorResposta, totalPorPergunta,respostasDissertativas,totalRespostasDissertativas,respostasPorBairro,totalRespostasPorBairro);
 				
 		return ResponseEntity.ok().body(pergutaApurada);
 	}

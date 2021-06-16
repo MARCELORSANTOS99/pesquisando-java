@@ -5,6 +5,7 @@ import java.util.List;
 public class PerguntaApuracao {
 	
 	private String pergunta;
+	private long idPergunta;
 	private List<String> respostas;
 	private List<Integer> totalPorResposta;
 	private Integer totalPorPergunta;
@@ -18,11 +19,12 @@ public class PerguntaApuracao {
 	}
 	
 
-	public PerguntaApuracao(String pergunta, List<String> respostas, List<Integer> totalPorResposta,
+	public PerguntaApuracao(String pergunta, long idPergunta, List<String> respostas, List<Integer> totalPorResposta,
 			Integer totalPorPergunta, List<String> respostasDissertativa, List<Integer> totalRespostasDissertativa,
 			List<String> respostasBairro, List<Integer> totalRespostasBairro) {
 		super();
 		this.pergunta = pergunta;
+		this.idPergunta = idPergunta;
 		this.respostas = respostas;
 		this.totalPorResposta = totalPorResposta;
 		this.totalPorPergunta = totalPorPergunta;
@@ -35,6 +37,16 @@ public class PerguntaApuracao {
 
 	public Integer getTotalPorPergunta() {
 		return totalPorPergunta;
+	}
+	
+	
+	public long getIdPergunta() {
+		return idPergunta;
+	}
+
+
+	public void setIdPergunta(long idPergunta) {
+		this.idPergunta = idPergunta;
 	}
 
 
