@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.marcelo.pesquisando.entities.BairroApuracao;
+import com.marcelo.pesquisando.entities.Cidade;
 import com.marcelo.pesquisando.entities.Pergunta;
 import com.marcelo.pesquisando.entities.PerguntaApuracao;
 import com.marcelo.pesquisando.entities.RespostaApuracao;
@@ -98,6 +99,36 @@ public class PerguntaResource {
 	}
 	
 	
+	@GetMapping(value = "/apuracao/cidade/{idCidade}")
+	public ResponseEntity<List<PerguntaApuracao>> findByIdCidadeApuracao(@PathVariable Long idCidade){
+		
+		Cidade cidade = cidadeService.findById(idCidade);
+		List<PerguntaApuracao> pergutaApuradaList = new ArrayList<PerguntaApuracao>();
+		
+		for(Pergunta obj : cidade.getPerguntas()){
+			
+			long total = pesquisaService.resumoApurationAppPergunta(obj.getQuestion());
+			List<String> respostasDissertativas  = pesquisaService.listaRespostasDissertativas(obj);
+			List<Integer> totalRespostasDissertativas  = pesquisaService.totalListaRespostasDissertativas(obj,respostasDissertativas);
+			
+			List<String> respostasPorBairro  = pesquisaService.listaRespostasPorBairro(obj);
+			List<Integer> totalRespostasPorBairro  = pesquisaService.totalListaRespostasPorBairro(obj,respostasPorBairro);
+			
+			
+			List<Integer> totalPorResposta = pesquisaService.resumoApurationAppPerguntaPorResposta(obj);
+			Integer totalPorPergunta = pesquisaService.resumoApurationAppTotalPorPergunta(obj);
+			
+			System.out.println(obj.getRespostasWeb());
+			System.out.println(totalPorResposta);
+			
+			PerguntaApuracao pergutaApurada = new PerguntaApuracao(obj.getQuestion(), obj.getRespostasWeb(), totalPorResposta, totalPorPergunta,respostasDissertativas,totalRespostasDissertativas,respostasPorBairro,totalRespostasPorBairro);
+			pergutaApuradaList.add(pergutaApurada);
+            
+        }
+				
+		return ResponseEntity.ok().body(pergutaApuradaList);
+	}
+	
 	@GetMapping(value = "/apuracao/{id}")
 	public ResponseEntity<PerguntaApuracao> findByIdApuracao(@PathVariable Long id){
 		
@@ -122,6 +153,7 @@ public class PerguntaResource {
 		return ResponseEntity.ok().body(pergutaApurada);
 	}
 	
+
 	@GetMapping(value = "/apuracao/{id}/{tipo}/{resposta}")
 	public ResponseEntity<RespostaApuracao> findByIdApuracaoPorTipoAndResposta(@PathVariable Long id, @PathVariable String tipo, @PathVariable String resposta){
 		
@@ -165,6 +197,73 @@ public class PerguntaResource {
 		return ResponseEntity.ok().body(tipoApuracao);
 	}
 	
+	@GetMapping(value = "/apuracao/tipo/{id}/{tipo}")
+	public ResponseEntity<List<TipoApuracao>> findByIdApuracaoPorTipoListAll(@PathVariable Long id, @PathVariable String tipo){
+		
+		Pergunta obj = service.findById(id);
+		
+		List<TipoApuracao> tipoApuracaoList = new ArrayList<>();
+		List<String> enumsLista = new ArrayList<>();
+		
+		switch (tipo) {
+		case "genero":
+			System.out.println("EntrevistadoGenero");
+						
+			List<EntrevistadoGenero> listaGenero = Arrays.asList(EntrevistadoGenero.values());
+	        for (int i = 0; i < listaGenero.size(); i++) {
+	        	enumsLista.add(listaGenero.get(i).toString());
+	        }		
+			
+			break;
+		case "idade":
+			System.out.println("EntrevistadoFaixaIdade");
+						
+			List<EntrevistadoFaixaIdade> listaIdade = Arrays.asList(EntrevistadoFaixaIdade.values());
+	        for (int i = 0; i < listaIdade.size(); i++) {
+	        	enumsLista.add(listaIdade.get(i).toString());
+	        }
+			
+			break;
+		case "religiao":
+			System.out.println("EntrevistadoReligiao");
+			
+			
+			List<EntrevistadoReligiao> listaReligiao = Arrays.asList(EntrevistadoReligiao.values());
+	        for (int i = 0; i < listaReligiao.size(); i++) {
+	        	enumsLista.add(listaReligiao.get(i).toString());
+	        }
+			break;
+		case "escolaridade":
+			System.out.println("EntrevistadoEscolaridade");
+			
+			
+			List<EntrevistadoEscolaridade> listaEscola = Arrays.asList(EntrevistadoEscolaridade.values());
+	        for (int i = 0; i < listaEscola.size(); i++) {
+	        	enumsLista.add(listaEscola.get(i).toString());
+	        }
+			
+			break;
+
+		default:
+			break;
+		}
+		
+		
+		for(String tipoResposta : enumsLista){
+			
+			Integer totalPorPergunta = pesquisaService.totalPorPerguntaAndTipo(obj,tipo, tipoResposta.toUpperCase());
+
+			List<Integer> totalPerguntaTipoAndResposta = pesquisaService.totalPorPerguntaAndTipoAndResposta(obj,tipo, tipoResposta.toUpperCase());
+					
+
+			TipoApuracao tipoApuracao = new TipoApuracao(obj.getQuestion(),tipo,tipoResposta,obj.getRespostasWeb(),totalPerguntaTipoAndResposta, totalPorPergunta);
+			tipoApuracaoList.add(tipoApuracao);
+			
+		}
+ 		
+		return ResponseEntity.ok().body(tipoApuracaoList);
+	}
+	
 	@GetMapping(value = "/apuracao/bairro/{id}/{bairro}")
 	public ResponseEntity<BairroApuracao> findByIdApuracaoPorBairro(@PathVariable Long id, @PathVariable String bairro ){
 		
@@ -179,9 +278,33 @@ public class PerguntaResource {
 				
 		return ResponseEntity.ok().body(bairroApuracao);
 	}
+	
+	@GetMapping(value = "/apuracao/bairro/{id}")
+	public ResponseEntity<List<BairroApuracao>> findByIdApuracaoPorBairroList(@PathVariable Long id){
+		
+		Pergunta obj = service.findById(id);
+		
+		List<String> bairrosByPergunta  = pesquisaService.listaRespostasPorBairro(obj);
+		List<BairroApuracao> bairrosApuracao = new ArrayList<>();
+		
+		for(String bairro : bairrosByPergunta){
+			
+		
+		Integer totalPorPergunta = pesquisaService.totalPorPerguntaAndBairro(obj,bairro);
+
+		List<Integer> totalPerguntaBairroAndResposta = pesquisaService.totalPorPerguntaAndBairroAndResposta(obj,bairro);	
+		
+		BairroApuracao bairroApuracao = new BairroApuracao(obj.getQuestion(),bairro,obj.getRespostasWeb(),totalPerguntaBairroAndResposta, totalPorPergunta);
+		bairrosApuracao.add(bairroApuracao);
+		
+		}		
+		return ResponseEntity.ok().body(bairrosApuracao);
+		
+	}
 
 
 	public void definirTipo(String tipo, List<String> enumsLista) {
+		
 		switch (tipo) {
 		case "genero":
 			System.out.println("EntrevistadoGenero");

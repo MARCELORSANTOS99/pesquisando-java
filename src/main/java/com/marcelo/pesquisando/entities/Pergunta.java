@@ -27,6 +27,7 @@ public class Pergunta implements Serializable {
 	private Long id;
 	private String question;
 	private String respostasAleatorias;
+	private String respostaEspontanea;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -40,11 +41,12 @@ public class Pergunta implements Serializable {
 		
 	public Pergunta() {}
 
-	public Pergunta(Long id, String question, String respostasAleatorias, Cidade cidad, List<Resposta> respostas) {
+	public Pergunta(Long id, String question, String respostasAleatorias,String respostaEspontanea, Cidade cidad, List<Resposta> respostas) {
 		super();
 		this.id = id;
 		this.question = question;
 		this.respostasAleatorias = respostasAleatorias;
+		this.respostaEspontanea = respostaEspontanea;
 		this.cidad = cidad;
 		this.respostas = respostas;
 	}
@@ -88,6 +90,13 @@ public class Pergunta implements Serializable {
 	}
 
 
+	public String getRespostaEspontanea() {
+		return respostaEspontanea;
+	}
+
+	public void setRespostaEspontanea(String respostaEspontanea) {
+		this.respostaEspontanea = respostaEspontanea;
+	}
 
 	public List<Resposta> getRespostas() {
 		return respostas;

@@ -54,9 +54,9 @@ public class TestConfig implements CommandLineRunner {
 		Entrevistado p2 = new Entrevistado(null,"Debora Santos",EntrevistadoReligiao.ESPIRITA,EntrevistadoFaixaIdade.DE_16_A_24_ANOS,EntrevistadoGenero.MULHER,EntrevistadoEscolaridade.ENSINO_SUPERIOR);
 		Entrevistado p3 = new Entrevistado(null,"Alice",EntrevistadoReligiao.ESPIRITA,EntrevistadoFaixaIdade.ACIMA_DE_70_ANOS,EntrevistadoGenero.MULHER,EntrevistadoEscolaridade.ENSINO_FUNDAMENTAL);
 
-		Pergunta perg1 = new Pergunta(null, "Em que vc vai votar?","Sim",city,null);
-		Pergunta perg2 = new Pergunta(null, "Você é a favor do porte de arma?","Sim",city,null);
-		Pergunta perg3 = new Pergunta(null,"Teste","Sim",city,null);
+		Pergunta perg1 = new Pergunta(null, "Em que vc vai votar?","Sim","Sim",city,null);
+		Pergunta perg2 = new Pergunta(null, "Você é a favor do porte de arma?","Sim","Sim",city,null);
+		Pergunta perg3 = new Pergunta(null,"Teste","Sim","Sim",city,null);
 		
 
 		Resposta r1 = new Resposta(null, "Cajuru", perg1);
