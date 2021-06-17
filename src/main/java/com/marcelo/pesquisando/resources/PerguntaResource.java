@@ -122,7 +122,7 @@ public class PerguntaResource {
 			System.out.println(obj.getRespostasWeb());
 			System.out.println(totalPorResposta);
 			
-			PerguntaApuracao pergutaApurada = new PerguntaApuracao(obj.getQuestion(),obj.getId(), obj.getRespostasWeb(), totalPorResposta, totalPorPergunta,respostasDissertativas,totalRespostasDissertativas,respostasPorBairro,totalRespostasPorBairro);
+			PerguntaApuracao pergutaApurada = new PerguntaApuracao(obj.getQuestion(),obj.getId(),obj.getRespostaEspontanea(), obj.getRespostasWeb(), totalPorResposta, totalPorPergunta,respostasDissertativas,totalRespostasDissertativas,respostasPorBairro,totalRespostasPorBairro);
 			pergutaApuradaList.add(pergutaApurada);
             
         }
@@ -152,7 +152,7 @@ public class PerguntaResource {
 		System.out.println(obj.getRespostasWeb());
 		System.out.println(totalPorResposta);
 		
-		PerguntaApuracao pergutaApurada = new PerguntaApuracao(obj.getQuestion(),idPergunta, obj.getRespostasWeb(), totalPorResposta, totalPorPergunta,respostasDissertativas,totalRespostasDissertativas,respostasPorBairro,totalRespostasPorBairro);
+		PerguntaApuracao pergutaApurada = new PerguntaApuracao(obj.getQuestion(),idPergunta,obj.getRespostaEspontanea(), obj.getRespostasWeb(), totalPorResposta, totalPorPergunta,respostasDissertativas,totalRespostasDissertativas,respostasPorBairro,totalRespostasPorBairro);
 				
 		return ResponseEntity.ok().body(pergutaApurada);
 	}

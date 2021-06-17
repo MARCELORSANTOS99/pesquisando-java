@@ -6,6 +6,7 @@ public class PerguntaApuracao {
 	
 	private String pergunta;
 	private long idPergunta;
+	private String respEspontanea;
 	private List<String> respostas;
 	private List<Integer> totalPorResposta;
 	private Integer totalPorPergunta;
@@ -19,7 +20,7 @@ public class PerguntaApuracao {
 	}
 	
 
-	public PerguntaApuracao(String pergunta, long idPergunta, List<String> respostas, List<Integer> totalPorResposta,
+	public PerguntaApuracao(String pergunta, long idPergunta, String respEspontanea, List<String> respostas, List<Integer> totalPorResposta,
 			Integer totalPorPergunta, List<String> respostasDissertativa, List<Integer> totalRespostasDissertativa,
 			List<String> respostasBairro, List<Integer> totalRespostasBairro) {
 		super();
@@ -53,7 +54,15 @@ public class PerguntaApuracao {
 	public void setTotalPorPergunta(Integer totalPorPergunta) {
 		this.totalPorPergunta = totalPorPergunta;
 	}
+	
+	
+	public String getRespEspontanea() {
+		return respEspontanea;
+	}
 
+	public void setRespEspontanea(String respEspontanea) {
+		this.respEspontanea = respEspontanea;
+	}
 
 	public void setPergunta(String pergunta) {
 		this.pergunta = pergunta;
