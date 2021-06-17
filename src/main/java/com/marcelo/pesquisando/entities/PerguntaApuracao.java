@@ -26,6 +26,7 @@ public class PerguntaApuracao {
 		super();
 		this.pergunta = pergunta;
 		this.idPergunta = idPergunta;
+		this.respEspontanea = respEspontanea;
 		this.respostas = respostas;
 		this.totalPorResposta = totalPorResposta;
 		this.totalPorPergunta = totalPorPergunta;
