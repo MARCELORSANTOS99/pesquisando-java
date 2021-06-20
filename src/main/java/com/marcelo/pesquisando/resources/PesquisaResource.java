@@ -57,6 +57,22 @@ public class PesquisaResource {
 		 return ResponseEntity.ok().body(list);
 	}
 	
+	@GetMapping(value = "/bairros/cidade/{id}")
+	public ResponseEntity<List<String>> findAllBairrosByIdCidade(@PathVariable String id){
+		
+		List<String> list = service.findAllBairrosByCidade(id);
+		
+		 return ResponseEntity.ok().body(list);
+	}
+	
+	@GetMapping(value = "/espontanea/cidade/{id}")
+	public ResponseEntity<List<String>> findAllEspontaneaByIdCidade(@PathVariable String id){
+		
+		List<String> list = service.findAllEspontaneaByCidade(id);
+		
+		 return ResponseEntity.ok().body(list);
+	}
+	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Pesquisa> findById(@PathVariable Long id){
 		Pesquisa obj = service.findById(id);
@@ -126,6 +142,28 @@ public class PesquisaResource {
 		List<Pesquisa> objs = service.upDate(id, obj);
 		
 		return ResponseEntity.ok().body(objs);
+	}
+	
+	@PutMapping(value = "/bairro/all/{id}/{newBairro}/{oldBairro}")
+	public ResponseEntity<String> updateAllBairro(@PathVariable String id, @PathVariable String newBairro, @PathVariable String oldBairro){
+		
+		System.out.println(newBairro);
+		System.out.println(oldBairro);
+				
+		service.updateDataBairroAll(newBairro, oldBairro, id);	
+				
+		return ResponseEntity.ok().body("Bairros Alterados");
+	}
+	
+	@PutMapping(value = "/espontanea/all/{id}/{newEspontanea}/{oldEspontanea}")
+	public ResponseEntity<String> updateAllEspontanea(@PathVariable String id, @PathVariable String newEspontanea, @PathVariable String oldEspontanea){
+		
+		System.out.println(newEspontanea);
+		System.out.println(oldEspontanea);
+				
+		service.updateDataEspontaneaAll(newEspontanea, oldEspontanea, id);	
+				
+		return ResponseEntity.ok().body("Respostas Espontâneas Alteradas");
 	}
 	
 	@PutMapping(value = "/dissertativa/{id}")

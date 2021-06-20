@@ -40,8 +40,6 @@ private static final long serialVersionUID = 1L;
 	}
 	
 	
-	
-	
 	public List<Pergunta> getPerguntas() {
 		return perguntas;
 	}

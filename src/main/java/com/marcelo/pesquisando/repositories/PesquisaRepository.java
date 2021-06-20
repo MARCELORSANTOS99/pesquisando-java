@@ -30,6 +30,12 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
 		
 	long countByPergunta(String pergunta);
 	
+	@Query(value = "SELECT entrevistadoBairro FROM Pesquisa where idCidade = ?1 GROUP BY entrevistadoBairro")
+	List<String> agruparPorCidadeBairro(String idCidade);
+	
+	@Query(value = "SELECT respostaDissertiva FROM Pesquisa where idCidade = ?1 GROUP BY respostaDissertiva")
+	List<String> agruparPorCidadeEspontanea(String idCidade);
+	
 	@Query(value = "SELECT entrevistadoBairro FROM Pesquisa where pergunta = ?1 GROUP BY entrevistadoBairro")
 	List<String> agruparPorBairro(String pergunta);
 	
@@ -119,6 +125,18 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
  	@Modifying
     @Query("UPDATE Pesquisa c SET c.respostaDissertiva = :respostaDissertiva,c.entrevistadoBairro = :entrevistadoBairro WHERE c.id = :id")
     int updateRespostaDissertativa(@Param("id") long id, @Param("respostaDissertiva") String respostaDissertiva, @Param("entrevistadoBairro") String entrevistadoBairro);
+    
+    @Transactional
+ 	@Modifying
+    @Query("UPDATE Pesquisa c SET c.entrevistadoBairro = :entrevistadoBairroNew WHERE c.idCidade = :id AND c.entrevistadoBairro = :entrevistadoBairroOld ")
+    int updateAllBairro(@Param("id") String id, @Param("entrevistadoBairroNew") String entrevistadoBairroNew, @Param("entrevistadoBairroOld") String entrevistadoBairroOld);
+    
+    @Transactional
+ 	@Modifying
+    @Query("UPDATE Pesquisa c SET c.respostaDissertiva = :entrevistadoEspontaneaNew WHERE c.idCidade = :id AND c.respostaDissertiva = :entrevistadoEspontaneaOld ")
+    int updateAllEspontanea(@Param("id") String id, @Param("entrevistadoEspontaneaNew") String entrevistadoEspontaneaNew, @Param("entrevistadoEspontaneaOld") String entrevistadoEspontaneaOld);
+    
+    
 
 	
 

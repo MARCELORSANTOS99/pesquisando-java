@@ -41,6 +41,15 @@ public class PesquisaService {
 		
 		return repository.findAllByIdCidade(id);
 	}
+	public List<String> findAllBairrosByCidade(String id){
+		
+		return repository.agruparPorCidadeBairro(id);
+	}
+	
+	public List<String> findAllEspontaneaByCidade(String id){
+		
+		return repository.agruparPorCidadeEspontanea(id);
+	}
 	
 	public Pesquisa findById(Long id) {
 		Optional<Pesquisa> obj =  repository.findById(id);
@@ -90,6 +99,29 @@ public class PesquisaService {
 			
 	}
 	
+	
+	public void updateDataBairroAll(String newBairro, String oldBairro, String idCidade) {
+		
+		System.out.println("<<EDIT BAIRRO>>>");
+		System.out.println(idCidade);
+			
+		
+		repository.updateAllBairro(idCidade, newBairro, oldBairro);
+			
+	}
+	
+	public void updateDataEspontaneaAll(String newEspontanea, String oldEspontanea, String idCidade) {
+		
+		System.out.println("<<EDIT ESPONTANEA>>>");
+		System.out.println(idCidade);
+			
+		
+		repository.updateAllEspontanea(idCidade, newEspontanea, oldEspontanea);
+			
+	}
+	
+  
+
 	
 	public Pesquisa upDateDissertativa(Long id, Pesquisa obj) {
 		
