@@ -34,6 +34,7 @@ public class Pesquisa implements Serializable{
 	private String codigo;
 	
 	private String idCidade;
+	private String idContrato;
 	
 	private String cidade;
 
@@ -54,7 +55,7 @@ public class Pesquisa implements Serializable{
 	public Pesquisa() {}
 	
 
-	public Pesquisa(Long id, Instant moment, String codigo, String idCidade, String cidade, String entrevistadoNome,
+	public Pesquisa(Long id, Instant moment, String codigo, String idCidade,String idContrato, String cidade, String entrevistadoNome,
 			String entrevistadoBairro, String entrevistadoRua, String entrevistadoNumero, String entrevistadoReligiao,
 			String entrevistadoFaixaIdade, String entrevistadoGenero, String entrevistadoEscolaridade, String pergunta,
 			String resposta, String respostaDissertiva, String usuarioApp) {
@@ -63,6 +64,7 @@ public class Pesquisa implements Serializable{
 		this.moment = moment;
 		this.codigo = codigo;
 		this.idCidade = idCidade;
+		this.idContrato = idContrato;
 		this.cidade = cidade;
 		this.entrevistadoNome = entrevistadoNome;
 		this.entrevistadoBairro = entrevistadoBairro;
@@ -119,6 +121,17 @@ public class Pesquisa implements Serializable{
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
+	
+
+	public String getIdContrato() {
+		return idContrato;
+	}
+
+
+	public void setIdContrato(String idContrato) {
+		this.idContrato = idContrato;
+	}
+
 
 	public String getPergunta() {
 		return pergunta;

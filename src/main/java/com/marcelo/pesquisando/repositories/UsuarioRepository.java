@@ -9,8 +9,7 @@ import com.marcelo.pesquisando.entities.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-	
-	@Query(value = "SELECT u FROM Usuario u where u.uid = ?1")
 	Optional<Usuario> findByUid(String uid);
+	
 
 }
