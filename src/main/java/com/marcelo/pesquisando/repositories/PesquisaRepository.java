@@ -12,7 +12,7 @@ import org.springframework.data.repository.query.Param;
 import com.marcelo.pesquisando.entities.Pesquisa;
 
 public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
-	
+
 	
 	
 	@Query(value = "SELECT COUNT(p) FROM Pesquisa as p where p.resposta = ?1")

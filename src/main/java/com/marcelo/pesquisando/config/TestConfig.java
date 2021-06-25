@@ -10,7 +10,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.marcelo.pesquisando.entities.Cidade;
+import com.marcelo.pesquisando.entities.Contrato;
 import com.marcelo.pesquisando.entities.Entrevistado;
+import com.marcelo.pesquisando.entities.Usuario;
 import com.marcelo.pesquisando.entities.Pergunta;
 import com.marcelo.pesquisando.entities.Pesquisa;
 import com.marcelo.pesquisando.entities.Resposta;
@@ -19,7 +21,9 @@ import com.marcelo.pesquisando.entities.enums.EntrevistadoFaixaIdade;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoGenero;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoReligiao;
 import com.marcelo.pesquisando.repositories.CidadeRepository;
+import com.marcelo.pesquisando.repositories.ContratoRepository;
 import com.marcelo.pesquisando.repositories.EntrevistadoRepository;
+import com.marcelo.pesquisando.repositories.UsuarioRepository;
 import com.marcelo.pesquisando.repositories.PerguntaRepository;
 import com.marcelo.pesquisando.repositories.PesquisaRepository;
 import com.marcelo.pesquisando.repositories.RespostaRepository;
@@ -42,13 +46,28 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private CidadeRepository cidadeRepository;
+	@Autowired
+	private ContratoRepository contratoRepository;
+	@Autowired
+	private UsuarioRepository funcionarioRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
 
-		
+		Contrato contrato = new Contrato();
+		Usuario funcionario = new Usuario(1,"debora","debora@htoamil.com","teste",true,contrato);
 		Cidade city = new Cidade();
-		city.setNome("Salvador");
+		city.setNome("Rio");
+		
+		
+		List<Cidade> cidades = new ArrayList<>();
+		cidades.add(city);
+		
+		List<Usuario> funcionarios = new ArrayList<>();
+		funcionarios.add(funcionario);
+		
+		
+		
 		
 		Entrevistado p1 = new Entrevistado(null,"Marcelo Santos",EntrevistadoReligiao.OUTRA,EntrevistadoFaixaIdade.DE_16_A_24_ANOS,EntrevistadoGenero.HOMEM,EntrevistadoEscolaridade.ENSINO_SUPERIOR);
 		Entrevistado p2 = new Entrevistado(null,"Debora Santos",EntrevistadoReligiao.ESPIRITA,EntrevistadoFaixaIdade.DE_16_A_24_ANOS,EntrevistadoGenero.MULHER,EntrevistadoEscolaridade.ENSINO_SUPERIOR);
@@ -126,13 +145,19 @@ public class TestConfig implements CommandLineRunner {
 		//Observaçãosss
 		pesquisa4.setRespostaDissertiva("Não gosto de armas");
 		
+		//CONTRATO
+		contrato.setCidades(cidades);
+	
+		
 		
 		
 		entrevistadoRepository.saveAll(Arrays.asList(p1,p2));
 		perguntaRepository.saveAll(Arrays.asList(perg2, perg1));
 		respostaRepository.saveAll(Arrays.asList(r1, r2, r3, r4,r5));
 		pesquisaRepository.saveAll(Arrays.asList(pesquisa,pesquisa2,pesquisa3,pesquisa4));
-		cidadeRepository.saveAll(Arrays.asList(city));
+		funcionarioRepository.saveAll(Arrays.asList(funcionario));
+		contratoRepository.saveAll(Arrays.asList(contrato));
+		
 
 
 	}
