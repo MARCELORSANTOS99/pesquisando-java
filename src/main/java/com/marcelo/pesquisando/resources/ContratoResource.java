@@ -1,7 +1,6 @@
 package com.marcelo.pesquisando.resources;
 
 import java.net.URI;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +26,8 @@ public class ContratoResource {
 	
 	@Autowired
 	private ContratoService service;
-	
+
+	/*
 	@GetMapping
 	public ResponseEntity<List<Contrato>> findAll(){
 		
@@ -35,6 +35,7 @@ public class ContratoResource {
 		
 		 return ResponseEntity.ok().body(list);
 	}
+	*/
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Contrato> findById(@PathVariable Long id){

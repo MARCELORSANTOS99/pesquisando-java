@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.marcelo.pesquisando.entities.Apuracao;
@@ -13,18 +14,23 @@ import com.marcelo.pesquisando.entities.Cidade;
 import com.marcelo.pesquisando.entities.Pergunta;
 import com.marcelo.pesquisando.entities.Pesquisa;
 import com.marcelo.pesquisando.entities.Resposta;
+import com.marcelo.pesquisando.entities.User;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoEscolaridade;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoFaixaIdade;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoGenero;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoReligiao;
 import com.marcelo.pesquisando.repositories.GerenteRepository;
 import com.marcelo.pesquisando.repositories.PesquisaRepository;
+import com.marcelo.pesquisando.repositories.UserRepository;
 
 @Service
 public class PesquisaService {
 	
 	@Autowired
 	private PesquisaRepository repository;
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 	@Autowired
 	private GerenteRepository repositoryGerente;
@@ -59,11 +65,15 @@ public class PesquisaService {
 	
 	public Pesquisa insert(Pesquisa obj) {
 		
-		String user = obj.getUsuarioApp();
-		System.out.println(user);
+		String userFirebase = obj.getUsuarioApp();
+		System.out.println(userFirebase);
 		
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		User user = userRepository.findByUsername(username);
 		
-		obj.setUsuarioApp(repositoryGerente.pegarUser(user));
+		obj.setUsuarioApp(repositoryGerente.pegarUser(userFirebase));
+		obj.setUser(user);
+		
 		System.out.println(obj);
 		
 		return repository.save(obj);

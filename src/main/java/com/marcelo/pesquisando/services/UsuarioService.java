@@ -17,8 +17,6 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository repository;
 	
-	@Autowired
-	private PerguntaService perguntaService;
 	
 	public List<Usuario> findAll(){
 		return repository.findAll();

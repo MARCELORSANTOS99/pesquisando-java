@@ -48,6 +48,7 @@ public class UsuarioResource {
 				
 		System.out.println(uid);
 		Usuario obj = service.findByUID(uid);
+	
 		
 		return ResponseEntity.ok().body(obj);
 	}

@@ -2,19 +2,17 @@ package com.marcelo.pesquisando.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_pesquisa")
@@ -52,6 +50,11 @@ public class Pesquisa implements Serializable{
 	private String usuarioApp;
 	
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private User user;
+	
+	
+	
 	public Pesquisa() {}
 	
 
@@ -82,6 +85,16 @@ public class Pesquisa implements Serializable{
 
 
 
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 
 	public String getUsuarioApp() {
