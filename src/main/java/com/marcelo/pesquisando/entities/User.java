@@ -20,11 +20,6 @@ public class User {
 	private String password;
 	private Boolean enabled;
 
-
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
-	private List<Pesquisa> pesquisas;
-	
-	 
 	
 	public User() {
 		super();
@@ -38,12 +33,6 @@ public class User {
 	}
 
 
-	public List<Pesquisa> getPesquisas() {
-		return pesquisas;
-	}
-	public void setPesquisas(List<Pesquisa> pesquisas) {
-		this.pesquisas = pesquisas;
-	}
 	public String getUsername() {
 		return username;
 	}

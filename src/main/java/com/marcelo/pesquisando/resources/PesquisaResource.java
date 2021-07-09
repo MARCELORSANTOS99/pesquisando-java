@@ -115,6 +115,7 @@ public class PesquisaResource {
 	
 	@PostMapping
 	public ResponseEntity<List<Pesquisa>> insert(@RequestBody List<Pesquisa> obj){
+
 		
 		System.out.println(obj);
 		
@@ -127,6 +128,7 @@ public class PesquisaResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pesquisas.get(0).getCodigo()).toUri();
 		
 		return ResponseEntity.created(uri).body(pesquisas);
+		//return ResponseEntity.created(uri).body("");
 	}
 	
 	

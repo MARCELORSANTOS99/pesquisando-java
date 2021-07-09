@@ -5,18 +5,30 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.marcelo.pesquisando.entities.Gerente;
 import com.marcelo.pesquisando.entities.GerenteApuracao;
+import com.marcelo.pesquisando.entities.User;
+import com.marcelo.pesquisando.entities.Usuario;
 import com.marcelo.pesquisando.repositories.GerenteRepository;
 import com.marcelo.pesquisando.repositories.PesquisaRepository;
+import com.marcelo.pesquisando.repositories.UserRepository;
+import com.marcelo.pesquisando.repositories.UsuarioRepository;
 
 @Service
 public class GerenteService {
 	
 	@Autowired
 	private GerenteRepository repository;
+	
+	@Autowired
+	private UsuarioRepository UsuarioRepository;
+	
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 	@Autowired
 	private PesquisaRepository pesquisaRepository;
@@ -38,18 +50,20 @@ public class GerenteService {
 	
 	public List<GerenteApuracao> totalPesquisasFeitas(String idCidade) {
 				
-		List<Gerente> ListGerente = repository.findAll();
+		List<Usuario> ListGerente = UsuarioRepository.findAll();
 		List<GerenteApuracao> listGerenteApuracao = new ArrayList<GerenteApuracao>();
 		
-		for (Gerente gerente : ListGerente) {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		User user = userRepository.findByUsername(username);
+		
+		for (Usuario usuario : ListGerente) {
 			
-			List<Object[]> results = pesquisaRepository.totalPesquisaPorUsuario(gerente.getNome(), idCidade);	
-			//System.out.println(results.size());
+			List<Object[]> results = pesquisaRepository.totalPesquisaPorUsuario(usuario.getEmail(), idCidade);
+			System.out.println(usuario.getEmail());
 			
 				GerenteApuracao gerenteApuracao = new GerenteApuracao(
-						gerente.getUserFirebase(),
-						gerente.getNome(),
-						gerente.getEmail(),
+						usuario.getNome(),
+						usuario.getEmail(),
 						results.size()
 					);
 				listGerenteApuracao.add(gerenteApuracao);

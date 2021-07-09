@@ -65,14 +65,11 @@ public class PesquisaService {
 	
 	public Pesquisa insert(Pesquisa obj) {
 		
-		String userFirebase = obj.getUsuarioApp();
-		System.out.println(userFirebase);
-		
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		User user = userRepository.findByUsername(username);
 		
-		obj.setUsuarioApp(repositoryGerente.pegarUser(userFirebase));
-		obj.setUser(user);
+		
+		obj.setUserEmail(user.getUsername());
 		
 		System.out.println(obj);
 		

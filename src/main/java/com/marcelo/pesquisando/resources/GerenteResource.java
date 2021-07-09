@@ -52,10 +52,9 @@ public class GerenteResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@GetMapping(value = "/firebase/totalPesquisas/{user}/{idCidade}")
-	public ResponseEntity<List<GerenteApuracao>>  qtdPesquisaFeitas(@PathVariable String user,@PathVariable String idCidade){
+	@GetMapping(value = "/firebase/totalPesquisas/{idCidade}")
+	public ResponseEntity<List<GerenteApuracao>>  qtdPesquisaFeitas(@PathVariable String idCidade){
 		
-		System.out.println(user);
 			
 		List<GerenteApuracao> listGerenteApuracao = service.totalPesquisasFeitas(idCidade);
 			

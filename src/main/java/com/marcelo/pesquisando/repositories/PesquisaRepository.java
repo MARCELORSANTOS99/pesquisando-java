@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.marcelo.pesquisando.entities.Pesquisa;
+import com.marcelo.pesquisando.entities.User;
 
 public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
 
@@ -117,8 +118,8 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
 	
 	//@Query(value = "SELECT p.codigo, p.usuarioApp COUNT (usuarioApp) FROM Pesquisa as p where p.usuarioApp = ?1 GROUP BY codigo", nativeQuery=true)
     //@Query("SELECT u.serverName,count(u) as controlRunCount from RunList u where u.controlRunDate < :lastUploadDate group by u.serverName")
-    @Query("SELECT u.codigo,count(u) as usuarioApp from Pesquisa u where u.usuarioApp = ?1 and u.idCidade = ?2 group by u.codigo")
-	public List<Object[]> totalPesquisaPorUsuario(String usuarioApp,String idCidade);
+    @Query("SELECT u.codigo,count(u) as userEmail from Pesquisa u where u.userEmail = ?1 and u.idCidade = ?2 group by u.codigo")
+	public List<Object[]> totalPesquisaPorUsuario(String username,String idCidade);
     
 
     @Transactional
@@ -135,6 +136,7 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
  	@Modifying
     @Query("UPDATE Pesquisa c SET c.respostaDissertiva = :entrevistadoEspontaneaNew WHERE c.idCidade = :id AND c.respostaDissertiva = :entrevistadoEspontaneaOld ")
     int updateAllEspontanea(@Param("id") String id, @Param("entrevistadoEspontaneaNew") String entrevistadoEspontaneaNew, @Param("entrevistadoEspontaneaOld") String entrevistadoEspontaneaOld);
+
     
     
 

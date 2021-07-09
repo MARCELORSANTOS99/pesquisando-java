@@ -3,6 +3,7 @@ package com.marcelo.pesquisando.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +53,14 @@ public class UserService {
 		
 	}
 
+	public String userLogado() {
+
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		User user = repository.findByUsername(username);
+		
+		return user.getUsername();
+	}
+	
 
 	
 

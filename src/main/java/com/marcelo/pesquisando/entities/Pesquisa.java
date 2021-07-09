@@ -9,10 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_pesquisa")
@@ -47,11 +47,10 @@ public class Pesquisa implements Serializable{
 	private String pergunta;
 	private String resposta;
 	private String respostaDissertiva;
-	private String usuarioApp;
+	//private String usuarioApp;
 	
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	private User user;
+
+	private String userEmail;
 	
 	
 	
@@ -61,7 +60,7 @@ public class Pesquisa implements Serializable{
 	public Pesquisa(Long id, Instant moment, String codigo, String idCidade,String idContrato, String cidade, String entrevistadoNome,
 			String entrevistadoBairro, String entrevistadoRua, String entrevistadoNumero, String entrevistadoReligiao,
 			String entrevistadoFaixaIdade, String entrevistadoGenero, String entrevistadoEscolaridade, String pergunta,
-			String resposta, String respostaDissertiva, String usuarioApp) {
+			String resposta, String respostaDissertiva) {
 		super();
 		this.id = id;
 		this.moment = moment;
@@ -80,33 +79,18 @@ public class Pesquisa implements Serializable{
 		this.pergunta = pergunta;
 		this.resposta = resposta;
 		this.respostaDissertiva = respostaDissertiva;
-		this.usuarioApp = usuarioApp;
 	}
 
 
 
-
-
-	public User getUser() {
-		return user;
+	public String getUserEmail() {
+		return userEmail;
 	}
 
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
-
-
-	public String getUsuarioApp() {
-		return usuarioApp;
-	}
-
-
-
-	public void setUsuarioApp(String usuarioApp) {
-		this.usuarioApp = usuarioApp;
-	}
-
 
 
 	public Long getId() {

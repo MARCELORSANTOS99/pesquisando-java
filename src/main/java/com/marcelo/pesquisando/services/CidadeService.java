@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.marcelo.pesquisando.entities.Cidade;
 import com.marcelo.pesquisando.entities.Pergunta;
 import com.marcelo.pesquisando.entities.Resposta;
+import com.marcelo.pesquisando.entities.Usuario;
 import com.marcelo.pesquisando.repositories.CidadeRepository;
 
 @Service
@@ -16,6 +17,12 @@ public class CidadeService {
 	
 	@Autowired
 	private CidadeRepository repository;
+	
+	@Autowired
+	private UsuarioService UsuarioService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@Autowired
 	private PerguntaService perguntaService;
@@ -32,13 +39,21 @@ public class CidadeService {
 	
 	
 	public Cidade insert(Cidade obj) {
+		
 		System.out.println(obj.getNome());
+		System.out.println(userService.userLogado());
+		
+		Usuario user = UsuarioService.findByNome(userService.userLogado());
+		
+		obj.setContract(user.getContract());
+		
 		return repository.save(obj);
 	}
 	
 	public void delete(Long obj) {
 		
 		Cidade c = findById(obj);
+		System.out.println(userService.userLogado());
 	
 		List<Pergunta> perguntas = c.getPerguntas();
 	
@@ -51,6 +66,10 @@ public class CidadeService {
 	}
 	
 	public Cidade upDate(Long id, Cidade obj) {
+	
+		System.out.println(userService.userLogado());
+	
+
 		
 		Cidade entity = repository.getOne(id);
 		updateData(entity,obj);
@@ -59,6 +78,7 @@ public class CidadeService {
 	}
 
 	private void updateData(Cidade entity, Cidade obj) {
+
 		
 		entity.setNome(obj.getNome());;
 	

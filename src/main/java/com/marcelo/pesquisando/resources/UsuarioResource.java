@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.marcelo.pesquisando.entities.User;
 import com.marcelo.pesquisando.entities.Usuario;
+import com.marcelo.pesquisando.repositories.UserRepository;
 import com.marcelo.pesquisando.services.UsuarioService;
 
 @Controller
@@ -27,6 +30,9 @@ public class UsuarioResource {
 	
 	@Autowired
 	private UsuarioService service;
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 	@GetMapping
 	public ResponseEntity<List<Usuario>> findAll(){
@@ -43,11 +49,15 @@ public class UsuarioResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@GetMapping(value = "/uid/{uid}")
-	public ResponseEntity<Usuario> findByUID(@PathVariable String uid){
+	@GetMapping(value = "/login")
+	public ResponseEntity<Usuario> findByUID(){
 				
-		System.out.println(uid);
-		Usuario obj = service.findByUID(uid);
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		User user = userRepository.findByUsername(username);
+		
+		
+		System.out.println(user.getUsername());
+		Usuario obj = service.findByNome(user.getUsername());
 	
 		
 		return ResponseEntity.ok().body(obj);
