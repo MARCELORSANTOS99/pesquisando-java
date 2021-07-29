@@ -9,7 +9,9 @@ import com.marcelo.pesquisando.entities.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-	Optional<Usuario> findByUid(String uid);
+	Optional<Usuario> findByEmail(String EmailUser);
+	
+	Optional<Usuario> findByNome(String nomeUser);
 	
 
 }

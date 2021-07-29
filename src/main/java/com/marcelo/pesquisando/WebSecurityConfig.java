@@ -1,105 +1,61 @@
 package com.marcelo.pesquisando;
 
-import org.springframework.context.annotation.Bean;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
+	@Autowired
+	private DataSource dataSource;
+		
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		http.csrf().disable()
-		.authorizeRequests()
-        	.antMatchers(HttpMethod.GET, "/perguntas/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.GET, "/cidades/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.GET, "/perguntas/apuracao/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.GET, "/perguntas/apuracao/cidade/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.GET, "/perguntas/apuracao/*/*/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.GET, "/perguntas/apuracao/tipo/*/*/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.GET, "/perguntas/apuracao/tipo/*/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.GET, "/perguntas/apuracao/bairro/*/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.GET, "/perguntas/apuracao/bairro/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.GET, "/gerente/firebase/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.GET, "/gerente/firebase/totalPesquisas/*/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.PUT, "/perguntas/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.PUT, "/pesquisas/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.PUT, "/pesquisas/bairro/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.PUT, "/pesquisas/bairro/all/*/*/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.PUT, "/pesquisas/espontanea/all/*/*/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.PUT, "/pesquisas/dissertativa/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.PUT, "/respostas/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.PUT, "/cidades/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.POST, "/respostas/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.DELETE, "/respostas/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.DELETE, "/cidades/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.DELETE, "/perguntas/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.POST, "/perguntas/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.POST, "/cidades/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.GET, "/cidades/")
-        	.permitAll()
-        	.antMatchers(HttpMethod.GET, "/pesquisas/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.GET, "/pesquisas/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.GET, "/pesquisas/*/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.GET, "/pesquisas/cidade/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.GET, "/pesquisas/bairros/cidade/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.GET, "/pesquisas/espontanea/cidade/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.GET, "/respostas/")
-        	.permitAll()
-        	.antMatchers(HttpMethod.GET, "/contratos/")
-        	.permitAll()
-        	.antMatchers(HttpMethod.GET, "/usuarios/uid/*")
-        	.permitAll()
-        	.antMatchers(HttpMethod.POST, "/pesquisas/")
-        	.permitAll()
-		.anyRequest().authenticated()
+	
+		http.authorizeRequests()
+		//.antMatchers(HttpMethod.POST, "/users").permitAll()
+			.anyRequest().authenticated()
+		.and().
+			httpBasic()
 		.and()
-		.formLogin(form -> form
-	            .loginPage("/login")
-	            .permitAll()
-	        );
+			.csrf().disable();
+		
 	}
 	
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		
+		BCryptPasswordEncoder encoder  = new BCryptPasswordEncoder();
+		
+	    //auth.userDetailsService(userDetailsService()).passwordEncoder(encoder());
+		/*
+		UserDetails user =
+				 User.builder()
+					.username("admin")
+					.password(encoder.encode("admin"))
+					.roles("ADM")
+					.build();
+		
+		*/
+		auth.jdbcAuthentication()
+		.dataSource(dataSource)
+		.passwordEncoder(encoder);
+		//.withUser(user);
+		
+
+	}
+	
+	/*
 	@Bean
 	@Override
 	public UserDetailsService userDetailsService() {
@@ -112,6 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		return new InMemoryUserDetailsManager(user);
 	}
+	*/
 
 
 }

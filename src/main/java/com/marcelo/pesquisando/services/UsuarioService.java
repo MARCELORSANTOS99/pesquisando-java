@@ -17,8 +17,6 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository repository;
 	
-	@Autowired
-	private PerguntaService perguntaService;
 	
 	public List<Usuario> findAll(){
 		return repository.findAll();
@@ -30,10 +28,17 @@ public class UsuarioService {
 		return obj.get();
 	}
 	
-	public Usuario findByUID(String uid) {
+	public Usuario findByNome(String nomeUser) {
 		
-		System.out.println(uid);
-		Optional<Usuario> obj =  repository.findByUid(uid);
+		System.out.println(nomeUser);
+		Optional<Usuario> obj =  repository.findByEmail(nomeUser);
+		return obj.get();
+	}
+	
+	public Usuario findByNomeUsuario(String nomeUser) {
+		
+		System.out.println(nomeUser);
+		Optional<Usuario> obj =  repository.findByNome(nomeUser);
 		return obj.get();
 	}
 	

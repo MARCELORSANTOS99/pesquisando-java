@@ -2,27 +2,18 @@ package com.marcelo.pesquisando.entities;
 
 public class GerenteApuracao {
 	
-	String uid;
 	String nome;
 	String email;
 	Integer totalPesquisaFeitasUser;
 	
 	
-	public GerenteApuracao(String uid, String nome, String email, Integer totalPesquisaFeitasUser) {
+	public GerenteApuracao(String nome, String email, Integer totalPesquisaFeitasUser) {
 		super();
-		this.uid = uid;
 		this.nome = nome;
 		this.email = email;
 		this.totalPesquisaFeitasUser = totalPesquisaFeitasUser;
 	}
 
-	
-	public String getUid() {
-		return uid;
-	}
-	public void setUid(String uid) {
-		this.uid = uid;
-	}
 	public String getNome() {
 		return nome;
 	}

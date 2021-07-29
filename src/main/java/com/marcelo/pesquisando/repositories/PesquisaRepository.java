@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.marcelo.pesquisando.entities.Pesquisa;
+import com.marcelo.pesquisando.entities.User;
 
 public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
 
@@ -41,6 +42,18 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
 	
 	@Query(value = "SELECT respostaDissertiva FROM Pesquisa where pergunta = ?1 GROUP BY respostaDissertiva")
 	List<String> agruparPorDissertativa(String pergunta);
+	
+	@Query(value = "SELECT entrevistadoGenero FROM Pesquisa where idCidade = ?1 GROUP BY entrevistadoGenero")
+	List<String> agruparPorGenero(String idCidade);
+	
+	@Query(value = "SELECT entrevistadoFaixaIdade FROM Pesquisa where idCidade = ?1 GROUP BY entrevistadoFaixaIdade")
+	List<String> agruparPorIdade(String idCidade);
+	
+	@Query(value = "SELECT entrevistadoReligiao FROM Pesquisa where idCidade = ?1 GROUP BY entrevistadoReligiao")
+	List<String> agruparPorReligiao(String idCidade);
+	
+	@Query(value = "SELECT entrevistadoEscolaridade FROM Pesquisa where idCidade = ?1 GROUP BY entrevistadoEscolaridade")
+	List<String> agruparPorEscolaridade(String idCidade);
 
 	
 	@Query(value = "SELECT COUNT(p) FROM Pesquisa as p where p.pergunta = ?1 AND p.entrevistadoGenero = ?2")
@@ -49,6 +62,9 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
 	
 	@Query(value = "SELECT pergunta,resposta, COUNT(resposta) FROM Pesquisa GROUP BY resposta,pergunta ORDER BY pergunta ")
 	public List<String> resumoGrouByPergunta();
+	
+	@Query(value = "SELECT codigo,latitude,longitude,userEmail,entrevistadoNome FROM Pesquisa GROUP BY codigo,latitude,longitude,userEmail,entrevistadoNome")
+	public List<String> latLong(String idCidade);
 
 	
 	@Query(value = "SELECT COUNT(pergunta) FROM Pesquisa as p where p.pergunta = ?1")
@@ -117,8 +133,23 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
 	
 	//@Query(value = "SELECT p.codigo, p.usuarioApp COUNT (usuarioApp) FROM Pesquisa as p where p.usuarioApp = ?1 GROUP BY codigo", nativeQuery=true)
     //@Query("SELECT u.serverName,count(u) as controlRunCount from RunList u where u.controlRunDate < :lastUploadDate group by u.serverName")
-    @Query("SELECT u.codigo,count(u) as usuarioApp from Pesquisa u where u.usuarioApp = ?1 and u.idCidade = ?2 group by u.codigo")
-	public List<Object[]> totalPesquisaPorUsuario(String usuarioApp,String idCidade);
+    @Query("SELECT u.codigo,count(u) as userEmail from Pesquisa u where u.userEmail = ?1 and u.idCidade = ?2 group by u.codigo")
+	public List<Object[]> totalPesquisaPorUsuario(String username,String idCidade);
+	
+    @Query("SELECT u.codigo,count(u) as userEmail from Pesquisa u where u.userEmail = ?1 and u.idCidade = ?2 and u.entrevistadoGenero = ?3 group by u.codigo")
+	public List<Object[]> totalPesquisaPorUsuarioGenero(String username,String idCidade, String genero);
+	
+    @Query("SELECT u.codigo,count(u) as userEmail from Pesquisa u where u.userEmail = ?1 and u.idCidade = ?2 and u.entrevistadoFaixaIdade = ?3 group by u.codigo")
+	public List<Object[]> totalPesquisaPorUsuarioIdade(String username,String idCidade, String idade);
+	
+    @Query("SELECT u.codigo,count(u) as userEmail from Pesquisa u where u.userEmail = ?1 and u.idCidade = ?2 and u.entrevistadoReligiao = ?3 group by u.codigo")
+	public List<Object[]> totalPesquisaPorUsuarioReligiao(String username,String idCidade, String idade);
+	
+    @Query("SELECT u.codigo,count(u) as userEmail from Pesquisa u where u.userEmail = ?1 and u.idCidade = ?2 and u.entrevistadoEscolaridade = ?3 group by u.codigo")
+	public List<Object[]> totalPesquisaPorUsuarioEscolaridade(String username,String idCidade, String idade);
+	
+	@Query("SELECT u.codigo,count(u) as userEmail from Pesquisa u where u.userEmail = ?1 and u.idCidade = ?2 and u.entrevistadoBairro = ?3 group by u.codigo")
+	public List<Object[]> totalPesquisaPorUsuarioBairro(String username,String idCidade, String idade);
     
 
     @Transactional
@@ -135,6 +166,7 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
  	@Modifying
     @Query("UPDATE Pesquisa c SET c.respostaDissertiva = :entrevistadoEspontaneaNew WHERE c.idCidade = :id AND c.respostaDissertiva = :entrevistadoEspontaneaOld ")
     int updateAllEspontanea(@Param("id") String id, @Param("entrevistadoEspontaneaNew") String entrevistadoEspontaneaNew, @Param("entrevistadoEspontaneaOld") String entrevistadoEspontaneaOld);
+
     
     
 

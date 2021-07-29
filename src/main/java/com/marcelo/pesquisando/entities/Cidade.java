@@ -49,6 +49,12 @@ private static final long serialVersionUID = 1L;
 	}
 	
 	
+	public Contrato getContract() {
+		return contract;
+	}
+	public void setContract(Contrato contract) {
+		this.contract = contract;
+	}
 	public List<Pergunta> getPerguntas() {
 		return perguntas;
 	}

@@ -2,14 +2,12 @@ package com.marcelo.pesquisando.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -49,7 +47,13 @@ public class Pesquisa implements Serializable{
 	private String pergunta;
 	private String resposta;
 	private String respostaDissertiva;
-	private String usuarioApp;
+	private double latitude;
+	private double longitude;
+	//private String usuarioApp;
+	
+
+	private String userEmail;
+	
 	
 	
 	public Pesquisa() {}
@@ -58,7 +62,7 @@ public class Pesquisa implements Serializable{
 	public Pesquisa(Long id, Instant moment, String codigo, String idCidade,String idContrato, String cidade, String entrevistadoNome,
 			String entrevistadoBairro, String entrevistadoRua, String entrevistadoNumero, String entrevistadoReligiao,
 			String entrevistadoFaixaIdade, String entrevistadoGenero, String entrevistadoEscolaridade, String pergunta,
-			String resposta, String respostaDissertiva, String usuarioApp) {
+			String resposta, String respostaDissertiva, double latitude,double longitude) {
 		super();
 		this.id = id;
 		this.moment = moment;
@@ -77,23 +81,20 @@ public class Pesquisa implements Serializable{
 		this.pergunta = pergunta;
 		this.resposta = resposta;
 		this.respostaDissertiva = respostaDissertiva;
-		this.usuarioApp = usuarioApp;
+		this.latitude = latitude ;
+		this.longitude = longitude;
 	}
 
 
 
-
-
-	public String getUsuarioApp() {
-		return usuarioApp;
+	public String getUserEmail() {
+		return userEmail;
 	}
 
 
-
-	public void setUsuarioApp(String usuarioApp) {
-		this.usuarioApp = usuarioApp;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
-
 
 
 	public Long getId() {
@@ -224,6 +225,25 @@ public class Pesquisa implements Serializable{
 		this.respostaDissertiva = respostaDissertiva;
 	}
 
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
 
 
 	@Override
