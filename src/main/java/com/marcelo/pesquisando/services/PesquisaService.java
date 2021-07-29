@@ -2,6 +2,7 @@ package com.marcelo.pesquisando.services;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,10 +12,12 @@ import org.springframework.stereotype.Service;
 
 import com.marcelo.pesquisando.entities.Apuracao;
 import com.marcelo.pesquisando.entities.Cidade;
+import com.marcelo.pesquisando.entities.LatLongPesquisa;
 import com.marcelo.pesquisando.entities.Pergunta;
 import com.marcelo.pesquisando.entities.Pesquisa;
 import com.marcelo.pesquisando.entities.Resposta;
 import com.marcelo.pesquisando.entities.User;
+import com.marcelo.pesquisando.entities.Usuario;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoEscolaridade;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoFaixaIdade;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoGenero;
@@ -31,6 +34,9 @@ public class PesquisaService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private UsuarioService usuarioService;
 	
 	@Autowired
 	private GerenteRepository repositoryGerente;
@@ -68,8 +74,9 @@ public class PesquisaService {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		User user = userRepository.findByUsername(username);
 		
+		Usuario usuario = usuarioService.findByNome(user.getUsername());
 		
-		obj.setUserEmail(user.getUsername());
+		obj.setUserEmail(usuario.getNome());
 		
 		System.out.println(obj);
 		
@@ -188,6 +195,31 @@ public class PesquisaService {
 		
 		
 		return listaApuracao;
+	}
+	
+	
+	public List<LatLongPesquisa> latLong(String idCidade){
+	
+		List<LatLongPesquisa> latLongList = new ArrayList<>(); 
+			
+		List<String> lista = repository.latLong(idCidade);
+		
+		
+		for (String p : lista) {
+			
+			System.out.println(p);
+
+			
+			String[] textoSeparado = p.split(",");
+			System.out.println(Arrays.toString(textoSeparado));
+			
+			LatLongPesquisa latLong = new LatLongPesquisa(textoSeparado[0],textoSeparado[1],textoSeparado[2], textoSeparado[3],textoSeparado[4]);
+			latLongList.add(latLong);
+			
+		}
+		
+		
+		return latLongList;
 	}
 
 	

@@ -47,6 +47,8 @@ public class Pesquisa implements Serializable{
 	private String pergunta;
 	private String resposta;
 	private String respostaDissertiva;
+	private double latitude;
+	private double longitude;
 	//private String usuarioApp;
 	
 
@@ -60,7 +62,7 @@ public class Pesquisa implements Serializable{
 	public Pesquisa(Long id, Instant moment, String codigo, String idCidade,String idContrato, String cidade, String entrevistadoNome,
 			String entrevistadoBairro, String entrevistadoRua, String entrevistadoNumero, String entrevistadoReligiao,
 			String entrevistadoFaixaIdade, String entrevistadoGenero, String entrevistadoEscolaridade, String pergunta,
-			String resposta, String respostaDissertiva) {
+			String resposta, String respostaDissertiva, double latitude,double longitude) {
 		super();
 		this.id = id;
 		this.moment = moment;
@@ -79,6 +81,8 @@ public class Pesquisa implements Serializable{
 		this.pergunta = pergunta;
 		this.resposta = resposta;
 		this.respostaDissertiva = respostaDissertiva;
+		this.latitude = latitude ;
+		this.longitude = longitude;
 	}
 
 
@@ -221,6 +225,25 @@ public class Pesquisa implements Serializable{
 		this.respostaDissertiva = respostaDissertiva;
 	}
 
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
 
 
 	@Override

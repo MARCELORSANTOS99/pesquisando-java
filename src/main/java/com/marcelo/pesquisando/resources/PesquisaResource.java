@@ -29,6 +29,7 @@ import org.supercsv.prefs.CsvPreference;
 
 import com.marcelo.pesquisando.entities.Pesquisa;
 import com.marcelo.pesquisando.entities.Apuracao;
+import com.marcelo.pesquisando.entities.LatLongPesquisa;
 import com.marcelo.pesquisando.services.PesquisaService;
 
 
@@ -61,6 +62,14 @@ public class PesquisaResource {
 	public ResponseEntity<List<String>> findAllBairrosByIdCidade(@PathVariable String id){
 		
 		List<String> list = service.findAllBairrosByCidade(id);
+		
+		 return ResponseEntity.ok().body(list);
+	}
+	
+	@GetMapping(value = "/latlong/{id}")
+	public ResponseEntity<List<LatLongPesquisa>> findAllLatLongByIdCidade(@PathVariable String id){
+		
+		List<LatLongPesquisa> list = service.latLong(id);
 		
 		 return ResponseEntity.ok().body(list);
 	}

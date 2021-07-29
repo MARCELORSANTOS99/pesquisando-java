@@ -35,6 +35,13 @@ public class UsuarioService {
 		return obj.get();
 	}
 	
+	public Usuario findByNomeUsuario(String nomeUser) {
+		
+		System.out.println(nomeUser);
+		Optional<Usuario> obj =  repository.findByNome(nomeUser);
+		return obj.get();
+	}
+	
 	
 	public Usuario insert(Usuario obj) {
 		System.out.println(obj.getNome());

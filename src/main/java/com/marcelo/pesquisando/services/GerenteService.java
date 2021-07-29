@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.marcelo.pesquisando.entities.Gerente;
 import com.marcelo.pesquisando.entities.GerenteApuracao;
+import com.marcelo.pesquisando.entities.GerenteApuracaoTipo;
 import com.marcelo.pesquisando.entities.User;
 import com.marcelo.pesquisando.entities.Usuario;
 import com.marcelo.pesquisando.repositories.GerenteRepository;
@@ -64,6 +65,131 @@ public class GerenteService {
 				GerenteApuracao gerenteApuracao = new GerenteApuracao(
 						usuario.getNome(),
 						usuario.getEmail(),
+						results.size()
+					);
+				listGerenteApuracao.add(gerenteApuracao);
+			
+			 
+		}
+		
+		return listGerenteApuracao;
+	}
+	
+	public List<GerenteApuracaoTipo> totalPesquisasFeitasGenero(String idCidade, String usuario) {
+		
+		List<String> generos = pesquisaRepository.agruparPorGenero(idCidade);	
+		List<GerenteApuracaoTipo> listGerenteApuracao = new ArrayList<GerenteApuracaoTipo>();
+		
+		
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		User user = userRepository.findByUsername(username);
+		
+		for (String genero : generos) {
+			
+			List<Object[]> results = pesquisaRepository.totalPesquisaPorUsuarioGenero(usuario, idCidade,genero);
+						
+			GerenteApuracaoTipo gerenteApuracao = new GerenteApuracaoTipo(
+						genero,
+						results.size()
+					);
+				listGerenteApuracao.add(gerenteApuracao);
+			
+			 
+		}
+		
+		return listGerenteApuracao;
+	}
+	
+	public List<GerenteApuracaoTipo> totalPesquisasFeitasIdade(String idCidade, String usuario) {
+		
+		List<String> idades = pesquisaRepository.agruparPorIdade(idCidade);	
+		List<GerenteApuracaoTipo> listGerenteApuracao = new ArrayList<GerenteApuracaoTipo>();
+		
+		
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		User user = userRepository.findByUsername(username);
+		
+		for (String idade : idades) {
+			
+			List<Object[]> results = pesquisaRepository.totalPesquisaPorUsuarioIdade(usuario, idCidade,idade);
+						
+			GerenteApuracaoTipo gerenteApuracao = new GerenteApuracaoTipo(
+						idade,
+						results.size()
+					);
+				listGerenteApuracao.add(gerenteApuracao);
+			
+			 
+		}
+		
+		return listGerenteApuracao;
+	}
+	
+	public List<GerenteApuracaoTipo> totalPesquisasFeitasReligiao(String idCidade, String usuario) {
+		
+		List<String> relgioes = pesquisaRepository.agruparPorReligiao(idCidade);	
+		List<GerenteApuracaoTipo> listGerenteApuracao = new ArrayList<GerenteApuracaoTipo>();
+		
+		
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		User user = userRepository.findByUsername(username);
+		
+		for (String relgiao : relgioes) {
+			
+			List<Object[]> results = pesquisaRepository.totalPesquisaPorUsuarioReligiao(usuario, idCidade,relgiao);
+						
+			GerenteApuracaoTipo gerenteApuracao = new GerenteApuracaoTipo(
+						relgiao,
+						results.size()
+					);
+				listGerenteApuracao.add(gerenteApuracao);
+			
+			 
+		}
+		
+		return listGerenteApuracao;
+	}
+	
+	public List<GerenteApuracaoTipo> totalPesquisasFeitasEscolaridade(String idCidade, String usuario) {
+		
+		List<String> escolaridades = pesquisaRepository.agruparPorEscolaridade(idCidade);	
+		List<GerenteApuracaoTipo> listGerenteApuracao = new ArrayList<GerenteApuracaoTipo>();
+		
+		
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		User user = userRepository.findByUsername(username);
+		
+		for (String escolaridade : escolaridades) {
+			
+			List<Object[]> results = pesquisaRepository.totalPesquisaPorUsuarioEscolaridade(usuario, idCidade,escolaridade);
+						
+			GerenteApuracaoTipo gerenteApuracao = new GerenteApuracaoTipo(
+						escolaridade,
+						results.size()
+					);
+				listGerenteApuracao.add(gerenteApuracao);
+			
+			 
+		}
+		
+		return listGerenteApuracao;
+	}
+	
+	public List<GerenteApuracaoTipo> totalPesquisasFeitasBairro(String idCidade, String usuario) {
+		
+		List<String> bairros = pesquisaRepository.agruparPorCidadeBairro(idCidade);	
+		List<GerenteApuracaoTipo> listGerenteApuracao = new ArrayList<GerenteApuracaoTipo>();
+		
+		
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		User user = userRepository.findByUsername(username);
+		
+		for (String bairro : bairros) {
+			
+			List<Object[]> results = pesquisaRepository.totalPesquisaPorUsuarioBairro(usuario, idCidade,bairro);
+						
+			GerenteApuracaoTipo gerenteApuracao = new GerenteApuracaoTipo(
+						bairro,
 						results.size()
 					);
 				listGerenteApuracao.add(gerenteApuracao);
