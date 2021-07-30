@@ -55,7 +55,7 @@ public class UsuarioResource {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		User user = userRepository.findByUsername(username);
 		
-		
+		System.out.println("---");
 		System.out.println(user.getUsername());
 		Usuario obj = service.findByNome(user.getUsername());
 	
