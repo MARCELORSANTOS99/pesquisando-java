@@ -43,18 +43,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 	    auth.userDetailsService(userDetailsService()).passwordEncoder(encoder);
 		
-		UserDetails user =
+		/*
+	    UserDetails user =
 				 User.builder()
-					.username("marcelo.r.santos99@hotmail.com")
+					.username("marcelo")
 					.password(encoder.encode("987654"))
 					.roles("ADM")
 					.build();
 		
-		
+		*/
 		auth.jdbcAuthentication()
 		.dataSource(dataSource)
-		.passwordEncoder(encoder)
-		.withUser(user);
+		.passwordEncoder(encoder);
+		//.withUser(user);
 		
 
 	}
