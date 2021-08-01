@@ -63,7 +63,7 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
 	@Query(value = "SELECT pergunta,resposta, COUNT(resposta) FROM Pesquisa GROUP BY resposta,pergunta ORDER BY pergunta ")
 	public List<String> resumoGrouByPergunta();
 	
-	@Query(value = "SELECT codigo,latitude,longitude,userEmail,entrevistadoNome FROM Pesquisa GROUP BY codigo,latitude,longitude,userEmail,entrevistadoNome")
+	@Query(value = "SELECT codigo,latitude,longitude,userEmail,entrevistadoNome FROM Pesquisa as p where p.idCidade = ?1 GROUP BY codigo,latitude,longitude,userEmail,entrevistadoNome")
 	public List<String> latLong(String idCidade);
 
 	
