@@ -76,7 +76,7 @@ public class PesquisaService {
 		
 		Usuario usuario = usuarioService.findByNome(user.getUsername());
 		
-		obj.setUserEmail(usuario.getNome());
+		obj.setUserEmail(usuario.getEmail());
 		
 		System.out.println(obj);
 		
