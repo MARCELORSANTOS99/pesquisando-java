@@ -14,15 +14,23 @@ public class PerguntaApuracao {
 	private List<Integer> totalRespostasDissertativa;
 	private List<String> respostasBairro;
 	private List<Integer> totalRespostasBairro;
+	private List<String> respostasValida;
+	private List<Integer> totalRespostasValida;
+	private Integer totalPorPerguntaRespostaValida;
+	
 	
 	public String getPergunta() {
 		return pergunta;
 	}
 	
 
-	public PerguntaApuracao(String pergunta, long idPergunta, String respEspontanea, List<String> respostas, List<Integer> totalPorResposta,
-			Integer totalPorPergunta, List<String> respostasDissertativa, List<Integer> totalRespostasDissertativa,
-			List<String> respostasBairro, List<Integer> totalRespostasBairro) {
+
+
+
+	public PerguntaApuracao(String pergunta, long idPergunta, String respEspontanea, List<String> respostas,
+			List<Integer> totalPorResposta, Integer totalPorPergunta, List<String> respostasDissertativa,
+			List<Integer> totalRespostasDissertativa, List<String> respostasBairro, List<Integer> totalRespostasBairro,
+			List<String> respostasValida, List<Integer> totalRespostasValida, Integer totalPorPerguntaRespostaValida) {
 		super();
 		this.pergunta = pergunta;
 		this.idPergunta = idPergunta;
@@ -34,7 +42,13 @@ public class PerguntaApuracao {
 		this.totalRespostasDissertativa = totalRespostasDissertativa;
 		this.respostasBairro = respostasBairro;
 		this.totalRespostasBairro = totalRespostasBairro;
+		this.respostasValida = respostasValida;
+		this.totalRespostasValida = totalRespostasValida;
+		this.totalPorPerguntaRespostaValida = totalPorPerguntaRespostaValida;
 	}
+
+
+
 
 
 	public Integer getTotalPorPergunta() {
@@ -119,6 +133,54 @@ public class PerguntaApuracao {
 
 	public void setTotalRespostasBairro(List<Integer> totalRespostasBairro) {
 		this.totalRespostasBairro = totalRespostasBairro;
+	}
+
+
+
+
+
+	public List<String> getRespostasValida() {
+		return respostasValida;
+	}
+
+
+
+
+
+	public void setRespostasValida(List<String> respostasValida) {
+		this.respostasValida = respostasValida;
+	}
+
+
+
+
+
+	public List<Integer> getTotalRespostasValida() {
+		return totalRespostasValida;
+	}
+
+
+
+
+
+	public void setTotalRespostasValida(List<Integer> totalRespostasValida) {
+		this.totalRespostasValida = totalRespostasValida;
+	}
+
+
+
+
+
+	public Integer getTotalPorPerguntaRespostaValida() {
+		return totalPorPerguntaRespostaValida;
+	}
+
+
+
+
+
+	public void setTotalPorPerguntaRespostaValida(Integer totalPorPerguntaRespostaValida) {
+		this.totalPorPerguntaRespostaValida = totalPorPerguntaRespostaValida;
 	}
 	
 	

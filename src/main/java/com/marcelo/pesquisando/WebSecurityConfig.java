@@ -46,12 +46,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		/*
 	    UserDetails user =
 				 User.builder()
-					.username("marcelo")
-					.password(encoder.encode("987654"))
+					.username("deivis.gabinete@gmail.com")
+					.password(encoder.encode("852963"))
 					.roles("ADM")
 					.build();
-		
 		*/
+		
 		auth.jdbcAuthentication()
 		.dataSource(dataSource)
 		.passwordEncoder(encoder);

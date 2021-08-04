@@ -122,7 +122,14 @@ public class PerguntaResource {
 			System.out.println(obj.getRespostasWeb());
 			System.out.println(totalPorResposta);
 			
-			PerguntaApuracao pergutaApurada = new PerguntaApuracao(obj.getQuestion(),obj.getId(),obj.getRespostaEspontanea(), obj.getRespostasWeb(), totalPorResposta, totalPorPergunta,respostasDissertativas,totalRespostasDissertativas,respostasPorBairro,totalRespostasPorBairro);
+			List<String> respostasPorPerguntaValida = pesquisaService.listaRespostaValida(obj);
+			List<Integer> totalPorRespostaValida = pesquisaService.resumoApurationAppPerguntaPorRespostaValida(obj);
+			Integer totalPorPerguntaValida = pesquisaService.resumoApurationAppTotalPorPerguntaValida(obj);
+			
+			PerguntaApuracao pergutaApurada = new PerguntaApuracao(obj.getQuestion(),obj.getId(),obj.getRespostaEspontanea(), obj.getRespostasWeb(), totalPorResposta, totalPorPergunta,respostasDissertativas,totalRespostasDissertativas,respostasPorBairro,totalRespostasPorBairro,
+					respostasPorPerguntaValida,
+					totalPorRespostaValida,
+					totalPorPerguntaValida);
 			pergutaApuradaList.add(pergutaApurada);
             
         }
@@ -149,10 +156,29 @@ public class PerguntaResource {
 		List<Integer> totalPorResposta = pesquisaService.resumoApurationAppPerguntaPorResposta(obj);
 		Integer totalPorPergunta = pesquisaService.resumoApurationAppTotalPorPergunta(obj);
 		
+		List<String> respostasPorPerguntaValida = pesquisaService.listaRespostaValida(obj);
+		List<Integer> totalPorRespostaValida = pesquisaService.resumoApurationAppPerguntaPorRespostaValida(obj);
+		Integer totalPorPerguntaValida = pesquisaService.resumoApurationAppTotalPorPerguntaValida(obj);		
+		
 		System.out.println(obj.getRespostasWeb());
 		System.out.println(totalPorResposta);
 		
-		PerguntaApuracao pergutaApurada = new PerguntaApuracao(obj.getQuestion(),idPergunta,obj.getRespostaEspontanea(), obj.getRespostasWeb(), totalPorResposta, totalPorPergunta,respostasDissertativas,totalRespostasDissertativas,respostasPorBairro,totalRespostasPorBairro);
+		PerguntaApuracao pergutaApurada = new PerguntaApuracao(
+				obj.getQuestion(),
+				idPergunta,
+				obj.getRespostaEspontanea(),
+				obj.getRespostasWeb(),
+				totalPorResposta,
+				totalPorPergunta,
+				respostasDissertativas,
+				totalRespostasDissertativas,
+				respostasPorBairro,
+				totalRespostasPorBairro,
+				respostasPorPerguntaValida,
+				totalPorRespostaValida,
+				totalPorPerguntaValida
+				
+				);
 				
 		return ResponseEntity.ok().body(pergutaApurada);
 	}

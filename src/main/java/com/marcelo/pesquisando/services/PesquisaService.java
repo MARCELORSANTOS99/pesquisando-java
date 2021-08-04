@@ -80,6 +80,15 @@ public class PesquisaService {
 		
 		System.out.println(obj);
 		
+		if(obj.getResposta().toUpperCase().contains("BRANCO") || obj.getResposta().toUpperCase().contains("NULO") ){
+			
+			obj.setRespostaValida(false);
+			
+		}else {
+			
+			obj.setRespostaValida(true);
+		}
+		
 		return repository.save(obj);
 	}
 	
@@ -204,7 +213,20 @@ public class PesquisaService {
 			
 		List<String> lista = repository.latLong(idCidade);
 		
+				
 		
+		for(var i=0;i < lista.size();i++) {
+			
+			String[] textoSeparado = lista.get(i) .split(",");
+			Usuario usuario = usuarioService.findByNome(textoSeparado[3]);
+			
+			LatLongPesquisa latLong = new LatLongPesquisa(textoSeparado[0],textoSeparado[1],textoSeparado[2], textoSeparado[3],textoSeparado[4],usuario.getId());
+			latLongList.add(latLong);
+			
+		}
+		
+		
+		/*
 		for (String p : lista) {
 			
 			System.out.println(p);
@@ -217,6 +239,7 @@ public class PesquisaService {
 			latLongList.add(latLong);
 			
 		}
+		*/
 		
 		
 		return latLongList;
@@ -233,9 +256,57 @@ public class PesquisaService {
 		return totalPorResposta;
 	}
 	
+	public List<Integer> resumoApurationAppPerguntaPorRespostaValida(Pergunta obj) {
+		
+		List<Integer> totalPorResposta = new ArrayList<>();
+		
+		List<String> respostasValida = new ArrayList<>();
+		
+		for(var i=0;i<obj.getRespostasWeb().size();i++) {
+			
+			String respostaCaps = obj.getRespostasWeb().get(i).toUpperCase();
+			
+			if(!respostaCaps.contains("BRANCO") || !respostaCaps.contains("NULO")) {
+				respostasValida.add(obj.getRespostasWeb().get(i));
+			}
+			
+		}
+
+		respostasValida.forEach(resp->totalPorResposta.add(repository.resumoApurationPorRespostaDaPergunta(obj.getQuestion(), resp)));
+	
+		
+		return totalPorResposta;
+	}
+	
+	public List<String> listaRespostaValida(Pergunta obj) {
+		
+		List<String> respostasValida = new ArrayList<>();
+		
+		for(var i=0;i<obj.getRespostasWeb().size();i++) {
+			
+			String respostaCaps = obj.getRespostasWeb().get(i).toUpperCase();
+			
+			if(!respostaCaps.contains("BRANCO") || !respostaCaps.contains("NULO")) {
+				System.out.println(obj.getRespostasWeb().get(i));
+				respostasValida.add(obj.getRespostasWeb().get(i));
+			}
+			
+		}
+
+	
+		return respostasValida;
+	}
+	
 	public Integer resumoApurationAppTotalPorPergunta(Pergunta obj) {
 		
 		Integer total = repository.resumoApurationPorRespostaDaPergunta(obj.getQuestion());
+		
+		return total;
+	}
+	
+	public Integer resumoApurationAppTotalPorPerguntaValida(Pergunta obj) {
+		
+		Integer total = repository.resumoApurationPorRespostaValidaDaPergunta(obj.getQuestion());
 		
 		return total;
 	}

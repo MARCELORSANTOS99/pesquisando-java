@@ -79,13 +79,15 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
 	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.pergunta = ?1")
 	public Integer resumoApurationPorRespostaDaPergunta(String question);
 	
+	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.pergunta = ?1 AND p.respostaValida = true")
+	public Integer resumoApurationPorRespostaValidaDaPergunta(String question);
+		
 	@Query(value = "SELECT COUNT (respostaDissertiva) FROM Pesquisa as p where p.pergunta = ?1 AND respostaDissertiva = ?2")
 	public Integer resumoApurationPorDissertativaDaPergunta(String question, String dissertativa);
 	
 	@Query(value = "SELECT COUNT (entrevistadoBairro) FROM Pesquisa as p where p.pergunta = ?1 AND entrevistadoBairro = ?2")
 	public Integer resumoApurationPorBairroDaPergunta(String question, String bairro);
-	
-	
+		
 	
 	//por genero
 	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.pergunta = ?1 AND p.resposta = ?2 AND p.entrevistadoGenero = ?3")

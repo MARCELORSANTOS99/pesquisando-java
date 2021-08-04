@@ -7,15 +7,17 @@ public class LatLongPesquisa {
 	String longitude;
 	String usuario;
 	String entrevistado;
+	Long numeroCor;
 	
 	
-	public LatLongPesquisa(String codigo,String latitude, String longitude, String usuario, String entrevistado) {
+	public LatLongPesquisa(String codigo,String latitude, String longitude, String usuario, String entrevistado, Long numeroCor) {
 		super();
 		this.codigo = codigo;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.usuario = usuario;
 		this.entrevistado = entrevistado;
+		this.numeroCor = numeroCor;
 	}
 	
 		
@@ -51,6 +53,15 @@ public class LatLongPesquisa {
 	public void setEntrevistado(String entrevistado) {
 		this.entrevistado = entrevistado;
 	}
+
+	public Long getNumeroCor() {
+		return numeroCor;
+	}
+
+	public void setNumeroCor(Long numeroCor) {
+		this.numeroCor = numeroCor;
+	}
+	
 	
 	
 		
