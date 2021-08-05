@@ -286,7 +286,7 @@ public class PesquisaService {
 			
 			String respostaCaps = obj.getRespostasWeb().get(i).toUpperCase();
 			
-			if(!respostaCaps.contains("BRANCO") || !respostaCaps.contains("NULO")) {
+			if(!respostaCaps.contains("BRANCO") || !respostaCaps.contains("NULO") || !respostaCaps.contains("NÃO SABE") || !respostaCaps.contains("NÃO RESPONDEU")) {
 				System.out.println(obj.getRespostasWeb().get(i));
 				respostasValida.add(obj.getRespostasWeb().get(i));
 			}
