@@ -80,7 +80,8 @@ public class PesquisaService {
 		
 		System.out.println(obj);
 		
-		if(obj.getResposta().toUpperCase().contains("BRANCO") || obj.getResposta().toUpperCase().contains("NULO") ){
+		//respostaCaps.contains("BRANCO") || respostaCaps.contains("NÃO SABE") || respostaCaps.contains("NULO") || respostaCaps.contains("NÃO RESPONDEU")
+		if(obj.getResposta().toUpperCase().contains("BRANCO") || obj.getResposta().toUpperCase().contains("NULO") || obj.getResposta().toUpperCase().contains("NÃO SABE") || obj.getResposta().toUpperCase().contains("NÃO RESPONDEU") ){
 			
 			obj.setRespostaValida(false);
 			
@@ -282,18 +283,23 @@ public class PesquisaService {
 		
 		List<String> respostasValida = new ArrayList<>();
 		
+		
+		
 		for(var i=0;i<obj.getRespostasWeb().size();i++) {
 			
 			String respostaCaps = obj.getRespostasWeb().get(i).toUpperCase();
+			System.out.println("RESPOSTA PARA VALIDAR " + respostaCaps);
 			
-			if(!respostaCaps.contains("BRANCO") || !respostaCaps.contains("NULO") || !respostaCaps.contains("NÃO SABE") || !respostaCaps.contains("NÃO RESPONDEU")) {
-				System.out.println(obj.getRespostasWeb().get(i));
+			//|| !respostaCaps.contains("NÃO SABE") || !respostaCaps.contains("NÃO RESPONDEU") || !respostaCaps.contains("NULO")
+			if(respostaCaps.contains("BRANCO") || respostaCaps.contains("NÃO SABE") || respostaCaps.contains("NULO") || respostaCaps.contains("NÃO RESPONDEU") ) {
+			
+				System.out.println("Resposta não é válida: " + respostaCaps);	
+			}else {
 				respostasValida.add(obj.getRespostasWeb().get(i));
 			}
 			
 		}
 
-	
 		return respostasValida;
 	}
 	
