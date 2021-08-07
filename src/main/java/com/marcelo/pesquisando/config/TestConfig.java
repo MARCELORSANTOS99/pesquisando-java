@@ -55,7 +55,7 @@ public class TestConfig implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		Contrato contrato = new Contrato();
-		Usuario funcionario = new Usuario(1,"debora","debora@htoamil.com","teste",true,contrato);
+		Usuario funcionario = new Usuario(1,"debora","debora@htoamil.com","teste",true,contrato,1);
 		Cidade city = new Cidade();
 		city.setNome("Rio");
 		

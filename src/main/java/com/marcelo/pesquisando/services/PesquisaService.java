@@ -221,7 +221,7 @@ public class PesquisaService {
 			String[] textoSeparado = lista.get(i) .split(",");
 			Usuario usuario = usuarioService.findByNome(textoSeparado[3]);
 			
-			LatLongPesquisa latLong = new LatLongPesquisa(textoSeparado[0],textoSeparado[1],textoSeparado[2], textoSeparado[3],textoSeparado[4],usuario.getId());
+			LatLongPesquisa latLong = new LatLongPesquisa(textoSeparado[0],textoSeparado[1],textoSeparado[2], textoSeparado[3],textoSeparado[4],usuario.getCorMarker());
 			latLongList.add(latLong);
 			
 		}

@@ -28,6 +28,7 @@ public class Usuario implements Serializable{
 	private String email;
 	private String uid;
 	private Boolean gerente;
+	private Integer corMarker;
 	
 	@ManyToOne
 	@JoinColumn(name="contract_id")
@@ -42,7 +43,7 @@ public class Usuario implements Serializable{
 
 
 
-	public Usuario(long id, String nome, String email, String uid, Boolean gerente, Contrato contract) {
+	public Usuario(long id, String nome, String email, String uid, Boolean gerente, Contrato contract, Integer corMarker) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -50,6 +51,7 @@ public class Usuario implements Serializable{
 		this.uid = uid;
 		this.gerente = gerente;
 		this.contract = contract;
+		this.corMarker = corMarker;
 	}
 
 
@@ -111,6 +113,16 @@ public class Usuario implements Serializable{
 
 	public void setUid(String uid) {
 		this.uid = uid;
+	}
+	
+	
+	public Integer getCorMarker() {
+		return corMarker;
+	}
+
+
+	public void setCorMarker(Integer corMarker) {
+		this.corMarker = corMarker;
 	}
 
 
