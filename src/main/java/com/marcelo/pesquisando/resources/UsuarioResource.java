@@ -58,6 +58,7 @@ public class UsuarioResource {
 		System.out.println("---");
 		System.out.println(user.getUsername());
 		Usuario obj = service.findByNome(user.getUsername());
+		obj = service.upDateLastLogin(obj.getId(), obj);
 	
 		
 		return ResponseEntity.ok().body(obj);

@@ -1,6 +1,7 @@
 package com.marcelo.pesquisando.entities;
 
 import java.io.Serializable;
+import java.time.Instant;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,6 +30,8 @@ public class Usuario implements Serializable{
 	private String uid;
 	private Boolean gerente;
 	private Integer corMarker;
+	private Instant lastLogin;
+
 	
 	@ManyToOne
 	@JoinColumn(name="contract_id")
@@ -43,7 +46,7 @@ public class Usuario implements Serializable{
 
 
 
-	public Usuario(long id, String nome, String email, String uid, Boolean gerente, Contrato contract, Integer corMarker) {
+	public Usuario(long id, String nome, String email, String uid, Boolean gerente, Contrato contract, Integer corMarker,Instant lastLogin) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -52,6 +55,7 @@ public class Usuario implements Serializable{
 		this.gerente = gerente;
 		this.contract = contract;
 		this.corMarker = corMarker;
+		this.lastLogin = lastLogin;
 	}
 
 
@@ -124,6 +128,17 @@ public class Usuario implements Serializable{
 	public void setCorMarker(Integer corMarker) {
 		this.corMarker = corMarker;
 	}
+	
+
+
+	public Instant getLastLogin() {
+		return lastLogin;
+	}
+
+
+	public void setLastLogin(Instant lastLogin) {
+		this.lastLogin = lastLogin;
+	}
 
 
 
@@ -149,6 +164,8 @@ public class Usuario implements Serializable{
 			return false;
 		return true;
 	}
+	
+	
 	
 	
 	

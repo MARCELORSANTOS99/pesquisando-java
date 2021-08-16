@@ -1,5 +1,6 @@
 package com.marcelo.pesquisando.config;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,8 +55,11 @@ public class TestConfig implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
+		Instant moment = Instant.now();
+		
 		Contrato contrato = new Contrato();
-		Usuario funcionario = new Usuario(1,"debora","debora@htoamil.com","teste",true,contrato,1);
+		Usuario funcionario = new Usuario(1,"debora","debora@htoamil.com","teste",true,contrato,1,moment);
+
 		Cidade city = new Cidade();
 		city.setNome("Rio");
 		

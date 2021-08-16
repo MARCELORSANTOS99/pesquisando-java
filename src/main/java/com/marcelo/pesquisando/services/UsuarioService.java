@@ -1,5 +1,6 @@
 package com.marcelo.pesquisando.services;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,11 +61,28 @@ public class UsuarioService {
 		
 		return repository.save(entity);
 	}
+	
+	public Usuario upDateLastLogin(Long id, Usuario obj) {
+		
+    	
+		Usuario entity = repository.getOne(id);
+		updateDataLastLogin(entity);
+		
+		return repository.save(entity);
+	}
 
 	private void updateData(Usuario entity, Usuario obj) {
 		
 		entity.setNome(obj.getNome());;
 	
+		
+	}
+	
+private void updateDataLastLogin(Usuario entity) {
+	
+    	Instant moment = Instant.now();
+	
+		entity.setLastLogin(moment);	
 		
 	}
 
