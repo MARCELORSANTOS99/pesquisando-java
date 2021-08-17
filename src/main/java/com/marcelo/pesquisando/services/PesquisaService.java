@@ -267,7 +267,9 @@ public class PesquisaService {
 			
 			String respostaCaps = obj.getRespostasWeb().get(i).toUpperCase();
 			
-			if(!respostaCaps.contains("BRANCO") || !respostaCaps.contains("NULO")) {
+			if(respostaCaps.contains("BRANCO") || respostaCaps.contains("NÃO SABE") || respostaCaps.contains("NULO") || respostaCaps.contains("NÃO RESPONDEU") ) {
+				System.out.println("Resposta não é válida: " + respostaCaps);
+			}else {
 				respostasValida.add(obj.getRespostasWeb().get(i));
 			}
 			
@@ -292,8 +294,9 @@ public class PesquisaService {
 			
 			//|| !respostaCaps.contains("NÃO SABE") || !respostaCaps.contains("NÃO RESPONDEU") || !respostaCaps.contains("NULO")
 			if(respostaCaps.contains("BRANCO") || respostaCaps.contains("NÃO SABE") || respostaCaps.contains("NULO") || respostaCaps.contains("NÃO RESPONDEU") ) {
-			
+				
 				System.out.println("Resposta não é válida: " + respostaCaps);	
+				
 			}else {
 				respostasValida.add(obj.getRespostasWeb().get(i));
 			}
