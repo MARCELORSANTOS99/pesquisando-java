@@ -315,7 +315,7 @@ public class PesquisaService {
 	
 	public Integer resumoApurationAppTotalPorPerguntaValida(Pergunta obj) {
 		
-		Integer total = repository.resumoApurationPorRespostaValidaDaPergunta(obj.getQuestion());
+		Integer total = repository.resumoApurationPorRespostaValidaDaPergunta(obj.getId());
 		
 		return total;
 	}
@@ -342,7 +342,7 @@ public class PesquisaService {
 	        	enumsLista.add(listaGenero.get(i).toString());
 	        }
 	        
-	        enumsLista.forEach(resp->totalPorRespostaTipo.add(repository.resumoApurationPorRespostaDaPerguntaGenero(obj.getQuestion(), resposta, resp)));
+	        enumsLista.forEach(resp->totalPorRespostaTipo.add(repository.resumoApurationPorRespostaDaPerguntaGenero(obj.getId(), resposta, resp)));
 	        
 			
 			break;
@@ -355,7 +355,7 @@ public class PesquisaService {
 	        	enumsLista.add(listaIdade.get(i).toString());
 
 	        }
-	        enumsLista.forEach(resp->totalPorRespostaTipo.add(repository.resumoApurationPorRespostaDaPerguntaIdade(obj.getQuestion(), resposta, resp)));
+	        enumsLista.forEach(resp->totalPorRespostaTipo.add(repository.resumoApurationPorRespostaDaPerguntaIdade(obj.getId(), resposta, resp)));
 			
 			break;
 		case "religiao":
@@ -366,7 +366,7 @@ public class PesquisaService {
 	        	enumsLista.add(listaReligiao.get(i).toString());
 	        }
 	        
-	        enumsLista.forEach(resp->totalPorRespostaTipo.add(repository.resumoApurationPorRespostaDaPerguntaReligiao(obj.getQuestion(), resposta, resp)));
+	        enumsLista.forEach(resp->totalPorRespostaTipo.add(repository.resumoApurationPorRespostaDaPerguntaReligiao(obj.getId(), resposta, resp)));
 			
 	        break;
 			
@@ -378,7 +378,7 @@ public class PesquisaService {
 	        	enumsLista.add(listaEscola.get(i).toString());
 
 	        }
-	        enumsLista.forEach(resp->totalPorRespostaTipo.add(repository.resumoApurationPorRespostaDaPerguntaEscolaridade(obj.getQuestion(), resposta, resp)));
+	        enumsLista.forEach(resp->totalPorRespostaTipo.add(repository.resumoApurationPorRespostaDaPerguntaEscolaridade(obj.getId(), resposta, resp)));
 			
 			break;
 
@@ -402,7 +402,7 @@ public class PesquisaService {
 
 	public List<String> listaRespostasDissertativas(Pergunta obj) {
 		
-		List<String> respostasDissertativas = repository.agruparPorDissertativa(obj.getQuestion());
+		List<String> respostasDissertativas = repository.agruparPorDissertativa(obj.getId());
 		
 		return respostasDissertativas;
 	}
@@ -411,7 +411,7 @@ public class PesquisaService {
 
 		List<Integer> totalPorDissertativa = new ArrayList<>();
 
-		respostasDissertativas.forEach(resp->totalPorDissertativa.add(repository.resumoApurationPorDissertativaDaPergunta(obj.getQuestion(), resp)));
+		respostasDissertativas.forEach(resp->totalPorDissertativa.add(repository.resumoApurationPorDissertativaDaPergunta(obj.getId(), resp)));
 	
 		
 		return totalPorDissertativa;
@@ -421,7 +421,7 @@ public class PesquisaService {
 	
 	public List<String> listaRespostasPorBairro(Pergunta obj) {
 		
-		List<String> respostasBairro = repository.agruparPorBairro(obj.getQuestion());
+		List<String> respostasBairro = repository.agruparPorBairro(obj.getId());
 		
 		return respostasBairro;
 	}
@@ -430,7 +430,7 @@ public class PesquisaService {
 
 		List<Integer> totalPorBairro = new ArrayList<>();
 
-		respostasBairro.forEach(resp->totalPorBairro.add(repository.resumoApurationPorBairroDaPergunta(obj.getQuestion(), resp)));
+		respostasBairro.forEach(resp->totalPorBairro.add(repository.resumoApurationPorBairroDaPergunta(obj.getId(), resp)));
 	
 		
 		return totalPorBairro;
@@ -443,7 +443,7 @@ public class PesquisaService {
 		
 		for (String resposta : obj.getRespostasWeb()) {
 			
-			totalRespostaBairro.add(repository.resumoApurationPorRespostaDaPerguntaBairro(obj.getQuestion(), resposta, bairro));
+			totalRespostaBairro.add(repository.resumoApurationPorRespostaDaPerguntaBairro(obj.getId(), resposta, bairro));
 		}
 		
 		return totalRespostaBairro;
@@ -461,7 +461,7 @@ public class PesquisaService {
 								
 			for (String resposta : obj.getRespostasWeb()) {
 				
-				totalRespostaTipo.add(repository.resumoApurationPorRespostaDaPerguntaGenero(obj.getQuestion(), resposta, tipoResposta.toUpperCase()));
+				totalRespostaTipo.add(repository.resumoApurationPorRespostaDaPerguntaGenero(obj.getId(), resposta, tipoResposta.toUpperCase()));
 			}	
 			break;
 			
@@ -470,7 +470,7 @@ public class PesquisaService {
 						
 			for (String resposta : obj.getRespostasWeb()) {
 				
-				totalRespostaTipo.add(repository.resumoApurationPorRespostaDaPerguntaIdade(obj.getQuestion(), resposta, tipoResposta.toUpperCase()));
+				totalRespostaTipo.add(repository.resumoApurationPorRespostaDaPerguntaIdade(obj.getId(), resposta, tipoResposta.toUpperCase()));
 			}
 			
 			break;
@@ -480,7 +480,7 @@ public class PesquisaService {
 			
 			for (String resposta : obj.getRespostasWeb()) {
 				
-				totalRespostaTipo.add(repository.resumoApurationPorRespostaDaPerguntaReligiao(obj.getQuestion(), resposta, tipoResposta.toUpperCase()));
+				totalRespostaTipo.add(repository.resumoApurationPorRespostaDaPerguntaReligiao(obj.getId(), resposta, tipoResposta.toUpperCase()));
 			}
 			break;
 		case "escolaridade":
@@ -489,7 +489,7 @@ public class PesquisaService {
 			
 			for (String resposta : obj.getRespostasWeb()) {
 				
-				totalRespostaTipo.add(repository.resumoApurationPorRespostaDaPerguntaEscolaridade(obj.getQuestion(), resposta, tipoResposta.toUpperCase()));
+				totalRespostaTipo.add(repository.resumoApurationPorRespostaDaPerguntaEscolaridade(obj.getId(), resposta, tipoResposta.toUpperCase()));
 			}
 			
 			break;
@@ -504,7 +504,7 @@ public class PesquisaService {
 	
 	public Integer totalPorPerguntaAndBairro(Pergunta obj, String bairro) {
 		
-		Integer totalRespostaBairro = repository.resumoApurationPorPerguntaAndBairro(obj.getQuestion(), bairro);
+		Integer totalRespostaBairro = repository.resumoApurationPorPerguntaAndBairro(obj.getId(), bairro);
 		
 		return totalRespostaBairro;
 	}
@@ -519,7 +519,7 @@ public class PesquisaService {
 		case "genero":
 			System.out.println("EntrevistadoGenero");
 											
-				totalRespostaTipo = repository.resumoApurationPorPerguntaAndTipoGenero(obj.getQuestion(), tipoResposta.toUpperCase());
+				totalRespostaTipo = repository.resumoApurationPorPerguntaAndTipoGenero(obj.getId(), tipoResposta.toUpperCase());
 				
 			break;
 			
@@ -527,20 +527,20 @@ public class PesquisaService {
 			System.out.println("EntrevistadoFaixaIdade");
 						
 							
-			totalRespostaTipo = repository.resumoApurationPorPerguntaAndTipoFaixaIdade(obj.getQuestion(), tipoResposta.toUpperCase());
+			totalRespostaTipo = repository.resumoApurationPorPerguntaAndTipoFaixaIdade(obj.getId(), tipoResposta.toUpperCase());
 			
 			
 			break;
 		case "religiao":
 			System.out.println("EntrevistadoReligiao");
 			
-			totalRespostaTipo = repository.resumoApurationPorPerguntaAndTipoReligiao(obj.getQuestion(), tipoResposta.toUpperCase());			
+			totalRespostaTipo = repository.resumoApurationPorPerguntaAndTipoReligiao(obj.getId(), tipoResposta.toUpperCase());			
 			
 			break;
 		case "escolaridade":
 			System.out.println("EntrevistadoEscolaridade");
 		
-			totalRespostaTipo = repository.resumoApurationPorPerguntaAndTipoEscolaridade(obj.getQuestion(), tipoResposta.toUpperCase());
+			totalRespostaTipo = repository.resumoApurationPorPerguntaAndTipoEscolaridade(obj.getId(), tipoResposta.toUpperCase());
 							
 			break;
 			

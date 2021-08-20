@@ -45,7 +45,7 @@ public class Pesquisa implements Serializable{
 	private String entrevistadoGenero;
 	private String entrevistadoEscolaridade;
 	private String pergunta;
-	private Integer idPergunta;
+	private long idPergunta;
 	private String resposta;
 	private Boolean respostaValida;
 	private String respostaDissertiva;
@@ -100,7 +100,7 @@ public class Pesquisa implements Serializable{
 
 
 
-	public Integer getIdPergunta() {
+	public long getIdPergunta() {
 		return idPergunta;
 	}
 
@@ -109,7 +109,7 @@ public class Pesquisa implements Serializable{
 
 
 
-	public void setIdPergunta(Integer idPergunta) {
+	public void setIdPergunta(long idPergunta) {
 		this.idPergunta = idPergunta;
 	}
 

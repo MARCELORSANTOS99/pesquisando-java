@@ -37,11 +37,11 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
 	@Query(value = "SELECT respostaDissertiva FROM Pesquisa where idCidade = ?1 GROUP BY respostaDissertiva")
 	List<String> agruparPorCidadeEspontanea(String idCidade);
 	
-	@Query(value = "SELECT entrevistadoBairro FROM Pesquisa where pergunta = ?1 GROUP BY entrevistadoBairro")
-	List<String> agruparPorBairro(String pergunta);
+	@Query(value = "SELECT entrevistadoBairro FROM Pesquisa where idPergunta = ?1 GROUP BY entrevistadoBairro")
+	List<String> agruparPorBairro(long idPergunta);
 	
-	@Query(value = "SELECT respostaDissertiva FROM Pesquisa where pergunta = ?1 GROUP BY respostaDissertiva")
-	List<String> agruparPorDissertativa(String pergunta);
+	@Query(value = "SELECT respostaDissertiva FROM Pesquisa where idPergunta = ?1 GROUP BY respostaDissertiva")
+	List<String> agruparPorDissertativa(long idPergunta);
 	
 	@Query(value = "SELECT entrevistadoGenero FROM Pesquisa where idCidade = ?1 GROUP BY entrevistadoGenero")
 	List<String> agruparPorGenero(String idCidade);
@@ -79,57 +79,57 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
 	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.idPergunta = ?1")
 	public Integer resumoApurationPorRespostaDaPergunta(long idPergunta);
 	
-	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.pergunta = ?1 AND p.respostaValida = true")
-	public Integer resumoApurationPorRespostaValidaDaPergunta(String question);
+	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.idPergunta = ?1 AND p.respostaValida = true")
+	public Integer resumoApurationPorRespostaValidaDaPergunta(long idPergunta);
 		
-	@Query(value = "SELECT COUNT (respostaDissertiva) FROM Pesquisa as p where p.pergunta = ?1 AND respostaDissertiva = ?2")
-	public Integer resumoApurationPorDissertativaDaPergunta(String question, String dissertativa);
+	@Query(value = "SELECT COUNT (respostaDissertiva) FROM Pesquisa as p where p.idPergunta = ?1 AND respostaDissertiva = ?2")
+	public Integer resumoApurationPorDissertativaDaPergunta(long idPergunta, String dissertativa);
 	
-	@Query(value = "SELECT COUNT (entrevistadoBairro) FROM Pesquisa as p where p.pergunta = ?1 AND entrevistadoBairro = ?2")
-	public Integer resumoApurationPorBairroDaPergunta(String question, String bairro);
+	@Query(value = "SELECT COUNT (entrevistadoBairro) FROM Pesquisa as p where p.idPergunta = ?1 AND entrevistadoBairro = ?2")
+	public Integer resumoApurationPorBairroDaPergunta(long idPergunta, String bairro);
 		
 	
 	//por genero
-	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.pergunta = ?1 AND p.resposta = ?2 AND p.entrevistadoGenero = ?3")
-	public Integer resumoApurationPorRespostaDaPerguntaGenero(String pergunta, String resposta, String entrevistadoGenero);
+	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.idPergunta = ?1 AND p.resposta = ?2 AND p.entrevistadoGenero = ?3")
+	public Integer resumoApurationPorRespostaDaPerguntaGenero(long idPergunta, String resposta, String entrevistadoGenero);
 	
 	//por faixa de idade
-	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.pergunta = ?1 AND resposta = ?2 AND entrevistadoFaixaIdade = ?3")
-	public Integer resumoApurationPorRespostaDaPerguntaIdade(String pergunta, String resposta, String entrevistadoFaixaIdade);
+	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.idPergunta = ?1 AND resposta = ?2 AND entrevistadoFaixaIdade = ?3")
+	public Integer resumoApurationPorRespostaDaPerguntaIdade(long idPergunta, String resposta, String entrevistadoFaixaIdade);
 	
 	//por religião
-	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.pergunta = ?1 AND resposta = ?2 AND entrevistadoReligiao = ?3")
-	public Integer resumoApurationPorRespostaDaPerguntaReligiao(String pergunta, String resposta, String entrevistadoReligiao );
+	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.idPergunta = ?1 AND resposta = ?2 AND entrevistadoReligiao = ?3")
+	public Integer resumoApurationPorRespostaDaPerguntaReligiao(long idPergunta, String resposta, String entrevistadoReligiao );
 	
 	//por escolaridade
-	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.pergunta = ?1 AND resposta = ?2 AND entrevistadoEscolaridade = ?3")
-	public Integer resumoApurationPorRespostaDaPerguntaEscolaridade(String pergunta, String resposta, String entrevistadoEscolaridade );
+	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.idPergunta = ?1 AND resposta = ?2 AND entrevistadoEscolaridade = ?3")
+	public Integer resumoApurationPorRespostaDaPerguntaEscolaridade(long idPergunta, String resposta, String entrevistadoEscolaridade );
 	
 
 	//TIPO - por genero
-	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.pergunta = ?1 AND p.entrevistadoGenero = ?2")
-	public Integer resumoApurationPorPerguntaAndTipoGenero(String pergunta, String entrevistadoGenero);
+	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.idPergunta = ?1 AND p.entrevistadoGenero = ?2")
+	public Integer resumoApurationPorPerguntaAndTipoGenero(long idPergunta, String entrevistadoGenero);
 	
 	//TIPO - por idade
-	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.pergunta = ?1 AND p.entrevistadoFaixaIdade = ?2")
-	public Integer resumoApurationPorPerguntaAndTipoFaixaIdade(String pergunta, String entrevistadoFaixaIdade);
+	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.idPergunta = ?1 AND p.entrevistadoFaixaIdade = ?2")
+	public Integer resumoApurationPorPerguntaAndTipoFaixaIdade(long idPergunta, String entrevistadoFaixaIdade);
 	
 	//TIPO - por religião
-	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.pergunta = ?1 AND p.entrevistadoReligiao = ?2")
-	public Integer resumoApurationPorPerguntaAndTipoReligiao(String pergunta, String entrevistadoReligiao);
+	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.idPergunta = ?1 AND p.entrevistadoReligiao = ?2")
+	public Integer resumoApurationPorPerguntaAndTipoReligiao(long idPergunta, String entrevistadoReligiao);
 	
 	//TIPO - por escolaridade
-	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.pergunta = ?1 AND p.entrevistadoEscolaridade = ?2")
-	public Integer resumoApurationPorPerguntaAndTipoEscolaridade(String pergunta, String entrevistadoEscolaridade);
+	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.idPergunta = ?1 AND p.entrevistadoEscolaridade = ?2")
+	public Integer resumoApurationPorPerguntaAndTipoEscolaridade(long idPergunta, String entrevistadoEscolaridade);
 	
 	
 	//TOTAL PERGUNTA E BAIRRO
-	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.pergunta = ?1 AND p.entrevistadoBairro = ?2")
-	public Integer resumoApurationPorPerguntaAndBairro(String pergunta, String entrevistadoBairro);
+	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.idPergunta = ?1 AND p.entrevistadoBairro = ?2")
+	public Integer resumoApurationPorPerguntaAndBairro(long idPergunta, String entrevistadoBairro);
 	
 	//TOTAL RESPOSTAS POR PERGUNTA E BAIRRO
-	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.pergunta = ?1 AND resposta = ?2 AND entrevistadoBairro = ?3")
-	public Integer resumoApurationPorRespostaDaPerguntaBairro(String pergunta, String resposta, String entrevistadoBairro );
+	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.idPergunta = ?1 AND resposta = ?2 AND entrevistadoBairro = ?3")
+	public Integer resumoApurationPorRespostaDaPerguntaBairro(long idPergunta, String resposta, String entrevistadoBairro );
 	
 	//TOTAL PESQUISAS FEITAS POR USUARIO
 	
