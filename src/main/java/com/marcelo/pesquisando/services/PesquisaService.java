@@ -251,7 +251,7 @@ public class PesquisaService {
 		
 		List<Integer> totalPorResposta = new ArrayList<>();
 
-		obj.getRespostasWeb().forEach(resp->totalPorResposta.add(repository.resumoApurationPorRespostaDaPergunta(obj.getQuestion(), resp)));
+		obj.getRespostasWeb().forEach(resp->totalPorResposta.add(repository.resumoApurationPorRespostaDaPergunta(obj.getId(), resp)));
 	
 		
 		return totalPorResposta;
@@ -275,7 +275,7 @@ public class PesquisaService {
 			
 		}
 
-		respostasValida.forEach(resp->totalPorResposta.add(repository.resumoApurationPorRespostaDaPergunta(obj.getQuestion(), resp)));
+		respostasValida.forEach(resp->totalPorResposta.add(repository.resumoApurationPorRespostaDaPergunta(obj.getId(), resp)));
 	
 		
 		return totalPorResposta;
@@ -308,7 +308,7 @@ public class PesquisaService {
 	
 	public Integer resumoApurationAppTotalPorPergunta(Pergunta obj) {
 		
-		Integer total = repository.resumoApurationPorRespostaDaPergunta(obj.getQuestion());
+		Integer total = repository.resumoApurationPorRespostaDaPergunta(obj.getId());
 		
 		return total;
 	}
@@ -320,9 +320,9 @@ public class PesquisaService {
 		return total;
 	}
 	
-	public Integer totalPorPerguntaAndResposta(String pergunta, String resposta) {
+	public Integer totalPorPerguntaAndResposta(long idPergunta, String resposta) {
 		
-		Integer total = repository.resumoApurationPorRespostaDaPergunta(pergunta, resposta);
+		Integer total = repository.resumoApurationPorRespostaDaPergunta(idPergunta, resposta);
 		
 		return total;
 	}

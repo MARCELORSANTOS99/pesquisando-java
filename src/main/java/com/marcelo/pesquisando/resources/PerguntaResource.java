@@ -200,7 +200,7 @@ public class PerguntaResource {
 		
 		
 		List<Integer> totalPorRespostaTipo = pesquisaService.resumoApurationAppPerguntaPorRespostaTipo(obj, tipo, resposta);
-		Integer totalPerguntaResposta = pesquisaService.totalPorPerguntaAndResposta(obj.getQuestion(),resposta);
+		Integer totalPerguntaResposta = pesquisaService.totalPorPerguntaAndResposta(obj.getId(),resposta);
 		
 		
 		System.out.println(enumsLista);

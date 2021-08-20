@@ -72,12 +72,12 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
 	
 	
 	
-	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.pergunta = ?1 AND resposta = ?2")
-	public Integer resumoApurationPorRespostaDaPergunta(String pergunta, String resposta);
+	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.idPergunta = ?1 AND resposta = ?2")
+	public Integer resumoApurationPorRespostaDaPergunta(long idPergunta, String resposta);
 
 
-	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.pergunta = ?1")
-	public Integer resumoApurationPorRespostaDaPergunta(String question);
+	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.idPergunta = ?1")
+	public Integer resumoApurationPorRespostaDaPergunta(long idPergunta);
 	
 	@Query(value = "SELECT COUNT (resposta) FROM Pesquisa as p where p.pergunta = ?1 AND p.respostaValida = true")
 	public Integer resumoApurationPorRespostaValidaDaPergunta(String question);
