@@ -70,15 +70,15 @@ public class UsuarioResource {
 		
 		int tamanhoLista = obj.getContract().getCidades().size();
 		
-		List<Cidade> listaCidade = new ArrayList<Cidade>();
+		List<Cidade> listaCidade = obj.getContract().getCidades();
 		
 		if(perfil == 2) {
 			for (int i = 0; i < tamanhoLista; i++) {
-				
-				
-				if(obj.getContract().getCidades().get(i).getNomeCliente().toString().equals(user.getUsername().toString()))
 					
-					listaCidade.add(obj.getContract().getCidades().get(i));
+				if(!obj.getContract().getCidades().get(i).getNomeCliente().toString().equals(user.getUsername().toString()))
+					
+					//listaCidade.add(obj.getContract().getCidades().get(i));
+					listaCidade.remove(i);
 			
 			}
 			
