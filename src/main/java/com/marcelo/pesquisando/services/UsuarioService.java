@@ -34,14 +34,7 @@ public class UsuarioService {
 		System.out.println(nomeUser);
 		Optional<Usuario> obj =  repository.findByEmail(nomeUser);
 		
-		Integer perfil = obj.get().getPerfil();
 		
-		if(perfil == 2) {
-			for (int i = 0; i <  obj.get().getContract().getCidades().size(); i++) {
-				if(obj.get().getContract().getCidades().get(i).getNomeCliente().equals(nomeUser)) 
-					obj.get().getContract().getCidades().remove(i);
-			}
-		}
 		
 		return obj.get();
 	}

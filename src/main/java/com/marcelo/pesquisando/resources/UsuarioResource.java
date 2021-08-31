@@ -62,6 +62,14 @@ public class UsuarioResource {
 		
 		obj = service.upDateLastLogin(obj.getId(), obj);
 		
+		Integer perfil = obj.getPerfil();
+		
+		if(perfil == 2) {
+			for (int i = 0; i <  obj.getContract().getCidades().size(); i++) {
+				if(obj.getContract().getCidades().get(i).getNomeCliente().equals(user.getUsername())) 
+					obj.getContract().getCidades().remove(i);
+			}
+		}
 		
 		return ResponseEntity.ok().body(obj);
 	
