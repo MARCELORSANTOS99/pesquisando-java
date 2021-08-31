@@ -1,6 +1,7 @@
 package com.marcelo.pesquisando.resources;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.marcelo.pesquisando.entities.Cidade;
 import com.marcelo.pesquisando.entities.User;
 import com.marcelo.pesquisando.entities.Usuario;
 import com.marcelo.pesquisando.repositories.UserRepository;
@@ -63,13 +65,27 @@ public class UsuarioResource {
 		obj = service.upDateLastLogin(obj.getId(), obj);
 		
 		Integer perfil = obj.getPerfil();
+		System.out.println("Tamanho da lista-> "+obj.getContract().getCidades().size());
+		System.out.println("LISTA -> "+obj.getContract().getCidades().toString());
+		
+		int tamanhoLista = obj.getContract().getCidades().size();
+		
+		List<Cidade> listaCidade = new ArrayList<Cidade>();
 		
 		if(perfil == 2) {
-			for (int i = 0; i <  obj.getContract().getCidades().size(); i++) {
-				if(obj.getContract().getCidades().get(i).getNomeCliente().equals(user.getUsername())) 
-					obj.getContract().getCidades().remove(i);
+			for (int i = 0; i < tamanhoLista; i++) {
+				
+				
+				if(obj.getContract().getCidades().get(i).getNomeCliente().toString().equals(user.getUsername().toString()))
+					
+					listaCidade.add(obj.getContract().getCidades().get(i));
+			
 			}
+			
+			obj.getContract().getCidades().clear();
+			obj.getContract().setCidades(listaCidade);
 		}
+		
 		
 		return ResponseEntity.ok().body(obj);
 	
