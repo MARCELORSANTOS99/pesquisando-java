@@ -1,6 +1,7 @@
 package com.marcelo.pesquisando.resources;
 
 import java.net.URI;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,10 +59,14 @@ public class UsuarioResource {
 		System.out.println("---");
 		System.out.println(user.getUsername());
 		Usuario obj = service.findByNome(user.getUsername());
+		
 		obj = service.upDateLastLogin(obj.getId(), obj);
-	
+		
 		
 		return ResponseEntity.ok().body(obj);
+	
+		
+		
 	}
 	
 	@PostMapping

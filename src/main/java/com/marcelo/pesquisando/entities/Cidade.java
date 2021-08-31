@@ -34,6 +34,8 @@ private static final long serialVersionUID = 1L;
 	@JoinColumn(name="contract_id")
 	private Contrato contract;
 	
+	private String nomeCliente;
+	
 	
 	public Long getId() {
 		return id;
@@ -60,6 +62,14 @@ private static final long serialVersionUID = 1L;
 	}
 	public void setPerguntas(List<Pergunta> perguntas) {
 		this.perguntas = perguntas;
+	}
+	
+	
+	public String getNomeCliente() {
+		return nomeCliente;
+	}
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
 	}
 	@Override
 	public int hashCode() {
