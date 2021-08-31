@@ -58,7 +58,10 @@ public class TestConfig implements CommandLineRunner {
 		Instant moment = Instant.now();
 		
 		Contrato contrato = new Contrato();
-		Usuario funcionario = new Usuario(1,"debora","debora@htoamil.com","teste",true,contrato,1,moment);
+		Usuario funcionario = new Usuario();
+		Usuario funcionario2 = new Usuario();
+		
+		//1,"debora","debora@htoamil.com","teste",true,contrato,1,moment
 
 		Cidade city = new Cidade();
 		city.setNome("Rio");

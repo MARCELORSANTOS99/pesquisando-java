@@ -30,6 +30,7 @@ public class Usuario implements Serializable{
 	private String uid;
 	private Boolean gerente;
 	private Integer corMarker;
+	private Integer perfil;
 	private Instant lastLogin;
 
 	
@@ -46,7 +47,7 @@ public class Usuario implements Serializable{
 
 
 
-	public Usuario(long id, String nome, String email, String uid, Boolean gerente, Contrato contract, Integer corMarker,Instant lastLogin) {
+	public Usuario(long id, String nome, String email, String uid, Boolean gerente, Contrato contract, Integer corMarker,Instant lastLogin, Integer perfil) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -56,6 +57,7 @@ public class Usuario implements Serializable{
 		this.contract = contract;
 		this.corMarker = corMarker;
 		this.lastLogin = lastLogin;
+		this.perfil = perfil;
 	}
 
 
@@ -138,6 +140,20 @@ public class Usuario implements Serializable{
 
 	public void setLastLogin(Instant lastLogin) {
 		this.lastLogin = lastLogin;
+	}
+
+
+
+
+	public Integer getPerfil() {
+		return perfil;
+	}
+
+
+
+
+	public void setPerfil(Integer perfil) {
+		this.perfil = perfil;
 	}
 
 
