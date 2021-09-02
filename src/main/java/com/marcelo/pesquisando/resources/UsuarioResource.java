@@ -68,24 +68,51 @@ public class UsuarioResource {
 		System.out.println("Tamanho da lista-> "+obj.getContract().getCidades().size());
 		System.out.println("LISTA -> "+obj.getContract().getCidades().toString());
 		
+		
+		
 		int tamanhoLista = obj.getContract().getCidades().size();
 		
-		List<Cidade> listaCidade = obj.getContract().getCidades();
+		List<Cidade> listaCidade = new ArrayList<>();
 		
+		/*
 		if(perfil == 2) {
-			for (int i = 0; i < tamanhoLista; i++) {
-					
+			for (int i = 0; i <= tamanhoLista; i++) {
+				System.out.println("tamanhoLista FOR-> "+ tamanhoLista );
+				System.out.println("NOME DO CLIENTE-> "+ obj.getContract().getCidades().get(i).getNomeCliente().toString() );
+				System.out.println("USER-> "+ user.getUsername().toString() );
+				
+				System.out.println("TESTE -> "+!obj.getContract().getCidades().get(i).getNomeCliente().toString().equals(user.getUsername().toString()));
+				
 				if(!obj.getContract().getCidades().get(i).getNomeCliente().toString().equals(user.getUsername().toString()))
 					
 					//listaCidade.add(obj.getContract().getCidades().get(i));
 					listaCidade.remove(i);
+					tamanhoLista =-1;
+				
+					System.out.println("Removido-> "+obj.getContract().getCidades().get(i).getNome());
+
 			
 			}
 			
 			obj.getContract().getCidades().clear();
 			obj.getContract().setCidades(listaCidade);
 		}
+		*/
 		
+		if(perfil == 2) {
+			
+		for (Cidade cidade : obj.getContract().getCidades()) {
+			
+			if(cidade.getNomeCliente().equals(user.getUsername().toString())) {
+				listaCidade.add(cidade);
+			}
+				 
+		}
+		
+		obj.getContract().getCidades().clear();
+		obj.getContract().setCidades(listaCidade);
+	
+		}
 		
 		return ResponseEntity.ok().body(obj);
 	
