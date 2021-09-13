@@ -32,6 +32,7 @@ public class Usuario implements Serializable{
 	private Integer corMarker;
 	private Integer perfil;
 	private Instant lastLogin;
+	private String tokenFirebase;
 
 	
 	@ManyToOne
@@ -47,7 +48,7 @@ public class Usuario implements Serializable{
 
 
 
-	public Usuario(long id, String nome, String email, String uid, Boolean gerente, Contrato contract, Integer corMarker,Instant lastLogin, Integer perfil) {
+	public Usuario(long id, String nome, String email, String uid, Boolean gerente, Contrato contract, Integer corMarker,Instant lastLogin, Integer perfil, String tokenFirebase) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -58,6 +59,7 @@ public class Usuario implements Serializable{
 		this.corMarker = corMarker;
 		this.lastLogin = lastLogin;
 		this.perfil = perfil;
+		this.tokenFirebase = tokenFirebase ;
 	}
 
 
@@ -154,6 +156,18 @@ public class Usuario implements Serializable{
 
 	public void setPerfil(Integer perfil) {
 		this.perfil = perfil;
+	}
+	
+
+	public String getTokenFirebase() {
+		return tokenFirebase;
+	}
+
+
+
+
+	public void setTokenFirebase(String tokenFirebase) {
+		this.tokenFirebase = tokenFirebase;
 	}
 
 

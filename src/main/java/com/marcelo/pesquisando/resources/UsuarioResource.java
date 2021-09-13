@@ -52,8 +52,8 @@ public class UsuarioResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@GetMapping(value = "/login")
-	public ResponseEntity<Usuario> findByUID(){
+	@GetMapping(value = "/login/{token}")
+	public ResponseEntity<Usuario> findByUID(@PathVariable String token){
 				
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		User user = userRepository.findByUsername(username);
@@ -62,7 +62,9 @@ public class UsuarioResource {
 		System.out.println(user.getUsername());
 		Usuario obj = service.findByNome(user.getUsername());
 		
-		obj = service.upDateLastLogin(obj.getId(), obj);
+		System.out.println(token);
+		obj = service.upDateLastLogin(obj.getId(), obj,token);
+		
 		
 		Integer perfil = obj.getPerfil();
 		System.out.println("Tamanho da lista-> "+obj.getContract().getCidades().size());

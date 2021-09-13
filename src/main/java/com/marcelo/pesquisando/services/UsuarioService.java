@@ -65,11 +65,12 @@ public class UsuarioService {
 		return repository.save(entity);
 	}
 	
-	public Usuario upDateLastLogin(Long id, Usuario obj) {
+	public Usuario upDateLastLogin(Long id, Usuario obj,String token) {
 		
     	
 		Usuario entity = repository.getOne(id);
 		updateDataLastLogin(entity);
+		atualizaToken(entity,token);
 		
 		return repository.save(entity);
 	}
@@ -88,6 +89,12 @@ private void updateDataLastLogin(Usuario entity) {
 		entity.setLastLogin(moment);	
 		
 	}
+
+private void atualizaToken(Usuario entity, String token) {
+	
+	entity.setTokenFirebase(token);	
+	
+}
 
 
 	
