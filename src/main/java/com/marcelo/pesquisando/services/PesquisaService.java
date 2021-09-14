@@ -2,7 +2,6 @@ package com.marcelo.pesquisando.services;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,17 +10,18 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.marcelo.pesquisando.entities.Apuracao;
-import com.marcelo.pesquisando.entities.Cidade;
 import com.marcelo.pesquisando.entities.LatLongPesquisa;
+import com.marcelo.pesquisando.entities.Notification;
 import com.marcelo.pesquisando.entities.Pergunta;
 import com.marcelo.pesquisando.entities.Pesquisa;
-import com.marcelo.pesquisando.entities.Resposta;
+import com.marcelo.pesquisando.entities.RootNotification;
 import com.marcelo.pesquisando.entities.User;
 import com.marcelo.pesquisando.entities.Usuario;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoEscolaridade;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoFaixaIdade;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoGenero;
 import com.marcelo.pesquisando.entities.enums.EntrevistadoReligiao;
+import com.marcelo.pesquisando.notification.Notifications;
 import com.marcelo.pesquisando.repositories.GerenteRepository;
 import com.marcelo.pesquisando.repositories.PesquisaRepository;
 import com.marcelo.pesquisando.repositories.UserRepository;
@@ -31,6 +31,9 @@ public class PesquisaService {
 	
 	@Autowired
 	private PesquisaRepository repository;
+	
+	@Autowired
+	private Notifications notifications;
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -77,7 +80,6 @@ public class PesquisaService {
 		Usuario usuario = usuarioService.findByNome(user.getUsername());
 		
 		obj.setUserEmail(usuario.getEmail());
-		
 		System.out.println(obj);
 		
 		//respostaCaps.contains("BRANCO") || respostaCaps.contains("NÃO SABE") || respostaCaps.contains("NULO") || respostaCaps.contains("NÃO RESPONDEU")
