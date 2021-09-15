@@ -178,6 +178,12 @@ public class PesquisaService {
 		return repository.resumoApuration(pergunta,genero);
 	}
 	
+	public long totalEntrevistadosPorCidade(String idCidade){
+		
+		return repository.totalEntrevistadosPorCidade(idCidade);
+	}
+	
+	
 	
 	public long resumoApurationAppPergunta(String pergunta){
 		

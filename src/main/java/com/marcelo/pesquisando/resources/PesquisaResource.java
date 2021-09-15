@@ -138,7 +138,14 @@ public class PesquisaResource {
 			service.insert(pesquisa);
 		}
 		
-		notificationService.sendNotification();
+		long totalEntrevistados = service.totalEntrevistadosPorCidade(obj.get(0).getIdCidade());
+		
+		double resto = totalEntrevistados % 60;
+		System.out.println("+++"+resto);
+		
+		if(resto == 0) {
+			notificationService.sendNotificationApuracaoCliente(obj.get(0));
+		}
 		
 				
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pesquisas.get(0).getCodigo()).toUri();

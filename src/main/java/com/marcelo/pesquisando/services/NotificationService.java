@@ -1,13 +1,19 @@
 package com.marcelo.pesquisando.services;
 
+
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.marcelo.pesquisando.entities.Cidade;
 import com.marcelo.pesquisando.entities.Notification;
+import com.marcelo.pesquisando.entities.Pergunta;
+import com.marcelo.pesquisando.entities.Pesquisa;
 import com.marcelo.pesquisando.entities.RootNotification;
+import com.marcelo.pesquisando.entities.Usuario;
 import com.marcelo.pesquisando.notification.Notifications;
 
 @Service
@@ -17,25 +23,95 @@ public class NotificationService {
 	@Autowired
 	private Notifications notifications;
 	
+	@Autowired
+	private PesquisaService pesquisaService;
+	
+	@Autowired
+	private UsuarioService usuarioService;
+	
+	@Autowired
+	private CidadeService cidadeService;
+	
+	String authorization = "key=AAAAqnlaSjg:APA91bFcvLBioA5-wlxLGMQJBgQWepAJTc3BHcyK2L-EvRwr2rMLzga-2zxGsN06bc-BC9ZiiM-IPyygx5Y5Eblo1vTWDsm7re1yAFQttA_GRqpw1BrYK-lCF42pZwxwYInW1NhPvZL_";
 	
 	
-	public void sendNotification() {
+	
+	public void sendNotificationApuracaoCliente(Pesquisa obj) {
 		
 		List<String> tokens = new ArrayList<>();
-		String token = "eIG6KlsGS9SFjE9lnBQ0aS:APA91bHdBKR5JRP1HNgkcRf-HGYQ79ccxXYjeNA4zOlSst9n6uhkbrOl3Hmhny06SxoP-SKTSM6imJbjWd3q6Uxy6R_1iMhiQLM4f5H9IzRCShN6AEBtQ6G1tG_nAUWtt8gNs8ubClbC";
-		String token2 = "dowSgu8xTs-7czIWCF5kEy:APA91bGPoq6wrzI40ELFbqyoU_6SbhEVA1BeannaS85yYOP4pklkte7VhPfFJegPykCXHycFoRrFOAAw1pWnWBL9sXbjJRuBiIZzK5g1hw6CSUPdqjFQwSXLDWs3xomedwXkwQb1Q11f";
-		String token3 = "eePUI1BJTjav7BRAiVdkfI:APA91bFwzab0Yw3Kl9IqpU6pZnfcy6KF3dhBz987OZgAo1g8jRjiATcTTMdgcpGUnBPaC2r4PXGthIg3iLlIoBspS2_XmMalwZJsnPWJzL9tAcPZTBDTU2Jcr52kjSWK3qyZnHdgiPAx";
-		tokens.add(token);
-		tokens.add(token2);
-		tokens.add(token3);
 		
-		Notification notification = new Notification("Apuração on line \uD83D\uDCCA", "Pergunta 1 \nResposta1 - 25%\nResposta2 - 35%");
+		String perguntaNotificacao = perguntasToNotificacaoCliente(obj);
+		String token = buscarTokenCliente(obj);
+		
+		
+		tokens.add(token);
+		
+		
+	
+		Notification notification = new Notification("Apuração on line \uD83D\uDCCA", perguntaNotificacao);
 		RootNotification rootNotification = new RootNotification(notification,tokens);
-		String authorization = "key=AAAAqnlaSjg:APA91bFcvLBioA5-wlxLGMQJBgQWepAJTc3BHcyK2L-EvRwr2rMLzga-2zxGsN06bc-BC9ZiiM-IPyygx5Y5Eblo1vTWDsm7re1yAFQttA_GRqpw1BrYK-lCF42pZwxwYInW1NhPvZL_";
+		
 		
 		notifications.sendNotification(rootNotification,authorization);
 		System.out.println(rootNotification.toString());
 		
+	}
+
+
+
+	public String perguntasToNotificacaoCliente(Pesquisa obj) {
+	
+		StringBuilder stringBuilder = new StringBuilder(200);
+
+		Cidade cidade = cidadeService.findById(Long.valueOf(obj.getIdCidade()));
+		List<Pergunta> perguntas = cidade.getPerguntas();
+		
+		
+		for (int i = 0; i < perguntas.size(); i++) {
+			if(perguntas.get(i).getNotificacao()) {
+				stringBuilder.append(perguntas.get(i).getQuestion());
+				stringBuilder.append("\n");
+				List<Integer> totalPorResposta =  pesquisaService.resumoApurationAppPerguntaPorResposta(perguntas.get(i));
+				Integer totalPorPergunta = pesquisaService.resumoApurationAppTotalPorPergunta(perguntas.get(i));
+				
+				for (int j = 0; j < perguntas.get(i).getRespostas().size(); j++) {
+					stringBuilder.append(perguntas.get(i).getRespostas().get(j).getResp());
+					stringBuilder.append(" - ");
+					System.out.println(" TOTAL POR RESPOSTA"+totalPorResposta.get(j));
+					
+					
+					String resultado = String.format("%.2f", (((double)totalPorResposta.get(j)/(double)totalPorPergunta)*100));
+
+					
+					stringBuilder.append(resultado);
+					stringBuilder.append("%");
+					stringBuilder.append("\n");		
+					
+				}
+				
+			}
+			
+		}
+		
+		return stringBuilder.toString();
+		
+		
+	}
+
+
+
+	public String buscarTokenCliente(Pesquisa obj) {
+		long idCidade = Long.valueOf(obj.getIdCidade());
+		
+		Cidade cidade = cidadeService.findById(idCidade);
+		System.out.println("CIDADE =>"+cidade);
+		String cliente = cidade.getNomeCliente();
+		System.out.println("CLIENTE =>"+cliente);
+		Usuario usuario = usuarioService.findByNome(cliente);
+		System.out.println("USUARIO =>"+usuario);
+		String token = usuario.getTokenFirebase();
+		System.out.println("TOKEN =>"+token);
+		return token;
 	}
 		
 
