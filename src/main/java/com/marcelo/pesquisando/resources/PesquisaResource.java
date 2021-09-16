@@ -140,14 +140,18 @@ public class PesquisaResource {
 		
 		long totalEntrevistados = service.totalEntrevistadosPorCidade(obj.get(0).getIdCidade());
 		
-		double resto = totalEntrevistados % 100;
-		System.out.println("+++"+resto);
+		double restoCliente = totalEntrevistados % 100;
+		double restoGerente = totalEntrevistados % 10;
 		
-		if(resto == 0) {
+		if(restoCliente == 0) {
 			notificationService.sendNotificationApuracaoCliente(obj.get(0));
 		}
 		
-		notificationService.sendNotificationApuracaoGerente(obj.get(0));
+		if(restoGerente == 0) {
+			notificationService.sendNotificationApuracaoGerente(obj.get(0));
+		}
+		
+		
 				
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pesquisas.get(0).getCodigo()).toUri();
 		
