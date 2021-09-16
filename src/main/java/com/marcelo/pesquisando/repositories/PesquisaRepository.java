@@ -19,9 +19,14 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
 	@Query(value = "SELECT COUNT(p) FROM Pesquisa as p where p.resposta = ?1")
 	long resumo(String resposta);
 	
-	
 	@Query(value = "SELECT COUNT (DISTINCT codigo) FROM Pesquisa as p where p.idCidade = ?1")
 	long totalEntrevistadosPorCidade(String idCidade);
+	
+	@Query(value = "SELECT COUNT (DISTINCT codigo) FROM Pesquisa as p where p.idCidade = ?1 and p.userEmail = ?2")
+	long totalEntrevistadosPorFuncionarioCidade(String idCidade, String userEmail);
+	
+	@Query("SELECT userEmail from Pesquisa u where u.idCidade = ?1 group by u.userEmail")
+	public List<String> listaUsuariosPorCidade(String idCidade);
 	
 	@Query(value = "SELECT p FROM Pesquisa p where idCidade = ?1 ORDER BY id")
 	public List<Pesquisa> findAllByIdCidade(String idCidade);
