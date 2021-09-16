@@ -68,7 +68,6 @@ public class GerenteService {
 						results.size()
 					);
 				listGerenteApuracao.add(gerenteApuracao);
-			
 			 
 		}
 		

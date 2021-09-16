@@ -32,9 +32,7 @@ public class UsuarioService {
 	public Usuario findByNome(String nomeUser) {
 		
 		System.out.println(nomeUser);
-		Optional<Usuario> obj =  repository.findByEmail(nomeUser);
-		
-		
+		Optional<Usuario> obj =  repository.findByEmail(nomeUser);	
 		
 		return obj.get();
 	}

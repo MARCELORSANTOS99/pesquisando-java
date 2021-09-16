@@ -28,6 +28,7 @@ public class Pergunta implements Serializable {
 	private String question;
 	private String respostasAleatorias;
 	private String respostaEspontanea;
+	private Boolean notificacao;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -41,12 +42,13 @@ public class Pergunta implements Serializable {
 		
 	public Pergunta() {}
 
-	public Pergunta(Long id, String question, String respostasAleatorias,String respostaEspontanea, Cidade cidad, List<Resposta> respostas) {
+	public Pergunta(Long id, String question, String respostasAleatorias,String respostaEspontanea,Boolean notificacao, Cidade cidad, List<Resposta> respostas) {
 		super();
 		this.id = id;
 		this.question = question;
 		this.respostasAleatorias = respostasAleatorias;
 		this.respostaEspontanea = respostaEspontanea;
+		this.notificacao = notificacao;
 		this.cidad = cidad;
 		this.respostas = respostas;
 	}
@@ -105,7 +107,15 @@ public class Pergunta implements Serializable {
 	public void setRespostas(List<Resposta> respostas) {
 		this.respostas = respostas;
 	}
+	
 
+	public Boolean getNotificacao() {
+		return notificacao;
+	}
+
+	public void setNotificacao(Boolean notificacao) {
+		this.notificacao = notificacao;
+	}
 
 	public List<String> getRespostasWeb() {
 		

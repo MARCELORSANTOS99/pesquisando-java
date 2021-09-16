@@ -30,6 +30,7 @@ import org.supercsv.prefs.CsvPreference;
 import com.marcelo.pesquisando.entities.Pesquisa;
 import com.marcelo.pesquisando.entities.Apuracao;
 import com.marcelo.pesquisando.entities.LatLongPesquisa;
+import com.marcelo.pesquisando.services.NotificationService;
 import com.marcelo.pesquisando.services.PesquisaService;
 
 
@@ -41,6 +42,9 @@ public class PesquisaResource {
 	
 	@Autowired
 	private PesquisaService service;
+	
+	@Autowired
+	private NotificationService notificationService;
 	
 	@GetMapping
 	public ResponseEntity<List<Pesquisa>> findAll(){
@@ -132,8 +136,19 @@ public class PesquisaResource {
 		
 		for (Pesquisa pesquisa : pesquisas) {
 			service.insert(pesquisa);
-		}	
+		}
 		
+		long totalEntrevistados = service.totalEntrevistadosPorCidade(obj.get(0).getIdCidade());
+		
+		double resto = totalEntrevistados % 100;
+		System.out.println("+++"+resto);
+		
+		if(resto == 0) {
+			notificationService.sendNotificationApuracaoCliente(obj.get(0));
+		}
+		
+		notificationService.sendNotificationApuracaoGerente(obj.get(0));
+				
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pesquisas.get(0).getCodigo()).toUri();
 		
 		return ResponseEntity.created(uri).body(pesquisas);
