@@ -80,6 +80,7 @@ public class PerguntaService {
 		entity.setQuestion(obj.getQuestion());
 		entity.setRespostasAleatorias(obj.getRespostasAleatorias());
 		entity.setRespostaEspontanea(obj.getRespostaEspontanea());
+		entity.setNotificacao(obj.getNotificacao());
 		
 	}
 	
