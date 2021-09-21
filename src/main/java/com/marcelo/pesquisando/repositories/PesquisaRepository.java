@@ -142,6 +142,9 @@ public interface PesquisaRepository extends JpaRepository<Pesquisa, Long> {
 	
 	//TOTAL PESQUISAS FEITAS POR USUARIO
 	
+	@Query(value = "SELECT COUNT (DISTINCT codigo) FROM Pesquisa as p where p.idCidade = ?1 and p.userEmail = ?2 and p.gravado = 'Sim'")
+	Integer totalEntrevistasGravadas(String idCidade, String userEmail);
+	
 	//@Query(value = "SELECT p.codigo, p.usuarioApp COUNT (usuarioApp) FROM Pesquisa as p where p.usuarioApp = ?1 GROUP BY codigo", nativeQuery=true)
     //@Query("SELECT u.serverName,count(u) as controlRunCount from RunList u where u.controlRunDate < :lastUploadDate group by u.serverName")
     @Query("SELECT u.codigo,count(u) as userEmail from Pesquisa u where u.userEmail = ?1 and u.idCidade = ?2 group by u.codigo")

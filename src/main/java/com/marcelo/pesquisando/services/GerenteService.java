@@ -61,11 +61,15 @@ public class GerenteService {
 			
 			List<Object[]> results = pesquisaRepository.totalPesquisaPorUsuario(usuario.getEmail(), idCidade);
 			System.out.println(usuario.getEmail());
+			 
+			 Integer totalGravadas = pesquisaRepository.totalEntrevistasGravadas(idCidade, usuario.getEmail());
+			
 			
 				GerenteApuracao gerenteApuracao = new GerenteApuracao(
 						usuario.getNome(),
 						usuario.getEmail(),
-						results.size()
+						results.size(),
+						totalGravadas
 					);
 				listGerenteApuracao.add(gerenteApuracao);
 			 

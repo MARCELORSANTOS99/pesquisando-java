@@ -51,7 +51,7 @@ public class Pesquisa implements Serializable{
 	private String respostaDissertiva;
 	private double latitude;
 	private double longitude;
-	//private String usuarioApp;
+	private String gravado;
 	
 
 	private String userEmail;
@@ -60,16 +60,11 @@ public class Pesquisa implements Serializable{
 	
 	public Pesquisa() {}
 	
-
-
-
-
-
 	public Pesquisa(Long id, Instant moment, String codigo, String idCidade, String idContrato, String cidade,
 			String entrevistadoNome, String entrevistadoBairro, String entrevistadoRua, String entrevistadoNumero,
 			String entrevistadoReligiao, String entrevistadoFaixaIdade, String entrevistadoGenero,
-			String entrevistadoEscolaridade, String pergunta, Integer idPergunta, String resposta,
-			Boolean respostaValida, String respostaDissertiva, double latitude, double longitude, String userEmail) {
+			String entrevistadoEscolaridade, String pergunta, long idPergunta, String resposta, Boolean respostaValida,
+			String respostaDissertiva, double latitude, double longitude, String gravado, String userEmail) {
 		super();
 		this.id = id;
 		this.moment = moment;
@@ -92,13 +87,19 @@ public class Pesquisa implements Serializable{
 		this.respostaDissertiva = respostaDissertiva;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.gravado = gravado;
 		this.userEmail = userEmail;
 	}
 
 
 
+	public String getGravado() {
+		return gravado;
+	}
 
-
+	public void setGravado(String gravado) {
+		this.gravado = gravado;
+	}
 
 	public long getIdPergunta() {
 		return idPergunta;

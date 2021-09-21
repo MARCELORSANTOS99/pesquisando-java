@@ -5,13 +5,15 @@ public class GerenteApuracao {
 	String nome;
 	String email;
 	Integer totalPesquisaFeitasUser;
+	Integer totalPesquisaFeitasUserGravadas;
 	
 	
-	public GerenteApuracao(String nome, String email, Integer totalPesquisaFeitasUser) {
+	public GerenteApuracao(String nome, String email, Integer totalPesquisaFeitasUser,  Integer totalPesquisaFeitasUserGravadas) {
 		super();
 		this.nome = nome;
 		this.email = email;
 		this.totalPesquisaFeitasUser = totalPesquisaFeitasUser;
+		this.totalPesquisaFeitasUserGravadas = totalPesquisaFeitasUserGravadas;
 	}
 
 	public String getNome() {
@@ -21,6 +23,14 @@ public class GerenteApuracao {
 		this.nome = nome;
 	}
 		
+
+	public Integer getTotalPesquisaFeitasUserGravadas() {
+		return totalPesquisaFeitasUserGravadas;
+	}
+
+	public void setTotalPesquisaFeitasUserGravadas(Integer totalPesquisaFeitasUserGravadas) {
+		this.totalPesquisaFeitasUserGravadas = totalPesquisaFeitasUserGravadas;
+	}
 
 	public String getEmail() {
 		return email;
