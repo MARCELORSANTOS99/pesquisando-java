@@ -284,10 +284,13 @@ public class PerguntaResource {
 			Integer totalPorPergunta = pesquisaService.totalPorPerguntaAndTipo(obj,tipo, tipoResposta.toUpperCase());
 
 			List<Integer> totalPerguntaTipoAndResposta = pesquisaService.totalPorPerguntaAndTipoAndResposta(obj,tipo, tipoResposta.toUpperCase());
-					
 
 			TipoApuracao tipoApuracao = new TipoApuracao(obj.getQuestion(),tipo,tipoResposta,obj.getRespostasWeb(),totalPerguntaTipoAndResposta, totalPorPergunta);
-			tipoApuracaoList.add(tipoApuracao);
+			
+			if(totalPorPergunta > 0) {
+				tipoApuracaoList.add(tipoApuracao);	
+			}
+			
 			
 		}
  		
